@@ -44,3 +44,12 @@ testem.log
 # System Files
 /NgMakeMySkills/.DS_Store
 /NgMakeMySkills/Thumbs.db
+
+
+
+/MakeMySkills/.vs
+/MakeMySkills/MakeMySkills/bin
+
+
+
+

@@ -1,4 +1,11 @@
 @import '../node_modules/bootstrap/dist/css/bootstrap.min.css';
+@import '../node_modules/@fortawesome/fontawesome-free/css/all.min.css';
+@import url('https://fonts.googleapis.com/css?family=Rokkitt|Yeon+Sung&display=swap');
 
 html, body { height: 100%; }
-body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+body { 
+    margin: 0; 
+    padding-top: 60px;
+    font-family: 'Rokkitt', cursive !important; 
+    font-size: 1.05em !important;
+}

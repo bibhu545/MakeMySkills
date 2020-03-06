@@ -55,3 +55,4 @@ testem.log
 
 bin
 obj
+.vs

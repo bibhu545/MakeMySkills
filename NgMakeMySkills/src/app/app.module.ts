@@ -11,6 +11,14 @@ import { ModalModule } from 'ngx-bootstrap/modal';
 import { HttpClientModule } from '@angular/common/http';
 import { NavComponent } from './Components/Common/nav.component';
 import { AccountComponent } from './Components/Account/account.component';
+import { NotFoundComponent } from './Components/Common/not-found.component';
+import { CreateTestComponent } from './Components/Test/create-test.component';
+import { UpdateTestComponent } from './Components/Test/update-test.component';
+import { PublishTestComponent } from './Components/Test/publish-test.component';
+import { CandidateHomeComponent } from './Components/Users/Candidate/candidate-home.component';
+import { TeacherHomeComponent } from './Components/Users/Teacher/teacher-home.component';
+import { UserHomeComponent } from './Components/Users/user-home.component';
+import { FooterComponent } from './Components/Common/footer.component';
 
 
 @NgModule({
@@ -20,7 +28,15 @@ import { AccountComponent } from './Components/Account/account.component';
     LoginComponent,
     SignupComponent,
     NavComponent,
-    AccountComponent
+    AccountComponent,
+    NotFoundComponent,
+    CreateTestComponent,
+    UpdateTestComponent,
+    PublishTestComponent,
+    CandidateHomeComponent,
+    TeacherHomeComponent,
+    UserHomeComponent,
+    FooterComponent
   ],
   imports: [
     BrowserModule,
@@ -30,6 +46,7 @@ import { AccountComponent } from './Components/Account/account.component';
     ModalModule.forRoot()
   ],
   providers: [],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
+  entryComponents: [AccountComponent]
 })
 export class AppModule { }

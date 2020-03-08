@@ -5,7 +5,79 @@
 html, body { height: 100%; }
 body { 
     margin: 0; 
-    padding-top: 60px;
     font-family: 'Rokkitt', cursive !important; 
     font-size: 1.05em !important;
+}
+.custom-body{
+    padding-top: 60px;
+}
+.custom-container{
+    min-height: calc(100vh - 50px);
+    padding-bottom: 30px;
+}
+.shadow{
+    box-shadow: 5px 8px 10px #888888;
+}
+.bg-transparent{
+    background: rgba(0, 0, 0, 0.01);
+    color: white;
+}
+
+.center-content{
+    text-align: center;
+}
+.modal-body{
+    padding: 0;
+}
+.right-content{
+    text-align: right;
+}
+.custom-modal-header {
+    padding: 5px 20px;
+    border-bottom: 1px solid lightgray;
+}
+.custom-modal-header{
+    background: lightgray;
+}
+.custom-modal-body{
+    padding: 20px 30px;
+}
+.custom-modal-footer{
+    padding: 15px 20px;
+    border-top: 1px solid lightgray;
+}
+.btn-close{
+    cursor: pointer;
+}
+.fa{
+    margin-top: 5px;
+}
+
+/* Progress styling */
+
+.progress-row{
+    padding: 10px;
+    text-align: center;
+}
+.inline-block{
+    display: inline-block;
+}
+.progress{
+    background-color: lightgray;
+    height: 50px;
+    width: 50px;
+    border-radius: 50%;
+    padding: 15px;
+}
+.complete{
+    background-color: #53b9d8;
+    color: black;
+}
+.progress-interval{
+    width: 100px;
+    height: 2px;
+    background-color: gray;
+    position: relative;
+    top: -25px;
+    margin: 0 10px;
 }

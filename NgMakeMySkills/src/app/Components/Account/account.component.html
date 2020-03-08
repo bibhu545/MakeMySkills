@@ -1,4 +1,7 @@
+<div class="modal-body" *ngIf="loginMode">
+    <app-login></app-login>
+</div>
 
-<div class="modal-body">
-    This is a modal.
+<div class="modal-body" *ngIf="!loginMode">
+    <app-signup></app-signup>
 </div>

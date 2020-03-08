@@ -1,1 +1,89 @@
-<p>home works!</p>
+<div class="hero-bg">
+    <video autoplay muted loop oncanplay="this.play()" onloadedmetadata="this.muted = true">
+        <source src="../../../assets/hero.mp4" type="video/mp4" />
+    </video>
+</div>
+
+<div class="hero-content">
+    <div class="hero-content-wrapper">
+        <div class="hero-text">
+            <h1>Welcome to MakeMySkills</h1>
+            <br />
+            <h3>Practice Hundreds of Mock Tests online for free...</h3>
+            <br />
+            <br />
+            <span class="scroll-down" (click)="scrollDown()">
+                <i class="fa fa-arrow-circle-down" aria-hidden="true"></i>
+            </span>
+        </div>
+    </div>
+</div>
+
+<div class="container-fluid center-content stats-container">
+    <div class="row stats-row">
+        <div class="col-md-3 col-12">
+            <h3> 150 + <br /> Online Tests</h3>
+        </div>
+        <div class="col-md-3 col-12">
+            <h3> 5000 + <br /> Test Takers</h3>
+        </div>
+        <div class="col-md-3 col-12">
+            <h3> 15000 + <br /> Tests Attempted</h3>
+        </div>
+        <div class="col-md-3 col-12">
+            <h3> 200000 + <br /> Questions Attempted</h3>
+        </div>
+    </div>
+</div>
+
+<div class="container trending-container" id="trending">
+    <div class="row trending-header">
+        <div class="col-12 center-content">
+            <h4><i class="fa fa-bolt" aria-hidden="true"></i> Trending Tests</h4>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-3 col-12" *ngFor="let item of trendingTests">
+            <div class="card center-content shadow">
+                <span class="test-logo"><i class="fa fa-laptop" aria-hidden="true"></i></span>
+                <h5>COGNIZANT MERITTRAC TEST</h5>
+                <p>
+                    Questions : 55
+                    <br />
+                    Duration : 60 mins
+                    <br />
+                    Taken By : 1053 Users
+                </p>
+                <a href="#" class="btn-start-test">
+                    Start Test
+                </a>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="container trending-container">
+    <div class="row trending-header">
+        <div class="col-12 center-content">
+            <h4><i class="fa fa-paper-plane" aria-hidden="true"></i> Latest Tests</h4>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-3 col-12" *ngFor="let item of trendingTests">
+            <div class="card center-content shadow">
+                <span class="test-logo"><i class="fa fa-laptop" aria-hidden="true"></i></span>
+                <h5>COGNIZANT MERITTRAC TEST</h5>
+                <p>
+                    Questions : 55
+                    <br />
+                    Duration : 60 mins
+                    <br />
+                    Taken By : 1053 Users
+                </p>
+                <a href="#" class="btn-start-test">
+                    Start Test
+                </a>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,11 @@
+.footer{
+    height: 50px;
+    line-height: 50px;
+    background: darkslategray;
+    color: white;
+}
+.fa-social{
+    margin: 0px 10px;
+    color: white;
+    font-size: 1.2em;
+}

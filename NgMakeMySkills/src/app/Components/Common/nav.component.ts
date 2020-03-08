@@ -1,5 +1,6 @@
 import { Component, OnInit, TemplateRef } from '@angular/core';
 import { ModalService } from 'src/app/Services/modal.service';
+import { AccountComponent } from '../Account/account.component';
 
 @Component({
   selector: 'app-nav',
@@ -13,8 +14,8 @@ export class NavComponent implements OnInit {
   ngOnInit() {
   }
 
-  openAccountModal(template: TemplateRef<any>) {
-    this.modalService.showModal(template);
+  openAccountModal(e) {
+    this.modalService.showModal(AccountComponent);
   }
 
 }

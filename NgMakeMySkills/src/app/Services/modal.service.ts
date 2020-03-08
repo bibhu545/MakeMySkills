@@ -13,9 +13,14 @@ export class ModalService {
   };
   constructor(private modalService: BsModalService) { }
 
-  showModal(template: TemplateRef<any>) {
-    this.modalRef = this.modalService.show(template, this.config);
+  showModal(template: any, options = {}) {
+    var updatedConfig = {
+      ...this.config,
+      ...options
+    }
+    this.modalRef = this.modalService.show(template, updatedConfig);
   }
+
   closeModal() {
     this.modalRef.hide();
   }

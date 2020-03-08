@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ModalService } from 'src/app/Services/modal.service';
+import { AccountService } from 'src/app/Services/account.service';
 
 @Component({
   selector: 'app-account',
@@ -8,11 +9,20 @@ import { ModalService } from 'src/app/Services/modal.service';
 })
 export class AccountComponent implements OnInit {
 
-  constructor(private modalService: ModalService) { }
+  loginMode: boolean = true;
+
+  constructor(
+    private modalService: ModalService,
+    private accountService: AccountService
+  ) {
+    this.accountService.loginMode$.subscribe(data => {
+      this.loginMode = data;
+    })
+  }
 
   ngOnInit() {
   }
- 
+
   closeAccountModal() {
     this.modalService.closeModal();
   }

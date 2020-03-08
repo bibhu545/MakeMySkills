@@ -1,0 +1,121 @@
+<div class="custom-body">
+    <div class="progress-row">
+        <span class="inline-block progress complete">
+            <i class="fa fa-check" aria-hidden="true"></i>
+        </span>
+        <div class="inline-block progress-interval"></div>
+        <span class="inline-block progress">
+            <i class="fa fa-check" aria-hidden="true"></i>
+        </span>
+        <div class="inline-block progress-interval"></div>
+        <span class="inline-block progress">
+            <i class="fa fa-check" aria-hidden="true"></i>
+        </span>
+    </div>
+    <div class="container">
+        <div class="row">
+            <div class="col-12 center-content">
+                <h4 class="text-primary">Create Online Test</h4>
+                <p>
+                    These settings will control the newly created test. You can also edit these settings anytime later.
+                </p>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-2"></div>
+            <div class="col-md-8 col-12">
+                <div class="custom-modal-header">
+                    <h5 class="center-content">
+                        Basic Settings
+                    </h5>
+                </div>
+                <div class="custom-modal-body shadow">
+                    <form>
+                        <div class="row form-row">
+                            <div class="col-md-4 col-12 right-content">
+                                <label for="email">Test Title*:</label>
+                            </div>
+                            <div class="col-md-8 col-12">
+                                <input type="text" id="email" class="form-control" placeholder="E.g. Weekly test"
+                                    autocomplete="false" />
+                            </div>
+                        </div>
+                        <div class="row form-row">
+                            <div class="col-md-4 col-12 right-content">
+                                <label for="timeLimit">Time Limit:</label>
+                            </div>
+                            <div class="col-md-2 col-12 right-content">
+                                <input type="number" min="0" value="0" id="timeLimit" class="form-control" />
+                            </div>
+                            <div class="col-md-6 col-12">
+                                <small> (in minutes) Leave Empty for no time limit</small>
+                            </div>
+                        </div>
+                        <div class="row form-row">
+                            <div class="col-md-4 col-12 right-content">
+                                <label for="correctMarks">Correct Answer Marks*:</label>
+                            </div>
+                            <div class="col-md-2 col-12 right-content">
+                                <input type="number" min="0" id="correctMarks" class="form-control" />
+                            </div>
+                            <div class="col-md-6 col-12">
+                                <small> marks</small>
+                            </div>
+                        </div>
+                        <div class="row form-row">
+                            <div class="col-md-4 col-12 right-content">
+                                <label for="timeLimit">Negetive Marking*:</label>
+                            </div>
+                            <div class="col-md-2 col-12 right-content">
+                                <input type="number" min="0" id="timeLimit" class="form-control" />
+                            </div>
+                            <div class="col-md-6 col-12">
+                                <small> 0 means No Negative Marking</small>
+                            </div>
+                        </div>
+                        <div class="row form-row">
+                            <div class="col-md-4 col-12 right-content">
+                                <label for="passingPercentage">Passing Percentage*:</label>
+                            </div>
+                            <div class="col-md-2 col-12 right-content">
+                                <input type="number" min="0" id="passingPercentage" class="form-control" />
+                            </div>
+                            <div class="col-md-6 col-12">
+                                <small> %, 0 mean No Pass-Fail Concept</small>
+                            </div>
+                        </div>
+                        <hr />
+                        <div class="row">
+                            <div class="col-md-3"></div>
+                            <div class="col-md-9 col-12">
+                                <label class="checkbox">
+                                    <input type="checkbox" /> Shuffle Questions
+                                </label>
+                                <br />
+                                <label class="checkbox">
+                                    <input type="checkbox" /> Shuffle Options
+                                </label>
+                                <br />
+                                <label class="checkbox">
+                                    <input type="checkbox" /> Allow students to attempt test multiple times
+                                </label>
+                                <br />
+                                <label class="checkbox">
+                                    <input type="checkbox" /> Reveal Correct Answers on test completion
+                                </label>
+                            </div>
+                        </div>
+                        <hr />
+                        <div class="right-content">
+                            <button type="submit" class="btn btn-primary">
+                                Save and Proceed
+                                <i class="fa fa-arrow-right" aria-hidden="true"></i>
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+            <div class="col-md-2"></div>
+        </div>
+    </div>
+</div>

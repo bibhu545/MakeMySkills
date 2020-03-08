@@ -1,0 +1,10 @@
+.btn-add-qn{
+    border: 1px solid gray;
+}
+.delete-option{
+    cursor: pointer;
+    color: royalblue;
+}
+.custom-modal-body{
+    padding: 10px 30px;
+}

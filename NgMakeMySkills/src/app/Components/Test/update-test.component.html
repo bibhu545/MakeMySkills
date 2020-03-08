@@ -1,0 +1,88 @@
+<div class="custom-container custom-body">
+    <div class="progress-row">
+        <span class="inline-block progress complete">
+            <i class="fa fa-check" aria-hidden="true"></i>
+        </span>
+        <div class="inline-block progress-interval complete"></div>
+        <span class="inline-block progress complete">
+            <i class="fa fa-check" aria-hidden="true"></i>
+        </span>
+        <div class="inline-block progress-interval"></div>
+        <span class="inline-block progress">
+            <i class="fa fa-check" aria-hidden="true"></i>
+        </span>
+    </div>
+    <div class="container">
+        <div class="row">
+            <div class="col-12 center-content">
+                <h4 class="text-primary">Add/Update Questions</h4>
+                <p class="text-muted">
+                    Please click on the <strong> "+ Add New Question"</strong> button above to start adding questions.
+                </p>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-2"></div>
+            <div class="col-md-8 col-12">
+                <hr />
+                <div class="right-content">
+                    <button class="btn btn-light btn-add-qn" (click)="openQuestionModal(updateQuestion)">
+                        <i class="fa fa-plus" aria-hidden="true"></i>
+                        Add New Question
+                    </button>
+                </div>
+                <hr />
+                <div class="float-right">
+                    <button type="submit" class="btn btn-primary">
+                        Save and Proceed
+                        <i class="fa fa-arrow-right" aria-hidden="true"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-2"></div>
+    </div>
+</div>
+
+<ng-template #updateQuestion>
+    <div class="custom-modal-header">
+        <h5 class="center-content">
+            Add/Update Question
+            <span class="btn-close float-right" (click)="closeQuestionModal()">
+                <i class="fa fa-times-circle" aria-hidden="true"></i>
+            </span>
+        </h5>
+    </div>
+    <div class="custom-modal-body">
+        <form>
+            <div class="form-group">
+                <label for="questionText">Question Text*:</label>
+                <textarea type="text" id="questionText" class="form-control" placeholder="Enter question here..."></textarea>
+            </div>
+            <div class="form-group" *ngFor="let item of options; let i = index">
+                <span class="float-right delete-option" (click)="deleteOption(i)">Delete</span>
+                <label for="{{'option_' + i + 1}}">{{item.optionLabel}}</label>
+                <textarea type="text" id="{{'option_' + i + 1}}" class="form-control" ngModel="item.optionText" placeholder="Enter option here..."></textarea>
+                <label class="checkbox text-muted">
+                    <input type="checkbox" /> Mark as correct Answer
+                </label>
+            </div>
+            <div class="row">
+                <div class="col-12">
+                    <button type="button" class="btn btn-light" (click)="addOptions()">
+                        + Add Another Option
+                    </button>
+                </div>
+            </div>
+            <hr />
+            <div class="row">
+                <div class="col-md-6 col-12">
+                    <button type="button" class="btn btn-light btn-add-qn" (click)="closeQuestionModal()">Cancel</button>
+                </div>
+                <div class="col-md-6 col-12 right-content">
+                    <button type="submit" class="btn btn-primary">Add Now</button>
+                </div>
+            </div>
+        </form>
+    </div>
+</ng-template>

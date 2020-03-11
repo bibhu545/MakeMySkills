@@ -7,7 +7,16 @@
     justify-content: center;
     align-items: center;
 }
-
+.drop-bg{
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: calc(50vh + 60px);
+    background: orange;
+    background: url(../../../assets/drop.png) center center;
+    background-size: cover;
+}
 .banner video{
     position: absolute;
     top: 0;

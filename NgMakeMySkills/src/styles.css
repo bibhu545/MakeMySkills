@@ -7,6 +7,7 @@ body {
     margin: 0; 
     font-family: 'Rokkitt', cursive !important; 
     font-size: 1.05em !important;
+    /* background: linear-gradient(-45deg, lightblue, white, white, lightblue); */
 }
 .custom-body{
     padding-top: 60px;

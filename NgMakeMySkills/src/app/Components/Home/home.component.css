@@ -2,7 +2,7 @@ body{
     padding-top: 0 !important;
 }
 .hero-bg{
-    height: 100vh;
+    min-height: 100vh;
     width: 100%;
 }
 .hero-bg video{
@@ -20,6 +20,14 @@ body{
     background: rgba(0, 0, 0, 0.5);
     height: 100vh;
     width: 100%;
+}
+.hero-brand-text{
+    color: white;
+    animation: changeColor 3s infinite;
+}
+@keyframes changeColor {
+    50% {color: lightseagreen;}
+    /* 75% {color: greenyellow;} */
 }
 .hero-content-wrapper{
     position: relative;
@@ -76,8 +84,12 @@ body{
 .btn-start-test:hover{
     background-color: lightgray;
 }
+.shadow {
+    transition: all 0.5s ease;
+}
 .shadow:hover{
     border: 1px solid gray;
+    border-radius: 10px;
 }
 .trending-container{
     margin-bottom: 20px;
@@ -85,3 +97,14 @@ body{
 .trending-header{
     padding: 20px 0px 10px 0px;
 }
+
+@media only screen and (max-width: 600px) {
+    .stats-container {
+        position: static;
+        color: black;
+        border-bottom: 1px solid gray;
+    }
+    .stats-container br{
+        display: none;
+    }
+  }

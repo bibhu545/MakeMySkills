@@ -19,6 +19,9 @@ import { CandidateHomeComponent } from './Components/Users/Candidate/candidate-h
 import { TeacherHomeComponent } from './Components/Users/Teacher/teacher-home.component';
 import { UserHomeComponent } from './Components/Users/user-home.component';
 import { FooterComponent } from './Components/Common/footer.component';
+import { CustomDatePipe } from './Pipes/custom-date.pipe';
+import {NgsRevealModule} from 'ngx-scrollreveal';
+import { OnlineTestComponent } from './Components/OnlineTest/online-test.component';
 
 
 @NgModule({
@@ -36,14 +39,17 @@ import { FooterComponent } from './Components/Common/footer.component';
     CandidateHomeComponent,
     TeacherHomeComponent,
     UserHomeComponent,
-    FooterComponent
+    FooterComponent,
+    CustomDatePipe,
+    OnlineTestComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     BrowserAnimationsModule,
     HttpClientModule,
-    ModalModule.forRoot()
+    ModalModule.forRoot(),
+    NgsRevealModule
   ],
   providers: [],
   bootstrap: [AppComponent],

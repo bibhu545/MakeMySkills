@@ -6,6 +6,7 @@ import { CreateTestComponent } from './Components/Test/create-test.component';
 import { UpdateTestComponent } from './Components/Test/update-test.component';
 import { PublishTestComponent } from './Components/Test/publish-test.component';
 import { UserHomeComponent } from './Components/Users/user-home.component';
+import { OnlineTestComponent } from './Components/OnlineTest/online-test.component';
 
 
 const routes: Routes = [
@@ -14,6 +15,7 @@ const routes: Routes = [
   { path: 'update-test', component: UpdateTestComponent },
   { path: 'publish-test', component: PublishTestComponent },
   { path: 'user-home', component: UserHomeComponent },
+  { path: 'online-test', component: OnlineTestComponent },
   { path: 'not-found', component: NotFoundComponent },
   { path: '**', component: NotFoundComponent }
 ];

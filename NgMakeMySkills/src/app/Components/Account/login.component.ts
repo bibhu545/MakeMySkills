@@ -9,7 +9,6 @@ import { ModalService } from 'src/app/Services/modal.service';
 })
 export class LoginComponent implements OnInit {
 
-  loginMode: boolean = true;
   constructor(
     private modalService: ModalService,
     private accountService: AccountService

@@ -44,19 +44,21 @@
     </div>
     <div class="row">
         <div class="col-md-3 col-12" *ngFor="let item of trendingTests">
-            <div class="card center-content shadow">
-                <span class="test-logo"><i class="fa fa-laptop" aria-hidden="true"></i></span>
-                <h5>COGNIZANT MERITTRAC TEST</h5>
-                <p>
-                    Questions : 55
-                    <br />
-                    Duration : 60 mins
-                    <br />
-                    Taken By : 1053 Users
-                </p>
-                <a href="#" class="btn-start-test">
-                    Start Test
-                </a>
+            <div class="itemset" [ngsRevealSet]="{ reset:true}" [ngsSelector]="'.item'">
+                <div class="card center-content shadow item" ngsReveal>
+                    <span class="test-logo"><i class="fa fa-laptop" aria-hidden="true"></i></span>
+                    <h5>COGNIZANT MERITTRAC TEST</h5>
+                    <p>
+                        Questions : 55
+                        <br />
+                        Duration : 60 mins
+                        <br />
+                        Taken By : 1053 Users
+                    </p>
+                    <a href="#" class="btn-start-test">
+                        Start Test
+                    </a>
+                </div>
             </div>
         </div>
     </div>
@@ -70,19 +72,21 @@
     </div>
     <div class="row">
         <div class="col-md-3 col-12" *ngFor="let item of trendingTests">
-            <div class="card center-content shadow">
-                <span class="test-logo"><i class="fa fa-laptop" aria-hidden="true"></i></span>
-                <h5>COGNIZANT MERITTRAC TEST</h5>
-                <p>
-                    Questions : 55
-                    <br />
-                    Duration : 60 mins
-                    <br />
-                    Taken By : 1053 Users
-                </p>
-                <a href="#" class="btn-start-test">
-                    Start Test
-                </a>
+            <div class="itemset" [ngsRevealSet]="{ reset:true}" [ngsSelector]="'.item'">
+                <div class="card center-content shadow item">
+                    <span class="test-logo"><i class="fa fa-laptop" aria-hidden="true"></i></span>
+                    <h5>COGNIZANT MERITTRAC TEST</h5>
+                    <p>
+                        Questions : 55
+                        <br />
+                        Duration : 60 mins
+                        <br />
+                        Taken By : 1053 Users
+                    </p>
+                    <a href="#" class="btn-start-test">
+                        Start Test
+                    </a>
+                </div>
             </div>
         </div>
     </div>

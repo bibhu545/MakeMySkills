@@ -1,0 +1,14 @@
+body{
+    overflow: hidden;
+}
+.online-test-container{
+    height: 100vh;
+    max-height: 100vh;
+    overflow: hidden;
+    /* background-color: aliceblue; */
+    padding-top: 60px;
+}
+.btn-light{
+    border: 1px solid gray;
+    margin: 5px;
+}

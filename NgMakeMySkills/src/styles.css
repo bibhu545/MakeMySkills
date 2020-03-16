@@ -7,6 +7,7 @@ body {
     margin: 0; 
     font-family: 'Rokkitt', cursive !important; 
     font-size: 1.05em !important;
+    /* background-color: aliceblue; */
     /* background: linear-gradient(-45deg, lightblue, white, white, lightblue); */
 }
 .custom-body{
@@ -22,6 +23,11 @@ body {
 .bg-transparent{
     background: rgba(0, 0, 0, 0.01);
     color: white;
+}
+
+.btn-link{
+    cursor: pointer;
+    color: royalblue;
 }
 
 .center-content{

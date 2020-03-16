@@ -7,11 +7,12 @@ import { UpdateTestComponent } from './Components/Test/update-test.component';
 import { PublishTestComponent } from './Components/Test/publish-test.component';
 import { UserHomeComponent } from './Components/Users/user-home.component';
 import { OnlineTestComponent } from './Components/OnlineTest/online-test.component';
+import { RouteGuardService } from './Services/route-guard.service';
 
 
 const routes: Routes = [
   { path: '', component: HomeComponent },
-  { path: 'create-test', component: CreateTestComponent },
+  { path: 'create-test', component: CreateTestComponent, canActivate: [RouteGuardService] },
   { path: 'update-test', component: UpdateTestComponent },
   { path: 'publish-test', component: PublishTestComponent },
   { path: 'user-home', component: UserHomeComponent },

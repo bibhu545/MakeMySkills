@@ -12,3 +12,142 @@ body{
     border: 1px solid gray;
     margin: 5px;
 }
+
+.bg-dark {
+    background: darkslategray;
+    padding: 10px;
+    border-radius: 5px;
+    color: #fff;
+    font-size: 20px;
+    text-align: center;
+}
+
+.border {
+    padding: 8px;
+    border-radius: 5px;
+    margin-bottom: 5px;
+    border: 1px solid #ddd;
+    background: #f9f9f9;
+    position: relative;
+    min-height: 50px;
+}
+
+.border:active {
+    border: 1px solid #1BA9F9;
+    background: #fff;
+}
+
+.positon-absolute {
+    position: absolute;
+}
+
+.qn-no-icon {
+    background: #ddd;
+    border: 1px solid #ddd;
+    top: 8px;
+    padding-top: 6px;
+    border-radius: 50%;
+    width: 30px;
+    height: 30px;
+    text-align: center;
+    font-weight: bold;
+    font-size: 12px;
+    display: inline-block;
+}
+
+.marker-icon {
+    border-radius: 50%;
+    width: 20px;
+    height: 20px;
+    text-align: center;
+    font-size: 8px;
+    display: inline-block;
+}
+
+.inner-green-circle {
+    background:green !important;
+    border-radius: 50%;
+    width: 15px;
+    height: 15px;
+    text-align: center;
+    font-size: 8px;
+    display: inline-block;
+}
+
+.qn-detail {
+    margin-left: 30px;
+    padding-left: 10px;
+    color: #777;
+    font-size: 14px;
+}
+
+.full-height {
+    position: relative;
+    height: 100%;
+}
+
+.left-pallete{
+    /* height: 100%;
+    max-height: inherit; */
+    height: 530px;
+    overflow-y: auto;
+}
+
+.right-top-pallete {
+    height: 400px;
+    border-bottom: 1px solid #ddd;
+}
+
+.spacing {
+    margin: 8px;
+}
+
+.question-body-wrapper {
+    height: 330px;
+    overflow: auto;
+}
+
+.question-body {
+    position: relative;
+    padding: 10px;
+    background: #fff;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    margin-bottom: 5px;
+    color: #555;
+}
+
+.question-text {
+    background: #f9f9f9;
+    border-radius: 5px;
+    margin-top: 10px;
+    padding: 5px;
+    margin-bottom: 10px;
+}
+
+table {
+    width:100%;
+}
+
+.radio-option-width {
+    width: 20px;
+}
+
+.option td {
+    padding: 5px;
+}
+
+.option:hover {
+    background: #f2f2f2;
+    cursor: pointer;
+    border-radius: 5px;
+}
+
+.center-bottom-pallete {
+    background: #f2f2f2;
+    border-radius: 5px; 
+}
+
+/* ::-webkit-scrollbar {
+    width: 10px;
+  } */

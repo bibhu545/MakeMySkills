@@ -3,9 +3,6 @@ body{
 }
 .online-test-container{
     height: 100vh;
-    max-height: 100vh;
-    overflow: hidden;
-    /* background-color: aliceblue; */
     padding-top: 60px;
 }
 .btn-light{
@@ -14,7 +11,7 @@ body{
 }
 
 .bg-dark {
-    background: darkslategray;
+    background: darkslategray !important;
     padding: 10px;
     border-radius: 5px;
     color: #fff;
@@ -82,19 +79,19 @@ body{
 }
 
 .full-height {
-    position: relative;
-    height: 100%;
+    height: calc(100vh - 60px);
 }
 
 .left-pallete{
-    /* height: 100%;
-    max-height: inherit; */
-    height: 530px;
+    max-height: calc(100vh - 60px);
     overflow-y: auto;
+    padding: 0 5px;
 }
 
 .right-top-pallete {
-    height: 400px;
+    min-height: 400px;
+    max-height: 400px;
+    overflow: auto;
     border-bottom: 1px solid #ddd;
 }
 
@@ -148,6 +145,19 @@ table {
     border-radius: 5px; 
 }
 
-/* ::-webkit-scrollbar {
-    width: 10px;
-  } */
+/* width */
+::-webkit-scrollbar {
+    width: 8px;
+}
+  
+  /* Track */
+::-webkit-scrollbar-track {
+    box-shadow: inset 0 0 5px grey;
+    border-radius: 10px;
+}
+  
+  /* Handle */
+::-webkit-scrollbar-thumb {
+    background: gray;
+    border-radius: 10px;
+}

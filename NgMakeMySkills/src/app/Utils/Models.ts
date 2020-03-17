@@ -4,3 +4,8 @@ export class OptionModel {
     optionText: String;
     isAnswer: boolean;
 }
+
+export class LoginRequestModel {
+    email: string = "";
+    password: string = "";
+}

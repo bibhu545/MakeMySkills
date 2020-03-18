@@ -14,7 +14,10 @@
                             id="section{{topic.TopicNumber}}-qnshort{{question.Qnumber}}">
                                 <div class="qn-no-icon positon-absolute"
                                     [ngClass]="{ 'qn-no-icon-active': 'section' + topic.TopicNumber + '-qnshort' + question.Qnumber == selectedQuestionNo,
-                                    'not-answered': question.Visited }">
+                                    'not-answered': question.NotAnswered,
+                                    'answered': question.Answered,
+                                    'marked': question.Marked,
+                                    'marked-and-answered': question.MarkedAndAnswered }">
                                     {{question.Qnumber}}
                                 </div>
                                 <div class="qn-detail">
@@ -34,46 +37,40 @@
                 </span>
             </fieldset>
             <p>
-                <span>Question {{currentQuestionNumber}}</span>
+                <span>Question {{currentQuestionNo}}</span>
                 <span class="float-right">
-                    Time left: 119:59:59
+                    Time left: 119:59:{{seconds}}
                 </span>
             </p>
             <div class="question-body-wrapper">
                 <div class="question-body">
-                    <div class="question-text">
-                        {{currentQuestionText}}
+                    <div class="question-text justify-content-center" style="text-align: center !important;" *ngIf="reachedEndText; else questionText">
+                        <p>End of Test Reached!<br>You can end the test by clicking on the 'Finish Test' button.<br>
+                            <button class="btn btn-sm btn-danger fa fa-power-off" (click)="confirmSubmittingTest()"> Finish Test</button></p>
                     </div>
-                    <table>
-                        <tbody>
-                            <tr class="option">
-                                <td class="radio-option-width"><input type="radio" name="option"/></td>
-                                <td class="radio-option-width"><strong>A.</strong></td>
-                                <td>Both (II) and (III)</td>
-                            </tr>
-                            <tr class="option">
-                                <td class="radio-option-width"><input type="radio" name="option"/></td>
-                                <td class="radio-option-width"><strong>B.</strong></td>
-                                <td>Both (I) and (III)</td>
-                            </tr>
-                            <tr class="option">
-                                <td class="radio-option-width"><input type="radio" name="option"/></td>
-                                <td class="radio-option-width"><strong>C.</strong></td>
-                                <td>Both (I) and (II)</td>
-                            </tr>
-                            <tr class="option">
-                                <td class="radio-option-width"><input type="radio" name="option"/></td>
-                                <td class="radio-option-width"><strong>D.</strong></td>
-                                <td>All (I), (II) and (III)</td>
-                            </tr>
-                        </tbody>
-                    </table>
+                    <ng-template #questionText>
+                        <div class="question-text">
+                            {{topicWiseQuestionsList[currentTopicNo - 1].Questions[currentQuestionNo - 1].Text}}
+                        </div>
+                        <table>
+                            <tbody>
+                                <tr class="option" (click)="toggleSelectedOption(option.OptionNo)"
+                                *ngFor="let option of topicWiseQuestionsList[currentTopicNo - 1].Questions[currentQuestionNo - 1].Options">
+                                    <td class="radio-option-width"><input type="radio" name="option" 
+                                        [checked]="topicWiseQuestionsList[currentTopicNo - 1].Questions[currentQuestionNo - 1].SelectedOptionId === option.OptionNo" 
+                                        (change)="setSelectedOption(option.OptionNo)"/></td>
+                                    <td class="radio-option-width"><strong>{{getFromCharCode(option.OptionNo - 1)}}</strong></td>
+                                    <td>{{option.Text}}</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </ng-template>
                 </div>
             </div>
             <div class="center-bottom-pallete p-2">
-                <button type="button" class="btn btn-sm btn-primary">Mark for Review</button>&nbsp;
-                <button type="button" class="btn btn-sm btn-primary">Clear Response</button>
-                <span style="float: right;"><button type="button" class="btn btn-sm btn-success">Save and Next&nbsp;<span class="fa fa-sm fa-arrow-right"></span></button></span>
+                <button type="button" class="btn btn-sm btn-primary" (click)="setMarkForReviewMarker()">Mark for Review</button>&nbsp;
+                <button type="button" class="btn btn-sm btn-primary" (click)="setSelectedOption(0)">Clear Response</button>
+                <span style="float: right;"><button type="button" class="btn btn-sm btn-success" (click)="setNextQuestion()">Save and Next&nbsp;<span class="fa fa-sm fa-arrow-right"></span></button></span>
             </div>
         </div>
         <div class="col-md-3 full-height">
@@ -82,7 +79,11 @@
                 <div>
                     <span *ngFor="let question of topicWiseQuestionsList[currentTopicNo - 1].Questions" style="padding-left: 5px;">
                         <div class="qn-no-icon" style="margin:8px;" (click)="scrollAndActivateCurrentQuestion(currentTopicNo,question.Qnumber)"
-                        [ngClass]="{'not-answered': question.Visited}">
+                        [ngClass]="{'qn-no-icon-active': 'section' + topicWiseQuestionsList[currentTopicNo - 1].TopicNumber + '-qnshort' + question.Qnumber == selectedQuestionNo,
+                        'not-answered': question.NotAnswered,
+                        'answered': question.Answered,
+                        'marked': question.Marked,
+                        'marked-and-answered': question.MarkedAndAnswered}">
                             {{question.Qnumber}}
                         </div>
                     </span>
@@ -109,7 +110,7 @@
                     <span class="marker-icon marked-and-answered position-absolute"></span>
                     <span style="font-size: 12px;margin-left:20px">&nbsp;Marked & Answered</span>
                 </div>
-                <button class="btn btn-lg btn-danger fa fa-power-off" style="width: 100%;"> Finish Test</button>
+                <button class="btn btn-lg btn-danger fa fa-power-off" style="width: 100%;" (click)="confirmSubmittingTest()"> Finish Test</button>
             </div>
         </div>
     </div>

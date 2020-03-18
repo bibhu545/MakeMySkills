@@ -90,7 +90,7 @@ p {
 }
 
 .answered {
-    background:rgb(14, 179, 14);
+    background:rgb(14, 179, 14) !important;
 }
 
 .not-answered {
@@ -98,7 +98,7 @@ p {
 }
 
 .marked {
-    background:rgb(150, 7, 150);
+    background:rgb(150, 7, 150) !important;
 }
 
 .not-visited {
@@ -106,8 +106,8 @@ p {
 }
 
 .marked-and-answered {
-    background:rgb(14, 179, 14);
-    border:4px solid rgb(150, 7, 150);
+    background:rgb(14, 179, 14) !important;
+    border:4px solid rgb(150, 7, 150) !important;
 }
 
 .qn-detail {

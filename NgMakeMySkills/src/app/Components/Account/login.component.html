@@ -7,15 +7,21 @@
     </h5>
 </div>
 <div class="custom-modal-body">
-    <form>
+    <form #loginForm="ngForm" novalidate>
+
         <div class="form-group">
             <label for="email">Email*:</label>
-            <input type="email" id="email" class="form-control" />
+            <input type="email" id="email" class="form-control" placeholder="E.g. Jhon@gmail.com" name="email" required #email="ngModel"
+                [class.is-invalid]="email.invalid && email.touched" [(ngModel)]="loginData.email" />
+            <small class="text-danger" *ngIf="email.invalid && email.touched">Email is required.</small>
         </div>
+        
         <div class="form-group">
             <label for="password">Password*:</label>
-            <input type="password" id="password" class="form-control" />
+            <input type="password" id="password" class="form-control" name="password" required #password="ngModel" [class.is-invalid]="password.invalid && password.touched" placeholder="Enter your password" [(ngModel)]="loginData.password" />
+            <small class="text-danger" *ngIf="password.invalid && password.touched">Password is required.</small>
         </div>
+        
         <div class="row">
             <div class="col-md-6 col-12">
                 <label class="checkbox">
@@ -23,7 +29,7 @@
                 </label>
             </div>
             <div class="col-md-6 col-12 right-content">
-                <button type="submit" class="btn btn-primary">Login</button>
+                <button type="submit" [disabled]="loginForm.form.invalid" (click)="login()" class="btn btn-primary">Login</button>
             </div>
         </div>
     </form>

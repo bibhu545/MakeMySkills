@@ -7,12 +7,16 @@ namespace MakeMySkills.Models
 {
     public class LoginRequestModel
     {
-        public String userName { get; set; }
+        public String email { get; set; }
         public String password { get; set; }
     }
-    public class LoginResponsetModel
+    public class LoginResponseModel
     {
-        public String userName { get; set; }
-        public String password { get; set; }
+        public int loggedIn { get; set; }
+        public int userId { get; set; }
+        public String email { get; set; }
+        public String firstName { get; set; }
+        public String lastName { get; set; }
+        public int userType { get; set; }
     }
 }

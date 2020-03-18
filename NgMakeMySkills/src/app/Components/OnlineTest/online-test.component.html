@@ -39,7 +39,7 @@
             <p>
                 <span>Question {{currentQuestionNo}}</span>
                 <span class="float-right">
-                    Time left: 119:59:{{seconds}}
+                    Time left: {{getTimerInString(hours)}}:{{getTimerInString(minutes)}}:{{getTimerInString(seconds)}}
                 </span>
             </p>
             <div class="question-body-wrapper">

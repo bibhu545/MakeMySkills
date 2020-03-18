@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonService } from 'src/app/Services/common.service';
 import { Router } from '@angular/router';
-import { timer } from 'rxjs';
+import { interval, timer } from 'rxjs';
+import { takeUntil, takeWhile } from 'rxjs/operators';
 
 const MARKER = {
   'answered': 1,
@@ -28,7 +29,9 @@ export class OnlineTestComponent implements OnInit {
   currentQuestionNo = 0;
   currentTopicNo = 0;
   reachedEndText = false;
-  seconds = 0;
+  seconds = 60;
+  minutes = 59;
+  hours = 0;
 
   constructor(private commonService: CommonService, private route: Router) {
   }
@@ -53,14 +56,44 @@ export class OnlineTestComponent implements OnInit {
         question.Options[3].Text = 'All (I), (II) and (III)';
       });
     });
-    console.log(this.topicWiseQuestionsList);
     this.selectedQuestionNo = 'section1-qnshort1';
     this.prevVisitedTopicNo = 1;
     this.prevVisitedQuestionNo = 1;
     this.currentQuestionNo = 1;
     this.currentTopicNo = 1;
-    const numbers = timer(5000, 1000);
-    //numbers.subscribe(x => {console.log(x);this.seconds = x;});
+    this.setTimerForOneHour();
+  }
+
+  setTimerForOneHour() {
+    const numbers = timer(500, 1000);
+    const upperLimitOfSeconds = 60;
+    numbers.pipe(
+      takeWhile(y => !(this.hours == 0 && this.minutes == 0 && this.seconds == 0))
+    )
+    .subscribe(x => {
+      if(this.hours == 0 && this.minutes == 0 && this.seconds == 0) {
+        alert("Times Up!!");
+        return;
+      }
+      if(x !== 0 && x % 60 === 0){
+        this.seconds = 0;
+        this.minutes = this.minutes - 1;
+      }
+      else{
+      this.seconds = upperLimitOfSeconds - (x % 60);
+      }
+    },
+    error => {},
+    () => alert("Times Up!!"));
+  }
+
+  getTimerInString(time) {
+    if(time <= 9 && time >= 0){
+      return '0'+ time;
+    }
+    else{
+      return '' + time;
+    }
   }
 
   getFromCharCode(index) {
@@ -145,6 +178,7 @@ export class OnlineTestComponent implements OnInit {
 
   confirmSubmittingTest() {
     //to-do
+    alert("Test Finished");
   }
 
   enableOnlyMarker(marker) {

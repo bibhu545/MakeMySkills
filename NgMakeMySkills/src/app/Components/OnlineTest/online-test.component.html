@@ -2,53 +2,39 @@
     <div class="row">
         <div class="col-md-3 full-height">
             <div class="left-pallete">
-                <h4 class="bg-dark p-2 mt-3">
+                <h4 class="bg-dark p-2 mt-1">
                     Question List
                 </h4>
-                <div>
-                    <h5 style="text-align: center;">Quantitative Ability</h5>
-                    <div *ngFor="let number of [0,1,2,3,4]">
-                        <div class="border">
-                            <div class="qn-no-icon positon-absolute">{{number + 1}}</div>
-                            <div class="qn-detail">
-                                <p>The ratio of ages of mother and son is 5:2 and mother's age is 16.</p>
+                <span *ngFor="let topic of topicWiseQuestionsList">
+                    <div id="section{{topic.TopicNumber}}">
+                        <h5 style="text-align: center;">{{topic.Name}}</h5>
+                        <div *ngFor="let question of topic.Questions">
+                            <div class="border" (click)="setSelectedQuestion(topic.TopicNumber,question.Qnumber)"
+                            [ngClass]="{ 'border-active': 'section' + topic.TopicNumber + '-qnshort' + question.Qnumber == selectedQuestionNo }"
+                            id="section{{topic.TopicNumber}}-qnshort{{question.Qnumber}}">
+                                <div class="qn-no-icon positon-absolute"
+                                    [ngClass]="{ 'qn-no-icon-active': 'section' + topic.TopicNumber + '-qnshort' + question.Qnumber == selectedQuestionNo,
+                                    'not-answered': question.Visited }">
+                                    {{question.Qnumber}}
+                                </div>
+                                <div class="qn-detail">
+                                    <p>{{question.Summary}}</p>
+                                </div>
                             </div>
                         </div>
                     </div>
-                </div>
-                <div>
-                    <h5 style="text-align: center;">Reasoning Ability</h5>
-                    <div *ngFor="let number of [0,1,2,3,4]">
-                        <div class="border">
-                            <div class="qn-no-icon positon-absolute">{{number + 1}}</div>
-                            <div class="qn-detail">
-                                <p>The ratio of ages of mother and son is 5:2 and mother's age is 16.</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div>
-                    <h5 style="text-align: center;">Verbal Ability</h5>
-                    <div *ngFor="let number of [0,1,2,3,4]">
-                        <div class="border">
-                            <div class="qn-no-icon positon-absolute">{{number + 1}}</div>
-                            <div class="qn-detail">
-                                <p>The ratio of ages of mother and son is 5:2 and mother's age is 16.</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+                </span>
             </div>
         </div>
         <div class="col-md-6">
             <fieldset class="border p-2">
-                <legend class="w-auto">Select Section</legend>
-                <button class="btn btn-light">Quantitive Ability(10)</button>
-                <button class="btn btn-light">Reasoning Ability(15)</button>
-                <button class="btn btn-light">Verbal Ability(15)</button>
+                <legend class="w-auto" style="height:20px">Select Section</legend>
+                <span *ngFor="let topic of topicWiseQuestionsList">
+                    <button class="btn btn-sm btn-light" (click)="scrollAndActivateCurrentSection(topic.TopicNumber)">{{topic.Name}}({{topic.TotalQn}})</button>
+                </span>
             </fieldset>
             <p>
-                <span>Question 1</span>
+                <span>Question {{currentQuestionNumber}}</span>
                 <span class="float-right">
                     Time left: 119:59:59
                 </span>
@@ -56,19 +42,7 @@
             <div class="question-body-wrapper">
                 <div class="question-body">
                     <div class="question-text">
-                        Data Sufficiency:
-                        What is the age of Principal?
-                        (I) There are 14 students in a class.
-                        (II) The average age of students and principal is 16 years.
-                        (III) The average ageof 14 students is 3 less than the average of 14 students and Principal.Data Sufficiency:
-                        What is the age of Principal?
-                        (I) There are 14 students in a class.
-                        (II) The average age of students and principal is 16 years.
-                        (III) The average ageof 14 students is 3 less than the average of 14 students and Principal.Data Sufficiency:
-                        What is the age of Principal?
-                        (I) There are 14 students in a class.
-                        (II) The average age of students and principal is 16 years.
-                        (III) The average ageof 14 students is 3 less than the average of 14 students and Principal.
+                        {{currentQuestionText}}
                     </div>
                     <table>
                         <tbody>
@@ -104,34 +78,35 @@
         </div>
         <div class="col-md-3 full-height">
             <div class="positon-relative right-top-pallete">
-                <h5 style="text-align: center;">Quantitative Ability</h5>
-                <div class="">
-                    <span *ngFor="let number of [0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,
-                    21,22,23,24,25,26,27,28,29,0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,
-                    21,22,23,24,25,26,27,28,29]" style="padding-left: 8px;">
-                        <div class="qn-no-icon spacing">{{number + 1}}</div>
+                <h5 style="text-align: center;">{{topicWiseQuestionsList[currentTopicNo - 1].Name}}</h5>
+                <div>
+                    <span *ngFor="let question of topicWiseQuestionsList[currentTopicNo - 1].Questions" style="padding-left: 5px;">
+                        <div class="qn-no-icon" style="margin:8px;" (click)="scrollAndActivateCurrentQuestion(currentTopicNo,question.Qnumber)"
+                        [ngClass]="{'not-answered': question.Visited}">
+                            {{question.Qnumber}}
+                        </div>
                     </span>
                 </div>
             </div>
             <div class="right-bottom-pallete">
                 <div class="col-sm-6 mb-2" style="display:inline-block">
-                    <div class="marker-icon position-absolute" style="background:rgb(14, 179, 14)"></div>
+                    <div class="marker-icon answered position-absolute"></div>
                     <div style="font-size: 12px; margin-left:20px">&nbsp; Answered</div>
                 </div>
                 <div class="col-sm-6 mb-2" style="display:inline-block">
-                    <div class="marker-icon position-absolute" style="background:#dc3545"></div>
+                    <div class="marker-icon not-answered position-absolute"></div>
                     <div style="font-size: 12px;margin-left:20px">&nbsp; Not Answered</div>
                 </div>
                 <div class="col-sm-6 mb-1" style="display:inline-block">
-                    <span class="marker-icon position-absolute" style="background:rgb(150, 7, 150)"></span>
+                    <span class="marker-icon marked position-absolute"></span>
                     <span style="font-size: 12px;margin-left:20px">&nbsp; Marked</span>
                 </div>
                 <div class="col-sm-6 mb-1" style="display:inline-block">
-                    <span class="marker-icon position-absolute" style="background: #ddd;"></span>
+                    <span class="marker-icon not-visited position-absolute"></span>
                     <Span style="font-size: 12px;margin-left:20px">&nbsp;Not Visited</Span>
                 </div>
                 <div class="col-sm-7" style="display:inline-block">
-                    <span class="marker-icon position-absolute" style="background:rgb(14, 179, 14);border:4px solid rgb(150, 7, 150);"></span>
+                    <span class="marker-icon marked-and-answered position-absolute"></span>
                     <span style="font-size: 12px;margin-left:20px">&nbsp;Marked & Answered</span>
                 </div>
                 <button class="btn btn-lg btn-danger fa fa-power-off" style="width: 100%;"> Finish Test</button>

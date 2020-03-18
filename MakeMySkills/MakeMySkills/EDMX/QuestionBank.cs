@@ -7,27 +7,27 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace MakeMySkills
+namespace MakeMySkills.EDMX
 {
     using System;
     using System.Collections.Generic;
     
-    public partial class AnswerBank
+    public partial class QuestionBank
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public AnswerBank()
+        public QuestionBank()
         {
-            this.QuestionBank = new HashSet<QuestionBank>();
             this.UserResponse = new HashSet<UserResponse>();
         }
     
+        public int QuestionId { get; set; }
+        public string Question { get; set; }
         public int AnswerId { get; set; }
-        public string Answer { get; set; }
-        public string Explaination { get; set; }
+        public int TestId { get; set; }
         public int IsActive { get; set; }
     
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<QuestionBank> QuestionBank { get; set; }
+        public virtual AnswerBank AnswerBank { get; set; }
+        public virtual Test Test { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<UserResponse> UserResponse { get; set; }
     }

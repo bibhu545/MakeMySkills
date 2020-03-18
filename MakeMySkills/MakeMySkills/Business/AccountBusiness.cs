@@ -1,4 +1,5 @@
-﻿using MakeMySkills.Models;
+﻿using MakeMySkills.EDMX;
+using MakeMySkills.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -19,7 +20,7 @@ namespace MakeMySkills.Business
                     return new LoginResponseModel()
                     {
                         email = user.Email,
-                        //rest data
+                        firstName = user
                     };
                 }
                 else

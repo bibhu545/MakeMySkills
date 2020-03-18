@@ -113,12 +113,12 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Global.asax" />
-    <Content Include="MakeMySkill.Context.tt">
+    <Content Include="EDMX\MakeMySkill.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <LastGenOutput>MakeMySkill.Context.cs</LastGenOutput>
       <DependentUpon>MakeMySkill.edmx</DependentUpon>
     </Content>
-    <Content Include="MakeMySkill.tt">
+    <Content Include="EDMX\MakeMySkill.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <DependentUpon>MakeMySkill.edmx</DependentUpon>
       <LastGenOutput>MakeMySkill.cs</LastGenOutput>
@@ -126,7 +126,7 @@
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="AnswerBank.cs">
+    <Compile Include="EDMX\AnswerBank.cs">
       <DependentUpon>MakeMySkill.tt</DependentUpon>
     </Compile>
     <Compile Include="App_Start\RouteConfig.cs" />
@@ -137,17 +137,17 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="MakeMySkill.Context.cs">
+    <Compile Include="EDMX\MakeMySkill.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>MakeMySkill.Context.tt</DependentUpon>
     </Compile>
-    <Compile Include="MakeMySkill.cs">
+    <Compile Include="EDMX\MakeMySkill.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>MakeMySkill.tt</DependentUpon>
     </Compile>
-    <Compile Include="MakeMySkill.Designer.cs">
+    <Compile Include="EDMX\MakeMySkill.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>MakeMySkill.edmx</DependentUpon>
@@ -155,22 +155,22 @@
     <Compile Include="Models\AccountModels.cs" />
     <Compile Include="Models\CommonModels.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="QuestionBank.cs">
+    <Compile Include="EDMX\QuestionBank.cs">
       <DependentUpon>MakeMySkill.tt</DependentUpon>
     </Compile>
-    <Compile Include="Test.cs">
+    <Compile Include="EDMX\Test.cs">
       <DependentUpon>MakeMySkill.tt</DependentUpon>
     </Compile>
-    <Compile Include="Topics.cs">
+    <Compile Include="EDMX\Topics.cs">
       <DependentUpon>MakeMySkill.tt</DependentUpon>
     </Compile>
-    <Compile Include="User.cs">
+    <Compile Include="EDMX\User.cs">
       <DependentUpon>MakeMySkill.tt</DependentUpon>
     </Compile>
-    <Compile Include="UserReports.cs">
+    <Compile Include="EDMX\UserReports.cs">
       <DependentUpon>MakeMySkill.tt</DependentUpon>
     </Compile>
-    <Compile Include="UserResponse.cs">
+    <Compile Include="EDMX\UserResponse.cs">
       <DependentUpon>MakeMySkill.tt</DependentUpon>
     </Compile>
     <Compile Include="Utils\Constants.cs" />
@@ -178,11 +178,11 @@
   <ItemGroup>
     <Content Include="Views\web.config" />
     <Content Include="packages.config" />
-    <EntityDeploy Include="MakeMySkill.edmx">
+    <EntityDeploy Include="EDMX\MakeMySkill.edmx">
       <Generator>EntityModelCodeGenerator</Generator>
       <LastGenOutput>MakeMySkill.Designer.cs</LastGenOutput>
     </EntityDeploy>
-    <Content Include="MakeMySkill.edmx.diagram">
+    <Content Include="EDMX\MakeMySkill.edmx.diagram">
       <DependentUpon>MakeMySkill.edmx</DependentUpon>
     </Content>
     <None Include="Web.Debug.config">

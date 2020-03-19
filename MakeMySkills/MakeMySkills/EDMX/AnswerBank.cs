@@ -7,26 +7,28 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace MakeMySkills
+namespace MakeMySkills.EDMX
 {
     using System;
     using System.Collections.Generic;
     
-    public partial class User
+    public partial class AnswerBank
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public User()
+        public AnswerBank()
         {
-            this.UserReports = new HashSet<UserReports>();
+            this.QuestionBank = new HashSet<QuestionBank>();
+            this.UserResponse = new HashSet<UserResponse>();
         }
     
-        public int UserId { get; set; }
-        public string FullName { get; set; }
-        public string Email { get; set; }
-        public string Password { get; set; }
+        public int AnswerId { get; set; }
+        public string Answer { get; set; }
+        public string Explaination { get; set; }
         public int IsActive { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<UserReports> UserReports { get; set; }
+        public virtual ICollection<QuestionBank> QuestionBank { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<UserResponse> UserResponse { get; set; }
     }
 }

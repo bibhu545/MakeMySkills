@@ -19,4 +19,13 @@ namespace MakeMySkills.Models
         public String lastName { get; set; }
         public int userType { get; set; }
     }
+    public class SignupModel
+    {
+        public int userId { get; set; }
+        public String email { get; set; }
+        public String password { get; set; }
+        public String firstName { get; set; }
+        public String lastName { get; set; }
+        public int userType { get; set; }
+    }
 }

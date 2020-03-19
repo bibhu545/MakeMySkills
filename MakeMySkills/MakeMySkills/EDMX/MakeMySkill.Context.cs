@@ -7,7 +7,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace MakeMySkills
+namespace MakeMySkills.EDMX
 {
     using System;
     using System.Data.Entity;

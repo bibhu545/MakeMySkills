@@ -23,6 +23,7 @@ import { FooterComponent } from './Components/Common/footer.component';
 import { CustomDatePipe } from './Pipes/custom-date.pipe';
 import {NgsRevealModule} from 'ngx-scrollreveal';
 import { OnlineTestComponent } from './Components/OnlineTest/online-test.component';
+import { ConfirmationDialogComponent } from './Components/Common/confirmation-dialog/confirmation-dialog.component';
 
 
 @NgModule({
@@ -42,7 +43,8 @@ import { OnlineTestComponent } from './Components/OnlineTest/online-test.compone
     UserHomeComponent,
     FooterComponent,
     CustomDatePipe,
-    OnlineTestComponent
+    OnlineTestComponent,
+    ConfirmationDialogComponent
   ],
   imports: [
     BrowserModule,

@@ -1,8 +1,10 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, TemplateRef } from '@angular/core';
 import { CommonService } from 'src/app/Services/common.service';
 import { Router } from '@angular/router';
 import { interval, timer } from 'rxjs';
 import { takeUntil, takeWhile } from 'rxjs/operators';
+import { ModalService } from 'src/app/Services/modal.service';
+import { ConfirmationDialogComponent } from '../Common/confirmation-dialog/confirmation-dialog.component';
 
 const MARKER = {
   'answered': 1,
@@ -32,8 +34,17 @@ export class OnlineTestComponent implements OnInit {
   seconds = 60;
   minutes = 59;
   hours = 0;
+  title: string = "Confirm Submit Test";
+  ownMessage: boolean = false;
+  message: any = "Are You Sure You want to Submit Test.";
+  btnOkText: string = "Yes, Submit Test";
+  btnCancelText: string = "No, Go back to my Test";
 
-  constructor(private commonService: CommonService, private route: Router) {
+  constructor(
+    private commonService: CommonService, 
+    private route: Router,
+    private modalService: ModalService
+    ) {
   }
 
   ngOnInit() {
@@ -172,9 +183,14 @@ export class OnlineTestComponent implements OnInit {
     }
   }
 
-  confirmSubmittingTest() {
+  confirmSubmittingTest(template: TemplateRef<any>) {
     //to-do
-    alert("Test Finished");
+    //alert("Test Finished");
+    this.modalService.showModal(template);
+  }
+
+  alertReturnValue($event) {
+    alert($event);
   }
 
   enableOnlyMarker(marker) {

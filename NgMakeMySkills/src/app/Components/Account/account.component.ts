@@ -23,8 +23,8 @@ export class AccountComponent implements OnInit {
   ngOnInit() {
   }
 
-  closeAccountModal() {
-    this.modalService.closeModal();
-  }
+  // closeAccountModal() {
+  //   this.modalService.closeModal();
+  // }
 
 }

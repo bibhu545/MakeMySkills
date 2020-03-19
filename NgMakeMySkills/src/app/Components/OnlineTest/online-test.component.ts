@@ -61,7 +61,7 @@ export class OnlineTestComponent implements OnInit {
     this.prevVisitedQuestionNo = 1;
     this.currentQuestionNo = 1;
     this.currentTopicNo = 1;
-    this.setTimerForOneHour();
+    //this.setTimerForOneHour();
   }
 
   setTimerForOneHour() {
@@ -71,10 +71,6 @@ export class OnlineTestComponent implements OnInit {
       takeWhile(y => !(this.hours == 0 && this.minutes == 0 && this.seconds == 0))
     )
     .subscribe(x => {
-      if(this.hours == 0 && this.minutes == 0 && this.seconds == 0) {
-        alert("Times Up!!");
-        return;
-      }
       if(x !== 0 && x % 60 === 0){
         this.seconds = 0;
         this.minutes = this.minutes - 1;

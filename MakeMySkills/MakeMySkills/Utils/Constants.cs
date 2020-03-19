@@ -5,6 +5,11 @@ using System.Web;
 
 namespace MakeMySkills.Utils
 {
+    public class EncryptionKey
+    {
+        public const string LoginPartialEncKey = "06AD4231-185F-#12343E1-AF67-CCF0228B188#!@#@8ETYfadda423";
+    }
+
     public class Constants
     {
         public class ApiRespnoseStatus

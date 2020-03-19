@@ -25,5 +25,18 @@ namespace MakeMySkills.Controllers
                 return CommonBusiness.GetErrorResponse(ex.Message);
             }
         }
+        public JsonResult Signup(SignupModel model)
+        {
+            try
+            {
+                var result = AccountBusiness.SignUp(model);
+                var response = new ApiRespnoseWrapper { status = ApiRespnoseStatus.Success, results = new ArrayList() { result } };
+                return new JsonResult { Data = response };
+            }
+            catch (Exception ex)
+            {
+                return CommonBusiness.GetErrorResponse(ex.Message);
+            }
+        }
     }
 }

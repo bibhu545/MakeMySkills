@@ -173,6 +173,7 @@
     <Compile Include="EDMX\UserResponse.cs">
       <DependentUpon>MakeMySkill.tt</DependentUpon>
     </Compile>
+    <Compile Include="Utils\CommonFunctions.cs" />
     <Compile Include="Utils\Constants.cs" />
   </ItemGroup>
   <ItemGroup>

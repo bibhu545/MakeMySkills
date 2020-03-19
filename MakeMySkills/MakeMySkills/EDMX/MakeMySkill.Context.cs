@@ -29,8 +29,9 @@ namespace MakeMySkills.EDMX
         public virtual DbSet<QuestionBank> QuestionBank { get; set; }
         public virtual DbSet<Test> Test { get; set; }
         public virtual DbSet<Topics> Topics { get; set; }
-        public virtual DbSet<User> User { get; set; }
         public virtual DbSet<UserReports> UserReports { get; set; }
         public virtual DbSet<UserResponse> UserResponse { get; set; }
+        public virtual DbSet<sysdiagrams> sysdiagrams { get; set; }
+        public virtual DbSet<User> User { get; set; }
     }
 }

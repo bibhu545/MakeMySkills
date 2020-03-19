@@ -27,8 +27,8 @@ namespace MakeMySkills.EDMX
         public int IsActive { get; set; }
     
         public virtual Test Test { get; set; }
-        public virtual User User { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<UserResponse> UserResponse { get; set; }
+        public virtual User User { get; set; }
     }
 }

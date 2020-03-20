@@ -37,8 +37,8 @@ export class OnlineTestComponent implements OnInit {
   title: string = "Confirm Submit Test";
   ownMessage: boolean = false;
   message: any = "Are You Sure You want to Submit Test.";
-  btnOkText: string = "Yes, Submit Test";
-  btnCancelText: string = "No, Go back to my Test";
+  btnOkText: string = "Confirm Submission.";
+  btnCancelText: string = "Go back to test";
 
   constructor(
     private commonService: CommonService, 
@@ -184,8 +184,7 @@ export class OnlineTestComponent implements OnInit {
   }
 
   confirmSubmittingTest(template: TemplateRef<any>) {
-    //to-do
-    //alert("Test Finished");
+    console.log(template)
     this.modalService.showModal(template);
   }
 

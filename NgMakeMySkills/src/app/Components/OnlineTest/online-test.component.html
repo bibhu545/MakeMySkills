@@ -10,10 +10,9 @@
                         <h5 style="text-align: center;">{{topic.Name}}</h5>
                         <div *ngFor="let question of topic.Questions">
                             <div class="border" (click)="setSelectedQuestion(topic.TopicNumber,question.Qnumber)"
-                            [ngClass]="{ 'border-active': 'section' + topic.TopicNumber + '-qnshort' + question.Qnumber == selectedQuestionNo }"
-                            id="section{{topic.TopicNumber}}-qnshort{{question.Qnumber}}">
-                                <div class="qn-no-icon positon-absolute"
-                                    [ngClass]="{ 'qn-no-icon-active': 'section' + topic.TopicNumber + '-qnshort' + question.Qnumber == selectedQuestionNo,
+                                [ngClass]="{ 'border-active': 'section' + topic.TopicNumber + '-qnshort' + question.Qnumber == selectedQuestionNo }"
+                                id="section{{topic.TopicNumber}}-qnshort{{question.Qnumber}}">
+                                <div class="qn-no-icon positon-absolute" [ngClass]="{ 'qn-no-icon-active': 'section' + topic.TopicNumber + '-qnshort' + question.Qnumber == selectedQuestionNo,
                                     'not-answered': question.NotAnswered,
                                     'answered': question.Answered,
                                     'marked': question.Marked,
@@ -33,7 +32,8 @@
             <fieldset class="border p-2">
                 <legend class="w-auto" style="height:20px">Select Section</legend>
                 <span *ngFor="let topic of topicWiseQuestionsList">
-                    <button class="btn btn-sm btn-light" (click)="scrollAndActivateCurrentSection(topic.TopicNumber)">{{topic.Name}}({{topic.TotalQn}})</button>
+                    <button class="btn btn-sm btn-light"
+                        (click)="scrollAndActivateCurrentSection(topic.TopicNumber)">{{topic.Name}}({{topic.TotalQn}})</button>
                 </span>
             </fieldset>
             <p>
@@ -44,9 +44,11 @@
             </p>
             <div class="question-body-wrapper">
                 <div class="question-body">
-                    <div class="question-text justify-content-center" style="text-align: center !important;" *ngIf="reachedEndText; else questionText">
+                    <div class="question-text justify-content-center" style="text-align: center !important;"
+                        *ngIf="reachedEndText; else questionText">
                         <p>End of Test Reached!<br>You can end the test by clicking on the 'Finish Test' button.<br>
-                            <button class="btn btn-sm btn-danger fa fa-power-off" (click)="confirmSubmittingTest()"> Finish Test</button></p>
+                            <button class="btn btn-sm btn-danger fa fa-power-off" (click)="confirmSubmittingTest()">
+                                Finish Test</button></p>
                     </div>
                     <ng-template #questionText>
                         <div class="question-text">
@@ -55,11 +57,12 @@
                         <table>
                             <tbody>
                                 <tr class="option" (click)="toggleSelectedOption(option.OptionNo)"
-                                *ngFor="let option of topicWiseQuestionsList[currentTopicNo - 1].Questions[currentQuestionNo - 1].Options">
-                                    <td class="radio-option-width"><input type="radio" name="option" 
-                                        [checked]="topicWiseQuestionsList[currentTopicNo - 1].Questions[currentQuestionNo - 1].SelectedOptionId === option.OptionNo" 
-                                        (change)="setSelectedOption(option.OptionNo)"/></td>
-                                    <td class="radio-option-width"><strong>{{getFromCharCode(option.OptionNo - 1)}}</strong></td>
+                                    *ngFor="let option of topicWiseQuestionsList[currentTopicNo - 1].Questions[currentQuestionNo - 1].Options">
+                                    <td class="radio-option-width"><input type="radio" name="option"
+                                            [checked]="topicWiseQuestionsList[currentTopicNo - 1].Questions[currentQuestionNo - 1].SelectedOptionId === option.OptionNo"
+                                            (change)="setSelectedOption(option.OptionNo)" /></td>
+                                    <td class="radio-option-width">
+                                        <strong>{{getFromCharCode(option.OptionNo - 1)}}</strong></td>
                                     <td>{{option.Text}}</td>
                                 </tr>
                             </tbody>
@@ -68,18 +71,23 @@
                 </div>
             </div>
             <div class="center-bottom-pallete p-2">
-                <button type="button" class="btn btn-sm btn-primary" (click)="setMarkForReviewMarker()">Mark for Review</button>&nbsp;
-                <button type="button" class="btn btn-sm btn-primary" (click)="setSelectedOption(0)">Clear Response</button>
-                <span style="float: right;"><button type="button" class="btn btn-sm btn-success" (click)="setNextQuestion()">Save and Next&nbsp;<span class="fa fa-sm fa-arrow-right"></span></button></span>
+                <button type="button" class="btn btn-sm btn-primary" (click)="setMarkForReviewMarker()">Mark for
+                    Review</button>&nbsp;
+                <button type="button" class="btn btn-sm btn-primary" (click)="setSelectedOption(0)">Clear
+                    Response</button>
+                <span style="float: right;"><button type="button" class="btn btn-sm btn-success"
+                        (click)="setNextQuestion()">Save and Next&nbsp;<span
+                            class="fa fa-sm fa-arrow-right"></span></button></span>
             </div>
         </div>
         <div class="col-md-3 full-height">
             <div class="positon-relative right-top-pallete">
                 <h5 style="text-align: center;">{{topicWiseQuestionsList[currentTopicNo - 1].Name}}</h5>
                 <div>
-                    <span *ngFor="let question of topicWiseQuestionsList[currentTopicNo - 1].Questions" style="padding-left: 5px;">
-                        <div class="qn-no-icon" style="margin:8px;" (click)="scrollAndActivateCurrentQuestion(currentTopicNo,question.Qnumber)"
-                        [ngClass]="{'qn-no-icon-active': 'section' + topicWiseQuestionsList[currentTopicNo - 1].TopicNumber + '-qnshort' + question.Qnumber == selectedQuestionNo,
+                    <span *ngFor="let question of topicWiseQuestionsList[currentTopicNo - 1].Questions"
+                        style="padding-left: 5px;">
+                        <div class="qn-no-icon" style="margin:8px;"
+                            (click)="scrollAndActivateCurrentQuestion(currentTopicNo,question.Qnumber)" [ngClass]="{'qn-no-icon-active': 'section' + topicWiseQuestionsList[currentTopicNo - 1].TopicNumber + '-qnshort' + question.Qnumber == selectedQuestionNo,
                         'not-answered': question.NotAnswered,
                         'answered': question.Answered,
                         'marked': question.Marked,
@@ -110,7 +118,8 @@
                     <span class="marker-icon marked-and-answered position-absolute"></span>
                     <span style="font-size: 12px;margin-left:20px">&nbsp;Marked & Answered</span>
                 </div>
-                <button class="btn btn-lg btn-danger fa fa-power-off" style="width: 100%;" (click)="confirmSubmittingTest()"> Finish Test</button>
+                <button class="btn btn-lg btn-danger fa fa-power-off" style="width: 100%;"
+                    (click)="confirmSubmittingTest(template)"> Finish Test</button>
             </div>
         </div>
     </div>
@@ -119,9 +128,12 @@
 <ng-template #template>
     <div class="modal-body">
         <app-confirmation-dialog 
-        [title]="title" [ownMessage]= "true" [message]="message" 
-        [btnOkText]="btnOkText" [btnCancelText]="btnCancelText" 
-        (messageToReturn) = "alertReturnValue($event)">
+            [title]="title" 
+            [ownMessage]="true" 
+            [message]="message" 
+            [btnOkText]="btnOkText"
+            [btnCancelText]="btnCancelText" 
+            (messageToReturn)="alertReturnValue($event)">
         </app-confirmation-dialog>
     </div>
 </ng-template>

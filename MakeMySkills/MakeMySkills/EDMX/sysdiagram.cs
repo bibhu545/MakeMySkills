@@ -12,16 +12,12 @@ namespace MakeMySkills.EDMX
     using System;
     using System.Collections.Generic;
     
-    public partial class UserResponse
+    public partial class sysdiagram
     {
-        public int UserResponseId { get; set; }
-        public int UserReportId { get; set; }
-        public int AnswerId { get; set; }
-        public int QuestionId { get; set; }
-        public int IsActive { get; set; }
-    
-        public virtual AnswerBank AnswerBank { get; set; }
-        public virtual QuestionBank QuestionBank { get; set; }
-        public virtual UserReport UserReport { get; set; }
+        public string name { get; set; }
+        public int principal_id { get; set; }
+        public int diagram_id { get; set; }
+        public Nullable<int> version { get; set; }
+        public byte[] definition { get; set; }
     }
 }

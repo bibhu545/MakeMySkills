@@ -12,13 +12,13 @@ namespace MakeMySkills.EDMX
     using System;
     using System.Collections.Generic;
     
-    public partial class Topics
+    public partial class Topic
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public Topics()
+        public Topic()
         {
-            this.Test = new HashSet<Test>();
-            this.Topics1 = new HashSet<Topics>();
+            this.Tests = new HashSet<Test>();
+            this.Topics1 = new HashSet<Topic>();
         }
     
         public int TopicId { get; set; }
@@ -27,9 +27,9 @@ namespace MakeMySkills.EDMX
         public int IsActive { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Test> Test { get; set; }
+        public virtual ICollection<Test> Tests { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Topics> Topics1 { get; set; }
-        public virtual Topics Topics2 { get; set; }
+        public virtual ICollection<Topic> Topics1 { get; set; }
+        public virtual Topic Topic1 { get; set; }
     }
 }

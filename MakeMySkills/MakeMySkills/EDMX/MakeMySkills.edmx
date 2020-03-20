@@ -60,8 +60,11 @@
           <Property Name="FirstName" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="LastName" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="Email" Type="nvarchar" MaxLength="50" Nullable="false" />
-          <Property Name="Password" Type="nchar" MaxLength="10" Nullable="false" />
+          <Property Name="Password" Type="nvarchar" MaxLength="255" Nullable="false" />
           <Property Name="IsActive" Type="int" Nullable="false" />
+          <Property Name="UserType" Type="int" Nullable="false" />
+          <Property Name="JoinedOn" Type="datetime" Nullable="false" />
+          <Property Name="IsLoggedIn" Type="int" Nullable="false" />
         </EntityType>
         <EntityType Name="UserReports">
           <Key>
@@ -249,8 +252,8 @@
           <Property Name="Answer" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="Explaination" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="IsActive" Type="Int32" Nullable="false" />
-          <NavigationProperty Name="QuestionBank" Relationship="Self.FK_QuestionBank_AnswerBank" FromRole="AnswerBank" ToRole="QuestionBank" />
-          <NavigationProperty Name="UserResponse" Relationship="Self.FK_UserResponse_AnswerBank" FromRole="AnswerBank" ToRole="UserResponse" />
+          <NavigationProperty Name="QuestionBanks" Relationship="Self.FK_QuestionBank_AnswerBank" FromRole="AnswerBank" ToRole="QuestionBank" />
+          <NavigationProperty Name="UserResponses" Relationship="Self.FK_UserResponse_AnswerBank" FromRole="AnswerBank" ToRole="UserResponse" />
         </EntityType>
         <EntityType Name="QuestionBank">
           <Key>
@@ -263,7 +266,17 @@
           <Property Name="IsActive" Type="Int32" Nullable="false" />
           <NavigationProperty Name="AnswerBank" Relationship="Self.FK_QuestionBank_AnswerBank" FromRole="QuestionBank" ToRole="AnswerBank" />
           <NavigationProperty Name="Test" Relationship="Self.FK_QuestionBank_Test" FromRole="QuestionBank" ToRole="Test" />
-          <NavigationProperty Name="UserResponse" Relationship="Self.FK_UserResponse_QuestionBank" FromRole="QuestionBank" ToRole="UserResponse" />
+          <NavigationProperty Name="UserResponses" Relationship="Self.FK_UserResponse_QuestionBank" FromRole="QuestionBank" ToRole="UserResponse" />
+        </EntityType>
+        <EntityType Name="sysdiagram">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="principal_id" Type="Int32" Nullable="false" />
+          <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="version" Type="Int32" />
+          <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
         </EntityType>
         <EntityType Name="Test">
           <Key>
@@ -273,11 +286,11 @@
           <Property Name="TestName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="IsActive" Type="Int32" Nullable="false" />
           <Property Name="TopicId" Type="Int32" Nullable="false" />
-          <NavigationProperty Name="QuestionBank" Relationship="Self.FK_QuestionBank_Test" FromRole="Test" ToRole="QuestionBank" />
-          <NavigationProperty Name="Topics" Relationship="Self.FK_Test_Topics" FromRole="Test" ToRole="Topics" />
+          <NavigationProperty Name="QuestionBanks" Relationship="Self.FK_QuestionBank_Test" FromRole="Test" ToRole="QuestionBank" />
+          <NavigationProperty Name="Topic" Relationship="Self.FK_Test_Topics" FromRole="Test" ToRole="Topics" />
           <NavigationProperty Name="UserReports" Relationship="Self.FK_UserReports_Test" FromRole="Test" ToRole="UserReports" />
         </EntityType>
-        <EntityType Name="Topics">
+        <EntityType Name="Topic">
           <Key>
             <PropertyRef Name="TopicId" />
           </Key>
@@ -285,11 +298,26 @@
           <Property Name="TopicName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="SubjectId" Type="Int32" />
           <Property Name="IsActive" Type="Int32" Nullable="false" />
-          <NavigationProperty Name="Test" Relationship="Self.FK_Test_Topics" FromRole="Topics" ToRole="Test" />
+          <NavigationProperty Name="Tests" Relationship="Self.FK_Test_Topics" FromRole="Topics" ToRole="Test" />
           <NavigationProperty Name="Topics1" Relationship="Self.FK_Topics_Topics" FromRole="Topics" ToRole="Topics1" />
-          <NavigationProperty Name="Topics2" Relationship="Self.FK_Topics_Topics" FromRole="Topics1" ToRole="Topics" />
+          <NavigationProperty Name="Topic1" Relationship="Self.FK_Topics_Topics" FromRole="Topics1" ToRole="Topics" />
         </EntityType>
-        <EntityType Name="UserReports">
+        <EntityType Name="User">
+          <Key>
+            <PropertyRef Name="UserId" />
+          </Key>
+          <Property Name="UserId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="FirstName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="LastName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Email" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Password" Type="String" MaxLength="255" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="IsActive" Type="Int32" Nullable="false" />
+          <Property Name="UserType" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="UserReports" Relationship="Self.FK_UserReports_User" FromRole="User" ToRole="UserReports" />
+          <Property Name="JoinedOn" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="IsLoggedIn" Type="Int32" Nullable="false" />
+        </EntityType>
+        <EntityType Name="UserReport">
           <Key>
             <PropertyRef Name="UserReportId" />
           </Key>
@@ -299,8 +327,8 @@
           <Property Name="NoOfAttempted" Type="Int32" Nullable="false" />
           <Property Name="IsActive" Type="Int32" Nullable="false" />
           <NavigationProperty Name="Test" Relationship="Self.FK_UserReports_Test" FromRole="UserReports" ToRole="Test" />
-          <NavigationProperty Name="UserResponse" Relationship="Self.FK_UserResponse_UserReports" FromRole="UserReports" ToRole="UserResponse" />
-          <NavigationProperty Name="User" Relationship="MakeMySkillsModel.FK_UserReports_User" FromRole="UserReports" ToRole="User" />
+          <NavigationProperty Name="User" Relationship="Self.FK_UserReports_User" FromRole="UserReports" ToRole="User" />
+          <NavigationProperty Name="UserResponses" Relationship="Self.FK_UserResponse_UserReports" FromRole="UserReports" ToRole="UserResponse" />
         </EntityType>
         <EntityType Name="UserResponse">
           <Key>
@@ -313,7 +341,7 @@
           <Property Name="IsActive" Type="Int32" Nullable="false" />
           <NavigationProperty Name="AnswerBank" Relationship="Self.FK_UserResponse_AnswerBank" FromRole="UserResponse" ToRole="AnswerBank" />
           <NavigationProperty Name="QuestionBank" Relationship="Self.FK_UserResponse_QuestionBank" FromRole="UserResponse" ToRole="QuestionBank" />
-          <NavigationProperty Name="UserReports" Relationship="Self.FK_UserResponse_UserReports" FromRole="UserResponse" ToRole="UserReports" />
+          <NavigationProperty Name="UserReport" Relationship="Self.FK_UserResponse_UserReports" FromRole="UserResponse" ToRole="UserReports" />
         </EntityType>
         <Association Name="FK_QuestionBank_AnswerBank">
           <End Role="AnswerBank" Type="Self.AnswerBank" Multiplicity="1" />
@@ -364,7 +392,7 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_Test_Topics">
-          <End Role="Topics" Type="Self.Topics" Multiplicity="1" />
+          <End Role="Topics" Type="Self.Topic" Multiplicity="1" />
           <End Role="Test" Type="Self.Test" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Topics">
@@ -377,7 +405,7 @@
         </Association>
         <Association Name="FK_UserReports_Test">
           <End Role="Test" Type="Self.Test" Multiplicity="1" />
-          <End Role="UserReports" Type="Self.UserReports" Multiplicity="*" />
+          <End Role="UserReports" Type="Self.UserReport" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Test">
               <PropertyRef Name="TestId" />
@@ -388,8 +416,8 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_Topics_Topics">
-          <End Role="Topics" Type="Self.Topics" Multiplicity="0..1" />
-          <End Role="Topics1" Type="Self.Topics" Multiplicity="*" />
+          <End Role="Topics" Type="Self.Topic" Multiplicity="0..1" />
+          <End Role="Topics1" Type="Self.Topic" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Topics">
               <PropertyRef Name="TopicId" />
@@ -399,8 +427,20 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_UserReports_User">
+          <End Role="User" Type="Self.User" Multiplicity="1" />
+          <End Role="UserReports" Type="Self.UserReport" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="UserId" />
+            </Principal>
+            <Dependent Role="UserReports">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_UserResponse_UserReports">
-          <End Role="UserReports" Type="Self.UserReports" Multiplicity="1" />
+          <End Role="UserReports" Type="Self.UserReport" Multiplicity="1" />
           <End Role="UserResponse" Type="Self.UserResponse" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="UserReports">
@@ -412,92 +452,58 @@
           </ReferentialConstraint>
         </Association>
         <EntityContainer Name="MakeMySkillsEntities" annotation:LazyLoadingEnabled="true">
-          <EntitySet Name="AnswerBank" EntityType="Self.AnswerBank" />
-          <EntitySet Name="QuestionBank" EntityType="Self.QuestionBank" />
-          <EntitySet Name="Test" EntityType="Self.Test" />
-          <EntitySet Name="Topics" EntityType="Self.Topics" />
-          <EntitySet Name="UserReports" EntityType="Self.UserReports" />
-          <EntitySet Name="UserResponse" EntityType="Self.UserResponse" />
+          <EntitySet Name="AnswerBanks" EntityType="Self.AnswerBank" />
+          <EntitySet Name="QuestionBanks" EntityType="Self.QuestionBank" />
+          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagram" />
+          <EntitySet Name="Tests" EntityType="Self.Test" />
+          <EntitySet Name="Topics" EntityType="Self.Topic" />
+          <EntitySet Name="Users" EntityType="Self.User" />
+          <EntitySet Name="UserReports" EntityType="Self.UserReport" />
+          <EntitySet Name="UserResponses" EntityType="Self.UserResponse" />
           <AssociationSet Name="FK_QuestionBank_AnswerBank" Association="Self.FK_QuestionBank_AnswerBank">
-            <End Role="AnswerBank" EntitySet="AnswerBank" />
-            <End Role="QuestionBank" EntitySet="QuestionBank" />
+            <End Role="AnswerBank" EntitySet="AnswerBanks" />
+            <End Role="QuestionBank" EntitySet="QuestionBanks" />
           </AssociationSet>
           <AssociationSet Name="FK_UserResponse_AnswerBank" Association="Self.FK_UserResponse_AnswerBank">
-            <End Role="AnswerBank" EntitySet="AnswerBank" />
-            <End Role="UserResponse" EntitySet="UserResponse" />
+            <End Role="AnswerBank" EntitySet="AnswerBanks" />
+            <End Role="UserResponse" EntitySet="UserResponses" />
           </AssociationSet>
           <AssociationSet Name="FK_QuestionBank_Test" Association="Self.FK_QuestionBank_Test">
-            <End Role="Test" EntitySet="Test" />
-            <End Role="QuestionBank" EntitySet="QuestionBank" />
+            <End Role="Test" EntitySet="Tests" />
+            <End Role="QuestionBank" EntitySet="QuestionBanks" />
           </AssociationSet>
           <AssociationSet Name="FK_UserResponse_QuestionBank" Association="Self.FK_UserResponse_QuestionBank">
-            <End Role="QuestionBank" EntitySet="QuestionBank" />
-            <End Role="UserResponse" EntitySet="UserResponse" />
+            <End Role="QuestionBank" EntitySet="QuestionBanks" />
+            <End Role="UserResponse" EntitySet="UserResponses" />
           </AssociationSet>
           <AssociationSet Name="FK_Test_Topics" Association="Self.FK_Test_Topics">
             <End Role="Topics" EntitySet="Topics" />
-            <End Role="Test" EntitySet="Test" />
+            <End Role="Test" EntitySet="Tests" />
           </AssociationSet>
           <AssociationSet Name="FK_UserReports_Test" Association="Self.FK_UserReports_Test">
-            <End Role="Test" EntitySet="Test" />
+            <End Role="Test" EntitySet="Tests" />
             <End Role="UserReports" EntitySet="UserReports" />
           </AssociationSet>
           <AssociationSet Name="FK_Topics_Topics" Association="Self.FK_Topics_Topics">
             <End Role="Topics" EntitySet="Topics" />
             <End Role="Topics1" EntitySet="Topics" />
           </AssociationSet>
+          <AssociationSet Name="FK_UserReports_User" Association="Self.FK_UserReports_User">
+            <End Role="User" EntitySet="Users" />
+            <End Role="UserReports" EntitySet="UserReports" />
+          </AssociationSet>
           <AssociationSet Name="FK_UserResponse_UserReports" Association="Self.FK_UserResponse_UserReports">
             <End Role="UserReports" EntitySet="UserReports" />
-            <End Role="UserResponse" EntitySet="UserResponse" />
-          </AssociationSet>
-          <EntitySet Name="sysdiagrams" EntityType="MakeMySkillsModel.sysdiagrams" />
-          <EntitySet Name="User" EntityType="MakeMySkillsModel.User" />
-          <AssociationSet Name="FK_UserReports_User" Association="MakeMySkillsModel.FK_UserReports_User">
-            <End Role="User" EntitySet="User" />
-            <End Role="UserReports" EntitySet="UserReports" />
+            <End Role="UserResponse" EntitySet="UserResponses" />
           </AssociationSet>
         </EntityContainer>
-        <EntityType Name="sysdiagrams">
-          <Key>
-            <PropertyRef Name="diagram_id" />
-          </Key>
-          <Property Name="name" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
-          <Property Name="principal_id" Type="Int32" Nullable="false" />
-          <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="version" Type="Int32" />
-          <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
-        </EntityType>
-        <EntityType Name="User">
-          <Key>
-            <PropertyRef Name="UserId" />
-          </Key>
-          <Property Name="UserId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="FirstName" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="LastName" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="Email" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="Password" Type="String" Nullable="false" MaxLength="10" FixedLength="true" Unicode="true" />
-          <Property Name="IsActive" Type="Int32" Nullable="false" />
-          <NavigationProperty Name="UserReports" Relationship="MakeMySkillsModel.FK_UserReports_User" FromRole="User" ToRole="UserReports" />
-        </EntityType>
-        <Association Name="FK_UserReports_User">
-          <End Type="MakeMySkillsModel.User" Role="User" Multiplicity="1" />
-          <End Type="MakeMySkillsModel.UserReports" Role="UserReports" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="User">
-              <PropertyRef Name="UserId" />
-            </Principal>
-            <Dependent Role="UserReports">
-              <PropertyRef Name="UserId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
         <EntityContainerMapping StorageEntityContainer="MakeMySkillsModelStoreContainer" CdmEntityContainer="MakeMySkillsEntities">
-          <EntitySetMapping Name="AnswerBank">
+          <EntitySetMapping Name="AnswerBanks">
             <EntityTypeMapping TypeName="MakeMySkillsModel.AnswerBank">
               <MappingFragment StoreEntitySet="AnswerBank">
                 <ScalarProperty Name="AnswerId" ColumnName="AnswerId" />
@@ -507,7 +513,7 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="QuestionBank">
+          <EntitySetMapping Name="QuestionBanks">
             <EntityTypeMapping TypeName="MakeMySkillsModel.QuestionBank">
               <MappingFragment StoreEntitySet="QuestionBank">
                 <ScalarProperty Name="QuestionId" ColumnName="QuestionId" />
@@ -518,7 +524,18 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="Test">
+          <EntitySetMapping Name="sysdiagrams">
+            <EntityTypeMapping TypeName="MakeMySkillsModel.sysdiagram">
+              <MappingFragment StoreEntitySet="sysdiagrams">
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="principal_id" ColumnName="principal_id" />
+                <ScalarProperty Name="diagram_id" ColumnName="diagram_id" />
+                <ScalarProperty Name="version" ColumnName="version" />
+                <ScalarProperty Name="definition" ColumnName="definition" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Tests">
             <EntityTypeMapping TypeName="MakeMySkillsModel.Test">
               <MappingFragment StoreEntitySet="Test">
                 <ScalarProperty Name="TestId" ColumnName="TestId" />
@@ -529,7 +546,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Topics">
-            <EntityTypeMapping TypeName="MakeMySkillsModel.Topics">
+            <EntityTypeMapping TypeName="MakeMySkillsModel.Topic">
               <MappingFragment StoreEntitySet="Topics">
                 <ScalarProperty Name="TopicId" ColumnName="TopicId" />
                 <ScalarProperty Name="TopicName" ColumnName="TopicName" />
@@ -538,8 +555,23 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <EntitySetMapping Name="Users">
+            <EntityTypeMapping TypeName="MakeMySkillsModel.User">
+              <MappingFragment StoreEntitySet="User">
+                <ScalarProperty Name="IsLoggedIn" ColumnName="IsLoggedIn" />
+                <ScalarProperty Name="JoinedOn" ColumnName="JoinedOn" />
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+                <ScalarProperty Name="FirstName" ColumnName="FirstName" />
+                <ScalarProperty Name="LastName" ColumnName="LastName" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="Password" ColumnName="Password" />
+                <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+                <ScalarProperty Name="UserType" ColumnName="UserType" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
           <EntitySetMapping Name="UserReports">
-            <EntityTypeMapping TypeName="MakeMySkillsModel.UserReports">
+            <EntityTypeMapping TypeName="MakeMySkillsModel.UserReport">
               <MappingFragment StoreEntitySet="UserReports">
                 <ScalarProperty Name="UserReportId" ColumnName="UserReportId" />
                 <ScalarProperty Name="UserId" ColumnName="UserId" />
@@ -549,7 +581,7 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="UserResponse">
+          <EntitySetMapping Name="UserResponses">
             <EntityTypeMapping TypeName="MakeMySkillsModel.UserResponse">
               <MappingFragment StoreEntitySet="UserResponse">
                 <ScalarProperty Name="UserResponseId" ColumnName="UserResponseId" />
@@ -557,29 +589,6 @@
                 <ScalarProperty Name="AnswerId" ColumnName="AnswerId" />
                 <ScalarProperty Name="QuestionId" ColumnName="QuestionId" />
                 <ScalarProperty Name="IsActive" ColumnName="IsActive" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="sysdiagrams">
-            <EntityTypeMapping TypeName="MakeMySkillsModel.sysdiagrams">
-              <MappingFragment StoreEntitySet="sysdiagrams">
-                <ScalarProperty Name="definition" ColumnName="definition" />
-                <ScalarProperty Name="version" ColumnName="version" />
-                <ScalarProperty Name="diagram_id" ColumnName="diagram_id" />
-                <ScalarProperty Name="principal_id" ColumnName="principal_id" />
-                <ScalarProperty Name="name" ColumnName="name" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="User">
-            <EntityTypeMapping TypeName="MakeMySkillsModel.User">
-              <MappingFragment StoreEntitySet="User">
-                <ScalarProperty Name="IsActive" ColumnName="IsActive" />
-                <ScalarProperty Name="Password" ColumnName="Password" />
-                <ScalarProperty Name="Email" ColumnName="Email" />
-                <ScalarProperty Name="LastName" ColumnName="LastName" />
-                <ScalarProperty Name="FirstName" ColumnName="FirstName" />
-                <ScalarProperty Name="UserId" ColumnName="UserId" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -597,7 +606,7 @@
     <Options>
       <DesignerInfoPropertySet>
         <DesignerProperty Name="ValidateOnBuild" Value="true" />
-        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
         <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
         <DesignerProperty Name="UseLegacyProvider" Value="false" />
         <DesignerProperty Name="CodeGenerationStrategy" Value="None" />

@@ -8,11 +8,11 @@
 
 </div>
 <div class="custom-modal-body">
-    <form>
+    <form [formGroup]="signupFormGroup" (ngSubmit)="submitSignup(signupFormGroup.value)">
 
         <div class="form-group">
             <label for="accountType">Account Type*:</label>
-            <select class="form-control" id="accountType">
+            <select class="form-control" id="accountType" formControlName="userType">
                 <option value="1">Candidate</option>
                 <option value="2">Examiner/Teacher</option>
             </select>
@@ -22,35 +22,60 @@
             <div class="col-md-6 col-12">
                 <div class="form-group">
                     <label for="firstName">First Name*:</label>
-                    <input type="text" id="firstName" class="form-control" />
+                    <input type="text" id="firstName" class="form-control" formControlName="firstName"
+                        placeholder="E.g. John" />
+                    <small class="text-danger"
+                        *ngIf="getFormControl('firstName').invalid && (getFormControl('firstName').dirty || getFormControl('firstName').touched)">Firstname
+                        is required.
+                    </small>
                 </div>
             </div>
             <div class="col-md-6 col-12">
                 <div class="form-group">
                     <label for="lastName">Last Name*:</label>
-                    <input type="text" id="lastName" class="form-control" />
+                    <input type="text" id="lastName" class="form-control" formControlName="lastName"
+                        placeholder="E.g. Doe" />
+                    <small class="text-danger"
+                        *ngIf="getFormControl('lastName').invalid && (getFormControl('lastName').dirty || getFormControl('lastName').touched)">LastName
+                        is required.
+                    </small>
                 </div>
             </div>
         </div>
 
         <div class="form-group">
             <label for="email">Email*:</label>
-            <input type="email" id="email" class="form-control" />
+            <input type="email" id="email" class="form-control" formControlName="email"
+                placeholder="E.g. John@gmail.com" />
+            <small class="text-danger"
+                *ngIf="getFormControl('email').invalid && (getFormControl('email').dirty || getFormControl('email').touched)">
+                Email is not in correct format.
+            </small>
         </div>
         <div class="form-group">
             <label for="password">Password*:</label>
-            <input type="password" id="password" class="form-control" />
+            <input type="password" id="password" class="form-control" formControlName="password"
+                placeholder="Enter new password" />
+            <small class="text-danger"
+                *ngIf="getFormControl('password').invalid && (getFormControl('password').dirty || getFormControl('password').touched)">
+                Password is not in correct format.
+            </small>
         </div>
         <div class="form-group">
             <label for="confirmPassword">Confirm Password*:</label>
-            <input type="Password" id="confirmPassword" class="form-control" />
+            <input type="Password" id="confirmPassword" class="form-control" formControlName="confirmPassword"
+                placeholder="Confirm your password" />
+            <small class="text-danger"
+                *ngIf="getFormControl('confirmPassword').invalid && (getFormControl('confirmPassword').dirty || getFormControl('confirmPassword').touched)">
+                Password is not in correct format.
+            </small>
         </div>
         <div class="row">
             <div class="col-md-8 col-12">
                 Already Registered? <span class="btn-link" (click)="login()">Login Here</span>
             </div>
             <div class="col-md-4 col-12 right-content">
-                <button type="submit" class="btn btn-primary">Signup</button>
+                <button type="submit" class="btn btn-primary" [disabled]='!signupFormGroup.valid'>Signup</button>
             </div>
         </div>
     </form>

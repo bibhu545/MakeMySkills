@@ -16,13 +16,17 @@ namespace MakeMySkills.Business
             using (var context = new MakeMySkillsEntities())
             {
                 model.password = CommonFunctions.CustomEncryptString(model.password, EncryptionKey.LoginPartialEncKey);
-                var user = context.User.FirstOrDefault(x => x.Email == model.email && x.Password == model.password && x.IsActive == ActiveStatus.IsActive);
+                var user = context.Users.FirstOrDefault(x => x.Email == model.email && x.Password == model.password && x.IsActive == ActiveStatus.IsActive && x.IsLoggedIn == LoginStatus.NotLoggedIn);
                 if (user != null)
                 {
                     return new LoginResponseModel()
                     {
                         email = user.Email,
-                        //rest properties
+                        firstName = user.FirstName,
+                        lastName = user.LastName,
+                        userId = user.UserId,
+                        userType = user.UserType,
+                        joinedOn = user.JoinedOn
                     };
                 }
                 else
@@ -35,23 +39,39 @@ namespace MakeMySkills.Business
         {
             using (var context = new MakeMySkillsEntities())
             {
-                var user = context.User.FirstOrDefault(x => x.Email == model.email);
-                if (user != null)
+                LoginResponseModel response = new LoginResponseModel();
+                var user = context.Users.FirstOrDefault(x => x.Email == model.email);
+                if (user == null)
                 {
                     model.password = CommonFunctions.CustomEncryptString(model.password, EncryptionKey.LoginPartialEncKey);
 
-                    //add user to db
+                    User newUser = new User();
 
-                    return new LoginResponseModel()
+                    newUser.Email = model.email;
+                    newUser.FirstName = model.firstName;
+                    newUser.LastName = model.lastName;
+                    newUser.Password = model.password;
+                    newUser.IsLoggedIn = LoginStatus.LoggedIn;
+                    newUser.IsActive = ActiveStatus.IsActive;
+                    newUser.JoinedOn = DateTime.UtcNow;
+                    newUser.UserType = model.userType;
+
+                    context.Users.Add(newUser);
+
+                    if (context.SaveChanges() > 0)
                     {
-                        email = user.Email,
-                        //rest properties
-                    };
+                        return Login(new LoginRequestModel() { email = user.Email, password = user.Password });
+                    }
+                    else
+                    {
+                        response.message = "Some error occured while saving data.";
+                    }
                 }
                 else
                 {
-                    return null;
+                    response.message = "Email already exists.";
                 }
+                return response;
             }
         }
     }

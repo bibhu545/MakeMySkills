@@ -17,8 +17,8 @@ namespace MakeMySkills.EDMX
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public AnswerBank()
         {
-            this.QuestionBank = new HashSet<QuestionBank>();
-            this.UserResponse = new HashSet<UserResponse>();
+            this.QuestionBanks = new HashSet<QuestionBank>();
+            this.UserResponses = new HashSet<UserResponse>();
         }
     
         public int AnswerId { get; set; }
@@ -27,8 +27,8 @@ namespace MakeMySkills.EDMX
         public int IsActive { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<QuestionBank> QuestionBank { get; set; }
+        public virtual ICollection<QuestionBank> QuestionBanks { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<UserResponse> UserResponse { get; set; }
+        public virtual ICollection<UserResponse> UserResponses { get; set; }
     }
 }

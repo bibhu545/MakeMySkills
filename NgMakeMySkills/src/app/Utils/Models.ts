@@ -9,3 +9,12 @@ export class LoginRequestModel {
     email: string = "";
     password: string = "";
 }
+
+export class SignupModel{
+    email: "";
+    firstName: "";
+    lastName: "";
+    password: "";
+    confirmPassword: "";
+    userType: "";
+}

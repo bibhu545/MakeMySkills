@@ -12,12 +12,14 @@ namespace MakeMySkills.Models
     }
     public class LoginResponseModel
     {
-        public int loggedIn { get; set; }
         public int userId { get; set; }
         public String email { get; set; }
         public String firstName { get; set; }
         public String lastName { get; set; }
         public int userType { get; set; }
+        public DateTime joinedOn { get; set; }
+        public int IsLoggedIn { get; set; }
+        public String message { get; set; }
     }
     public class SignupModel
     {

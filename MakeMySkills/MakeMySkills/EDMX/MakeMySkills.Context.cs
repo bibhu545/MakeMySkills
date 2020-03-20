@@ -25,13 +25,13 @@ namespace MakeMySkills.EDMX
             throw new UnintentionalCodeFirstException();
         }
     
-        public virtual DbSet<AnswerBank> AnswerBank { get; set; }
-        public virtual DbSet<QuestionBank> QuestionBank { get; set; }
-        public virtual DbSet<Test> Test { get; set; }
-        public virtual DbSet<Topics> Topics { get; set; }
-        public virtual DbSet<UserReports> UserReports { get; set; }
-        public virtual DbSet<UserResponse> UserResponse { get; set; }
-        public virtual DbSet<sysdiagrams> sysdiagrams { get; set; }
-        public virtual DbSet<User> User { get; set; }
+        public virtual DbSet<AnswerBank> AnswerBanks { get; set; }
+        public virtual DbSet<QuestionBank> QuestionBanks { get; set; }
+        public virtual DbSet<sysdiagram> sysdiagrams { get; set; }
+        public virtual DbSet<Test> Tests { get; set; }
+        public virtual DbSet<Topic> Topics { get; set; }
+        public virtual DbSet<User> Users { get; set; }
+        public virtual DbSet<UserReport> UserReports { get; set; }
+        public virtual DbSet<UserResponse> UserResponses { get; set; }
     }
 }

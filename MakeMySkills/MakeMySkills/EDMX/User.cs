@@ -17,7 +17,7 @@ namespace MakeMySkills.EDMX
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public User()
         {
-            this.UserReports = new HashSet<UserReports>();
+            this.UserReports = new HashSet<UserReport>();
         }
     
         public int UserId { get; set; }
@@ -26,8 +26,11 @@ namespace MakeMySkills.EDMX
         public string Email { get; set; }
         public string Password { get; set; }
         public int IsActive { get; set; }
+        public int UserType { get; set; }
+        public System.DateTime JoinedOn { get; set; }
+        public int IsLoggedIn { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<UserReports> UserReports { get; set; }
+        public virtual ICollection<UserReport> UserReports { get; set; }
     }
 }

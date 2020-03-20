@@ -24,5 +24,10 @@ namespace MakeMySkills.Utils
             public const int Deleted = 0;
             public const int IsActive = 1;
         }
+        public class LoginStatus
+        {
+            public const int LoggedIn = 1;
+            public const int NotLoggedIn = 0;
+        }
     }
 }

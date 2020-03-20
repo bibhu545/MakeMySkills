@@ -4,13 +4,15 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="19c0bce0667440cfbf80dace91d8e08f" Name="Diagram1">
-        <EntityTypeShape EntityType="MakeMySkillsModel.AnswerBank" Width="1.5" PointX="4.75" PointY="1" IsExpanded="true" />
-        <EntityTypeShape EntityType="MakeMySkillsModel.QuestionBank" Width="1.5" PointX="8.25" PointY="0.5" IsExpanded="true" />
-        <EntityTypeShape EntityType="MakeMySkillsModel.Test" Width="1.5" PointX="8.25" PointY="3.875" IsExpanded="true" />
-        <EntityTypeShape EntityType="MakeMySkillsModel.Topics" Width="1.5" PointX="4.75" PointY="3.375" IsExpanded="true" />
-        <EntityTypeShape EntityType="MakeMySkillsModel.UserReports" Width="1.5" PointX="2.625" PointY="3.625" IsExpanded="true" />
-        <EntityTypeShape EntityType="MakeMySkillsModel.UserResponse" Width="1.5" PointX="0.625" PointY="0.5" IsExpanded="true" />
+      <Diagram DiagramId="6215e267eec444e6844dd63650c5cfe1" Name="Diagram1">
+        <EntityTypeShape EntityType="MakeMySkillsModel.AnswerBank" Width="1.5" PointX="0.75" PointY="1.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="MakeMySkillsModel.QuestionBank" Width="1.5" PointX="3" PointY="1" IsExpanded="true" />
+        <EntityTypeShape EntityType="MakeMySkillsModel.sysdiagram" Width="1.5" PointX="2.75" PointY="4.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="MakeMySkillsModel.Test" Width="1.5" PointX="0.75" PointY="5" IsExpanded="true" />
+        <EntityTypeShape EntityType="MakeMySkillsModel.Topic" Width="1.5" PointX="1.5" PointY="9" IsExpanded="true" />
+        <EntityTypeShape EntityType="MakeMySkillsModel.User" Width="1.5" PointX="0.75" PointY="13" IsExpanded="true" />
+        <EntityTypeShape EntityType="MakeMySkillsModel.UserReport" Width="1.5" PointX="3" PointY="13" IsExpanded="true" />
+        <EntityTypeShape EntityType="MakeMySkillsModel.UserResponse" Width="1.5" PointX="5.25" PointY="1" IsExpanded="true" />
         <AssociationConnector Association="MakeMySkillsModel.FK_QuestionBank_AnswerBank" ManuallyRouted="false" />
         <AssociationConnector Association="MakeMySkillsModel.FK_UserResponse_AnswerBank" ManuallyRouted="false" />
         <AssociationConnector Association="MakeMySkillsModel.FK_QuestionBank_Test" ManuallyRouted="false" />
@@ -18,10 +20,8 @@
         <AssociationConnector Association="MakeMySkillsModel.FK_Test_Topics" ManuallyRouted="false" />
         <AssociationConnector Association="MakeMySkillsModel.FK_UserReports_Test" ManuallyRouted="false" />
         <AssociationConnector Association="MakeMySkillsModel.FK_Topics_Topics" ManuallyRouted="false" />
+        <AssociationConnector Association="MakeMySkillsModel.FK_UserReports_User" ManuallyRouted="false" />
         <AssociationConnector Association="MakeMySkillsModel.FK_UserResponse_UserReports" ManuallyRouted="false" />
-        <EntityTypeShape EntityType="MakeMySkillsModel.sysdiagrams" Width="1.5" PointX="5.5" PointY="5.625" />
-        <EntityTypeShape EntityType="MakeMySkillsModel.User" Width="1.5" PointX="0.5" PointY="3.625" />
-        <AssociationConnector Association="MakeMySkillsModel.FK_UserReports_User" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

@@ -8,13 +8,34 @@ export class OptionModel {
 export class LoginRequestModel {
     email: string = "";
     password: string = "";
+    saveLogin: boolean = false;
 }
 
-export class SignupModel{
-    email: "";
-    firstName: "";
-    lastName: "";
-    password: "";
-    confirmPassword: "";
-    userType: "";
+export class SignupModel {
+    email: string = "";
+    firstName: string = "";
+    lastName: string = "";
+    password: string = "";
+    confirmPassword: string = "";
+    userType: number;
+}
+
+export class LoginResponseModel {
+    isLoggedIn: boolean = false;
+    userId: number;
+    email: string = "";
+    firstName: string = "";
+    lastName: string = "";
+    userType: number;
+    joinedOn: any;
+    message: string = "";
+}
+
+export class UserModel {
+    userId: number;
+    email: string = "";
+    firstName: string = "";
+    lastName: string = "";
+    userType: number;
+    joinedOn: any;
 }

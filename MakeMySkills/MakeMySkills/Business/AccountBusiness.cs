@@ -16,7 +16,7 @@ namespace MakeMySkills.Business
             using (var context = new MakeMySkillsEntities())
             {
                 model.password = CommonFunctions.CustomEncryptString(model.password, EncryptionKey.LoginPartialEncKey);
-                var user = context.Users.FirstOrDefault(x => x.Email == model.email && x.Password == model.password && x.IsActive == ActiveStatus.IsActive && x.IsLoggedIn == LoginStatus.NotLoggedIn);
+                var user = context.Users.FirstOrDefault(x => x.Email == model.email && x.Password == model.password && x.IsActive == ActiveStatus.IsActive);
                 if (user != null)
                 {
                     return new LoginResponseModel()
@@ -60,7 +60,12 @@ namespace MakeMySkills.Business
 
                     if (context.SaveChanges() > 0)
                     {
-                        return Login(new LoginRequestModel() { email = user.Email, password = user.Password });
+                        response.email = newUser.Email;
+                        response.firstName = newUser.FirstName;
+                        response.lastName = newUser.LastName;
+                        response.userId = newUser.UserId;
+                        response.userType = newUser.UserType;
+                        response.joinedOn = newUser.JoinedOn;   
                     }
                     else
                     {

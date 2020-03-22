@@ -4,6 +4,9 @@ import { ModalService } from 'src/app/Services/modal.service';
 import { LoginRequestModel } from 'src/app/Utils/Models';
 import { HttpService } from 'src/app/Services/http.service';
 import { API_ENDPOINTS } from 'src/app/Utils/Utils';
+import { CookieService } from 'src/app/Services/cookie.service';
+import { Router } from '@angular/router';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-login',
@@ -17,7 +20,9 @@ export class LoginComponent implements OnInit {
   constructor(
     private modalService: ModalService,
     private accountService: AccountService,
-    private http: HttpService
+    private http: HttpService,
+    private router: Router,
+    private cookieService: CookieService
   ) { }
 
   ngOnInit() {
@@ -26,8 +31,23 @@ export class LoginComponent implements OnInit {
 
   login() {
     this.http.postData(API_ENDPOINTS.login, this.loginData).subscribe(response => {
-      console.log(response);
-      //set data at cookie and redirect to home according to user Type
+      if (response.results != null) {
+        if (response.results[0] != null) {
+          this.cookieService.saveLoginDataInCookies(response.results[0], this.loginData.saveLogin);
+          this.accountService.setLoggedIn(true);
+          this.accountService.setUserType(this.cookieService.getUserType());
+          this.closeModal();
+          this.router.navigateByUrl('/user-home');
+        }
+        else {
+          Swal.fire({
+            icon: 'error',
+            title: 'Oops...',
+            text: 'Username or password didn\'t match',
+            footer: '<a href="/forgot-password">Need help in password?</a>'
+          })
+        }
+      }
     }, error => {
       console.log(error);
     });

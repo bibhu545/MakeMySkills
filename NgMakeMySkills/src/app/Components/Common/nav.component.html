@@ -10,7 +10,7 @@
             <ul class="navbar-nav mr-auto"></ul>
             <ul class="navbar-nav">
                 <li class="nav-item">
-                    <a href="/create-test" class="nav-link">Create Test</a>
+                    <a href="/create-test" *ngIf="isLoggedIn && isExaminer" class="nav-link">Create Test</a>
                 </li>
                 <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle" href="#" id="navbardrop" data-toggle="dropdown">
@@ -23,7 +23,8 @@
                     </div>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" (click)="openAccountModal(e)">Login/Resister</a>
+                    <a class="nav-link" *ngIf="!isLoggedIn" (click)="openAccountModal(e)">Login/Resister</a>
+                    <a class="nav-link" *ngIf="isLoggedIn" (click)="logout()">Logout</a>
                 </li>
             </ul>
         </div>

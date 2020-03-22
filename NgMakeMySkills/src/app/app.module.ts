@@ -24,6 +24,8 @@ import { CustomDatePipe } from './Pipes/custom-date.pipe';
 import {NgsRevealModule} from 'ngx-scrollreveal';
 import { OnlineTestComponent } from './Components/OnlineTest/online-test.component';
 import { ConfirmationDialogComponent } from './Components/Common/confirmation-dialog/confirmation-dialog.component';
+import { CookieService } from './Services/cookie.service';
+import { CookieService as BaseCookieService } from 'ngx-cookie-service';
 
 
 @NgModule({
@@ -56,7 +58,7 @@ import { ConfirmationDialogComponent } from './Components/Common/confirmation-di
     ModalModule.forRoot(),
     NgsRevealModule
   ],
-  providers: [],
+  providers: [CookieService, BaseCookieService],
   bootstrap: [AppComponent],
   entryComponents: [AccountComponent]
 })

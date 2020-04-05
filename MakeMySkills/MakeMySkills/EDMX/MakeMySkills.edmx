@@ -302,21 +302,6 @@
           <NavigationProperty Name="Topics1" Relationship="Self.FK_Topics_Topics" FromRole="Topics" ToRole="Topics1" />
           <NavigationProperty Name="Topic1" Relationship="Self.FK_Topics_Topics" FromRole="Topics1" ToRole="Topics" />
         </EntityType>
-        <EntityType Name="User">
-          <Key>
-            <PropertyRef Name="UserId" />
-          </Key>
-          <Property Name="UserId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="FirstName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="LastName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="Email" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="Password" Type="String" MaxLength="255" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="IsActive" Type="Int32" Nullable="false" />
-          <Property Name="UserType" Type="Int32" Nullable="false" />
-          <NavigationProperty Name="UserReports" Relationship="Self.FK_UserReports_User" FromRole="User" ToRole="UserReports" />
-          <Property Name="JoinedOn" Type="DateTime" Nullable="false" Precision="3" />
-          <Property Name="IsLoggedIn" Type="Int32" Nullable="false" />
-        </EntityType>
         <EntityType Name="UserReport">
           <Key>
             <PropertyRef Name="UserReportId" />
@@ -327,8 +312,8 @@
           <Property Name="NoOfAttempted" Type="Int32" Nullable="false" />
           <Property Name="IsActive" Type="Int32" Nullable="false" />
           <NavigationProperty Name="Test" Relationship="Self.FK_UserReports_Test" FromRole="UserReports" ToRole="Test" />
-          <NavigationProperty Name="User" Relationship="Self.FK_UserReports_User" FromRole="UserReports" ToRole="User" />
           <NavigationProperty Name="UserResponses" Relationship="Self.FK_UserResponse_UserReports" FromRole="UserReports" ToRole="UserResponse" />
+          <NavigationProperty Name="User" Relationship="MakeMySkillsModel.FK_UserReports_User" FromRole="UserReport" ToRole="User" />
         </EntityType>
         <EntityType Name="UserResponse">
           <Key>
@@ -427,18 +412,6 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_UserReports_User">
-          <End Role="User" Type="Self.User" Multiplicity="1" />
-          <End Role="UserReports" Type="Self.UserReport" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="User">
-              <PropertyRef Name="UserId" />
-            </Principal>
-            <Dependent Role="UserReports">
-              <PropertyRef Name="UserId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK_UserResponse_UserReports">
           <End Role="UserReports" Type="Self.UserReport" Multiplicity="1" />
           <End Role="UserResponse" Type="Self.UserResponse" Multiplicity="*" />
@@ -457,7 +430,6 @@
           <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagram" />
           <EntitySet Name="Tests" EntityType="Self.Test" />
           <EntitySet Name="Topics" EntityType="Self.Topic" />
-          <EntitySet Name="Users" EntityType="Self.User" />
           <EntitySet Name="UserReports" EntityType="Self.UserReport" />
           <EntitySet Name="UserResponses" EntityType="Self.UserResponse" />
           <AssociationSet Name="FK_QuestionBank_AnswerBank" Association="Self.FK_QuestionBank_AnswerBank">
@@ -488,15 +460,43 @@
             <End Role="Topics" EntitySet="Topics" />
             <End Role="Topics1" EntitySet="Topics" />
           </AssociationSet>
-          <AssociationSet Name="FK_UserReports_User" Association="Self.FK_UserReports_User">
-            <End Role="User" EntitySet="Users" />
-            <End Role="UserReports" EntitySet="UserReports" />
-          </AssociationSet>
           <AssociationSet Name="FK_UserResponse_UserReports" Association="Self.FK_UserResponse_UserReports">
             <End Role="UserReports" EntitySet="UserReports" />
             <End Role="UserResponse" EntitySet="UserResponses" />
           </AssociationSet>
+          <EntitySet Name="Users" EntityType="MakeMySkillsModel.User" />
+          <AssociationSet Name="FK_UserReports_User" Association="MakeMySkillsModel.FK_UserReports_User">
+            <End Role="User" EntitySet="Users" />
+            <End Role="UserReport" EntitySet="UserReports" />
+          </AssociationSet>
         </EntityContainer>
+        <EntityType Name="User">
+          <Key>
+            <PropertyRef Name="UserId" />
+          </Key>
+          <Property Name="UserId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="FirstName" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="LastName" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Email" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Password" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="IsActive" Type="Int32" Nullable="false" />
+          <Property Name="UserType" Type="Int32" Nullable="false" />
+          <Property Name="JoinedOn" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="IsLoggedIn" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="UserReports" Relationship="MakeMySkillsModel.FK_UserReports_User" FromRole="User" ToRole="UserReport" />
+        </EntityType>
+        <Association Name="FK_UserReports_User">
+          <End Type="MakeMySkillsModel.User" Role="User" Multiplicity="1" />
+          <End Type="MakeMySkillsModel.UserReport" Role="UserReport" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="UserId" />
+            </Principal>
+            <Dependent Role="UserReport">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -555,21 +555,6 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="Users">
-            <EntityTypeMapping TypeName="MakeMySkillsModel.User">
-              <MappingFragment StoreEntitySet="User">
-                <ScalarProperty Name="IsLoggedIn" ColumnName="IsLoggedIn" />
-                <ScalarProperty Name="JoinedOn" ColumnName="JoinedOn" />
-                <ScalarProperty Name="UserId" ColumnName="UserId" />
-                <ScalarProperty Name="FirstName" ColumnName="FirstName" />
-                <ScalarProperty Name="LastName" ColumnName="LastName" />
-                <ScalarProperty Name="Email" ColumnName="Email" />
-                <ScalarProperty Name="Password" ColumnName="Password" />
-                <ScalarProperty Name="IsActive" ColumnName="IsActive" />
-                <ScalarProperty Name="UserType" ColumnName="UserType" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <EntitySetMapping Name="UserReports">
             <EntityTypeMapping TypeName="MakeMySkillsModel.UserReport">
               <MappingFragment StoreEntitySet="UserReports">
@@ -589,6 +574,21 @@
                 <ScalarProperty Name="AnswerId" ColumnName="AnswerId" />
                 <ScalarProperty Name="QuestionId" ColumnName="QuestionId" />
                 <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Users">
+            <EntityTypeMapping TypeName="MakeMySkillsModel.User">
+              <MappingFragment StoreEntitySet="User">
+                <ScalarProperty Name="IsLoggedIn" ColumnName="IsLoggedIn" />
+                <ScalarProperty Name="JoinedOn" ColumnName="JoinedOn" />
+                <ScalarProperty Name="UserType" ColumnName="UserType" />
+                <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+                <ScalarProperty Name="Password" ColumnName="Password" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="LastName" ColumnName="LastName" />
+                <ScalarProperty Name="FirstName" ColumnName="FirstName" />
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

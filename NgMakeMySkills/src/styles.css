@@ -12,6 +12,7 @@ body {
 }
 .custom-body{
     padding-top: 60px;
+    min-height: calc(100% - 50px);
 }
 .custom-container{
     min-height: calc(100vh - 50px);
@@ -28,6 +29,9 @@ body {
 .btn-link{
     cursor: pointer;
     color: royalblue;
+}
+.btn-add{
+    cursor: pointer;
 }
 
 .center-content{

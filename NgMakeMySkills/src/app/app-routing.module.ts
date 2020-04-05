@@ -8,6 +8,7 @@ import { PublishTestComponent } from './Components/Test/publish-test.component';
 import { UserHomeComponent } from './Components/Users/user-home.component';
 import { OnlineTestComponent } from './Components/OnlineTest/online-test.component';
 import { RouteGuardService } from './Services/route-guard.service';
+import { AdminDashboardComponent } from './Components/Admin/admin-dashboard/admin-dashboard.component';
 
 
 const routes: Routes = [
@@ -17,6 +18,7 @@ const routes: Routes = [
   { path: 'publish-test', component: PublishTestComponent },
   { path: 'user-home', component: UserHomeComponent },
   { path: 'online-test', component: OnlineTestComponent },
+  { path: 'admin', component: AdminDashboardComponent },
   { path: 'not-found', component: NotFoundComponent },
   { path: '**', component: NotFoundComponent }
 ];

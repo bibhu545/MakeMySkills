@@ -1,0 +1,67 @@
+<div class="container custom-body">
+    <div class="admin-dashboard">
+        <div class="row">
+            <div class="col-md-6 col-12">
+                <div class="card">
+                    <div class="card-header">
+                        Subjects
+                        <button class="btn btn-light">
+                            <i class="fa fa-plus" aria-hidden="true"></i>
+                        </button>
+                        <input type="text" class="form-control float-right search-control" placeholder="search..." />
+                    </div>
+                    <div class="card-body subject-section">
+                        <div class="row">
+                            <div class="col-md-6 col-12">
+                                <ul>
+                                    <li *ngFor="let item of subjects">
+                                        <span class="btn-link">{{item}}</span>
+                                    </li>
+                                </ul>
+                            </div>
+                            <div class="col-md-6 col-12">
+                                <ul>
+                                    <li *ngFor="let item of subjects">
+                                        <span class="btn-link">{{item}}</span>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6 col-12">
+                <div class="card">
+                    <div class="card-header">Users Stats</div>
+                    <div class="card-body">Content</div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-12 test-section">
+                <div class="row filter-section">
+                    <div class="col-sm-4">
+                        <div class="form-group">
+                            <label for="subjects">Filter By Subjects:</label>
+                            <select class="form-control" id="subjects">
+                                <option>Subject One</option>
+                                <option>Subject Two</option>
+                                <option>Subject Three</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="col-sm-4">
+                        <div class="form-group">
+                            <label for="createdAfter">Created after:</label>
+                            <input type="date" class="form-control" id="createdAfter" />
+                        </div>
+                    </div>
+                    <div class="col-sm-4"></div>
+                </div>
+                <div class="row">
+                    material datatable for tests with sorting and paging
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

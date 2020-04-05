@@ -30,8 +30,8 @@ namespace MakeMySkills.EDMX
         public virtual DbSet<sysdiagram> sysdiagrams { get; set; }
         public virtual DbSet<Test> Tests { get; set; }
         public virtual DbSet<Topic> Topics { get; set; }
-        public virtual DbSet<User> Users { get; set; }
         public virtual DbSet<UserReport> UserReports { get; set; }
         public virtual DbSet<UserResponse> UserResponses { get; set; }
+        public virtual DbSet<User> Users { get; set; }
     }
 }

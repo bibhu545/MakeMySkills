@@ -27,6 +27,7 @@ import { ConfirmationDialogComponent } from './Components/Common/confirmation-di
 import { CookieService } from './Services/cookie.service';
 import { CookieService as BaseCookieService } from 'ngx-cookie-service';
 import { AdminDashboardComponent } from './Components/Admin/admin-dashboard/admin-dashboard.component';
+import { SubjectManagementComponent } from './Components/Partial/subject-management.component';
 
 
 @NgModule({
@@ -48,7 +49,8 @@ import { AdminDashboardComponent } from './Components/Admin/admin-dashboard/admi
     CustomDatePipe,
     OnlineTestComponent,
     ConfirmationDialogComponent,
-    AdminDashboardComponent
+    AdminDashboardComponent,
+    SubjectManagementComponent
   ],
   imports: [
     BrowserModule,

@@ -5,7 +5,7 @@
                 <div class="card">
                     <div class="card-header">
                         Subjects
-                        <button class="btn btn-light">
+                        <button class="btn btn-light" (click)="openSubjectModal(subjectModal)">
                             <i class="fa fa-plus" aria-hidden="true"></i>
                         </button>
                         <input type="text" class="form-control float-right search-control" placeholder="search..." />
@@ -65,3 +65,38 @@
         </div>
     </div>
 </div>
+
+<ng-template #subjectModal>
+    <div class="custom-modal-header">
+        <h5 class="center-content">
+            Add/Update Subjects
+            <span class="btn-close float-right" (click)="closeModal()">
+                <i class="fa fa-times-circle" aria-hidden="true"></i>
+            </span>
+        </h5>
+    </div>
+    <div class="custom-modal-body">
+        <form #subjectForm="ngForm" novalidate>
+    
+            <div class="form-group">
+                <label for="topic">Topic Name*:</label>
+                <input type="text" id="topic" class="form-control" placeholder="E.g. Verbal ability" name="topicName" required #topic="ngModel"
+                    [class.is-invalid]="topic.invalid && topic.touched" [(ngModel)]="topicData.topic" />
+                <small class="text-danger" *ngIf="topic.invalid && topic.touched">Topic Name is required.</small>
+            </div>
+            
+            <!-- <div class="form-group">
+                <label for="password">Password*:</label>
+                <input type="password" id="password" class="form-control" name="password" required #password="ngModel" [class.is-invalid]="password.invalid && password.touched" placeholder="Enter your password" [(ngModel)]="loginData.password" />
+                <small class="text-danger" *ngIf="password.invalid && password.touched">Password is required.</small>
+            </div> -->
+            
+            <div class="row">
+                <div class="col-md-6 col-12"></div>
+                <div class="col-md-6 col-12 right-content">
+                    <button type="submit" [disabled]="subjectForm.form.invalid" (click)="addSubject()" class="btn btn-primary">Add Now</button>
+                </div>
+            </div>
+        </form>
+    </div>
+</ng-template>

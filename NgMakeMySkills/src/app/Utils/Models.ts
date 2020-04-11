@@ -39,3 +39,10 @@ export class UserModel {
     userType: number;
     joinedOn: any;
 }
+
+export class TopicModel {
+    topicId: number;
+    topicName: string = "";
+    isActive: boolean = true;
+    subject: TopicModel;
+}

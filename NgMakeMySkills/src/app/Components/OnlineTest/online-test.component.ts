@@ -25,6 +25,12 @@ export class OnlineTestComponent implements OnInit {
     {TopicNumber: 2, Name: 'Quantitative Ability', TotalQn: 12, Questions: [{Qnumber: 0, Text: '', Summary: '', NotAnswered: false, Answered: false, Marked: false, MarkedAndAnswered: false, SelectedOptionId: 0, Options: []},{},{},{},{},{},{},{},{},{},{},{}]},
     {TopicNumber: 3, Name: 'Verbal Ability', TotalQn: 20, Questions: [{Qnumber: 0, Text: '', Summary: '', NotAnswered: false, Answered: false, Marked: false, MarkedAndAnswered: false, SelectedOptionId: 0, Options: []},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{}]}
   ];
+
+  topicWiseAnswerCount = [
+    {TopicNumber: 1, Name: 'Reasoning Ability', Answered:0, NotAnswered:0, Marked:0, NotVisited:0},
+    {TopicNumber: 2, Name: 'Quantitative Ability', Answered:0, NotAnswered:0, Marked:0, NotVisited:0},
+    {TopicNumber: 3, Name: 'Verbal Ability', Answered:0, NotAnswered:0, Marked:0, NotVisited:0}
+  ]
   selectedQuestionNo = '';
   prevVisitedTopicNo = 0;
   prevVisitedQuestionNo = 0;
@@ -184,7 +190,7 @@ export class OnlineTestComponent implements OnInit {
   }
 
   confirmSubmittingTest(template: TemplateRef<any>) {
-    console.log(template)
+    //const arr = [{'TopicNo':1, 'TopicName':}]
     this.modalService.showModal(template);
   }
 

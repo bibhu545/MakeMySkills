@@ -42,12 +42,14 @@ body{
     color: white;
     text-align: center;
 }
+
 .scroll-down{
     font-size: 1.5em;
     cursor: pointer;
     animation: MoveUpDown 2s linear infinite;
     position: absolute;
 }
+
 @keyframes MoveUpDown {
     0%, 100% {
       bottom: -10px;
@@ -56,6 +58,7 @@ body{
       bottom: 0px;
     }
 }
+
 .stats-container{
     position: absolute;
     bottom: 0;

@@ -12,6 +12,10 @@ namespace MakeMySkills.Controllers
 {
     public class AccountController : Controller
     {
+        public string Hello()
+        {
+            return "Working";
+        }
         public JsonResult Login(LoginRequestModel model)
         {
             try

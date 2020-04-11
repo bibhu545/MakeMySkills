@@ -3,7 +3,7 @@ import { AccountService } from 'src/app/Services/account.service';
 import { ModalService } from 'src/app/Services/modal.service';
 import { LoginRequestModel } from 'src/app/Utils/Models';
 import { HttpService } from 'src/app/Services/http.service';
-import { API_ENDPOINTS } from 'src/app/Utils/Utils';
+import { API_ENDPOINTS, USER_TYPES } from 'src/app/Utils/Utils';
 import { CookieService } from 'src/app/Services/cookie.service';
 import { Router } from '@angular/router';
 import Swal from 'sweetalert2';
@@ -37,7 +37,12 @@ export class LoginComponent implements OnInit {
           this.accountService.setLoggedIn(true);
           this.accountService.setUserType(this.cookieService.getUserType());
           this.closeModal();
-          this.router.navigateByUrl('/user-home');
+          if (this.cookieService.getUserType() == USER_TYPES.admin) {
+            this.router.navigateByUrl('/admin');
+          }
+          else {
+            this.router.navigateByUrl('/user-home');
+          }
         }
         else {
           Swal.fire({

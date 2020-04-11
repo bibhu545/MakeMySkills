@@ -26,6 +26,7 @@ import { OnlineTestComponent } from './Components/OnlineTest/online-test.compone
 import { ConfirmationDialogComponent } from './Components/Common/confirmation-dialog/confirmation-dialog.component';
 import { CookieService } from './Services/cookie.service';
 import { CookieService as BaseCookieService } from 'ngx-cookie-service';
+import { AdminDashboardComponent } from './Components/Admin/admin-dashboard/admin-dashboard.component';
 
 
 @NgModule({
@@ -46,7 +47,8 @@ import { CookieService as BaseCookieService } from 'ngx-cookie-service';
     FooterComponent,
     CustomDatePipe,
     OnlineTestComponent,
-    ConfirmationDialogComponent
+    ConfirmationDialogComponent,
+    AdminDashboardComponent
   ],
   imports: [
     BrowserModule,

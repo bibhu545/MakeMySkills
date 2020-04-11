@@ -1,0 +1,1 @@
+INSERT INTO [dbo].[User] VALUES('admin', 'admin', 'admin@admin.com', 'mF+f15uPXEU=', 1, 0, GETDATE(), 1);

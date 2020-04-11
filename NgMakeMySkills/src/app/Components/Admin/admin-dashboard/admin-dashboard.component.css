@@ -1,0 +1,19 @@
+.admin-dashboard{
+    padding: 20px 0px;
+}
+.test-section{
+    margin-top: 20px;
+    padding: 20px;
+    border: 1px solid lightgray;
+    border-radius: 5px;
+}
+.filter-section{
+    margin-bottom: 15px;
+}
+.subject-section{
+    max-height: 300px;
+    overflow-y: auto;
+}
+.search-control{
+    width: 200px;
+}

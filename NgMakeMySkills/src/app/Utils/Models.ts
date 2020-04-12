@@ -44,5 +44,6 @@ export class TopicModel {
     topicId: number;
     topicName: string = "";
     isActive: boolean = true;
-    subject: TopicModel;
+    subTopics: TopicModel[] = [];
+    editMode: boolean = false;
 }

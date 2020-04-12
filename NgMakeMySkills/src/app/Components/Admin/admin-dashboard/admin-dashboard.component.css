@@ -6,14 +6,35 @@
     padding: 20px;
     border: 1px solid lightgray;
     border-radius: 5px;
+    /* box-shadow: 4px 4px 2px lightgray; */
 }
 .filter-section{
     margin-bottom: 15px;
 }
 .subject-section{
+    min-height: 100px;
     max-height: 300px;
     overflow-y: auto;
 }
 .search-control{
     width: 200px;
+}
+.fa-arrow-right{
+    font-size: small;
+    margin-right: 5px;
+}
+.subTopics-row:nth-child(odd){
+    background-color: lightgray;
+}
+.btn-link{
+    text-decoration: none;
+}
+.btn-cancel{
+    border: 1px solid lightgray;
+}
+.mr-top-bottom{
+    margin-top: 5px;
+}
+.error-txt{
+    border: 1px solid red;
 }

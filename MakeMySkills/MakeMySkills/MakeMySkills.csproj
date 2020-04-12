@@ -123,14 +123,19 @@
       <LastGenOutput>MakeMySkills.cs</LastGenOutput>
     </Content>
     <Content Include="Global.asax" />
-    <Content Include="Web.config" />
+    <Content Include="Web.config">
+      <SubType>Designer</SubType>
+    </Content>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Business\AccountBusiness.cs" />
+    <Compile Include="Business\AdminBusiness.cs" />
     <Compile Include="Business\CommonBusiness.cs" />
     <Compile Include="Controllers\AccountController.cs" />
+    <Compile Include="Controllers\AdminController.cs" />
+    <Compile Include="Controllers\CommonController.cs" />
     <Compile Include="EDMX\AnswerBank.cs">
       <DependentUpon>MakeMySkills.tt</DependentUpon>
     </Compile>
@@ -199,6 +204,8 @@
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Views\Account\" />
+    <Folder Include="Views\Admin\" />
+    <Folder Include="Views\Common\" />
   </ItemGroup>
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />

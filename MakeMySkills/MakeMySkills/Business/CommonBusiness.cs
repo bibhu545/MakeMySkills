@@ -1,4 +1,5 @@
-﻿using MakeMySkills.Models;
+﻿using MakeMySkills.EDMX;
+using MakeMySkills.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -20,5 +21,34 @@ namespace MakeMySkills.Business
                 }
             };
         }
+
+        public static List<TopicModel> GetAllSubjects()
+        {
+            using (var context = new MakeMySkillsEntities())
+            {
+                List<Topic> topicsFromDB = context.Topics.Where(x => x.IsActive == ActiveStatus.IsActive).ToList();
+
+                List<TopicModel> allTopics = topicsFromDB.Where(x => x.SubjectId == null).Select(x => new TopicModel()
+                {
+                    topicName = x.TopicName,
+                    subjectId = x.SubjectId,
+                    isActive = x.IsActive,
+                    topicId = x.TopicId
+                }).ToList();
+
+                foreach (var item in allTopics)
+                {
+                    item.subTopics = topicsFromDB.Where(x => x.SubjectId == item.topicId).Select(x => new TopicModel()
+                    {
+                        topicName = x.TopicName,
+                        subjectId = x.SubjectId,
+                        isActive = x.IsActive,
+                        topicId = x.TopicId
+                    }).ToList();
+                }
+                return allTopics;
+            }
+        }
+
     }
 }

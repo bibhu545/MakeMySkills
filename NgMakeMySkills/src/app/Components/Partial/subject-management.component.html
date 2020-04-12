@@ -1,1 +1,73 @@
-<p>subject-management works!</p>
+<div class="custom-modal-header">
+    <h5 class="center-content">
+        Add/Update Subjects
+        <span class="btn-close float-right" (click)="closeModal()">
+            <i class="fa fa-times-circle" aria-hidden="true"></i>
+        </span>
+    </h5>
+</div>
+<div class="custom-modal-body">
+    <form #subjectForm="ngForm" novalidate>
+
+        <div class="form-group">
+            <label for="topic">Topic Name*:</label>
+            <input type="text" id="topic" class="form-control" placeholder="E.g. Verbal ability" name="topicName"
+                required #topic="ngModel" [class.is-invalid]="topic.invalid && topic.touched"
+                [(ngModel)]="topicData.topicName" />
+            <small class="text-danger" *ngIf="topic.invalid && topic.touched">Topic Name is required.</small>
+        </div>
+
+        <div *ngIf="!subjectEdit">
+            <div class="form-group" *ngFor="let item of topicData.subTopics;let i = index">
+                <label for="{{'subTopic_' + i}}">Sub Topic Name*:</label>
+                <input type="text" id="{{'subTopic_' + i}}" class="form-control" name="{{'subTopic_' + i}}" required
+                    #subTopic="ngModel" [class.is-invalid]="subTopic.invalid && subTopic.touched"
+                    placeholder="Enter Subtopic Name" [(ngModel)]="item.topicName" />
+                <small class="text-danger" *ngIf="subTopic.invalid && subTopic.touched">subTopic is
+                    required.</small>
+            </div>
+        </div>
+
+        <div *ngIf="subjectEdit">
+            <div class="row">
+                <div *ngIf="topicData.subTopics.length == 0" class="center-content">
+                    <span class="text-primary">This topic has no sub-topics.</span>
+                </div>
+                <ng-container *ngFor="let item of topicData.subTopics">
+                    <div class="col-md-6 col-12" *ngIf="item.topicId != null">
+                        <i class="fa fa-arrow-right"></i>
+                        <span class="btn-link" (click)="editTopic(subjectModal, item)">{{item.topicName}}</span>
+                    </div>
+                    <br />
+                    <div class="col-12" *ngIf="item.topicId == null">
+                        <div class="form-group">
+                            <label for="{{'subTopic_' + i}}">Sub Topic Name*:</label>
+                            <input type="text" id="{{'subTopic_' + i}}" class="form-control"
+                                name="{{'subTopic_' + i}}" required #subTopic="ngModel"
+                                [class.is-invalid]="subTopic.invalid && subTopic.touched"
+                                placeholder="Enter Subtopic Name" [(ngModel)]="item.topicName" />
+                            <small class="text-danger" *ngIf="subTopic.invalid && subTopic.touched">
+                                subTopic isrequired.
+                            </small>
+                        </div>
+                    </div>
+                </ng-container>
+            </div>
+        </div>
+
+        <br />
+
+        <div class="row">
+            <div class="col-md-6 col-12">
+                <span class="btn-link" (click)="addSubtopic()">Add SubTopic</span>
+            </div>
+            <div class="col-md-6 col-12 right-content">
+                <button type="submit" [disabled]="subjectForm.form.invalid" (click)="addSubject()"
+                    class="btn btn-primary">
+                    <span *ngIf="!subjectEdit">Add Now</span>
+                    <span *ngIf="subjectEdit">Update Now</span>
+                </button>
+            </div>
+        </div>
+    </form>
+</div>

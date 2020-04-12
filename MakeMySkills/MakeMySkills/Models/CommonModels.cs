@@ -18,4 +18,12 @@ namespace MakeMySkills.Models
         public int value { get; set; }
         public String text { get; set; }
     }
+    public class TopicModel
+    {
+        public int topicId { get; set; }
+        public string topicName { get; set; }
+        public int? subjectId { get; set; }
+        public List<TopicModel> subTopics { get; set; }
+        public int isActive { get; set; }
+    }
 }

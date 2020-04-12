@@ -64,6 +64,6 @@ import { SubjectManagementComponent } from './Components/Partial/subject-managem
   ],
   providers: [CookieService, BaseCookieService],
   bootstrap: [AppComponent],
-  entryComponents: [AccountComponent]
+  entryComponents: [AccountComponent, SubjectManagementComponent]
 })
 export class AppModule { }

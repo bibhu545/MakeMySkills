@@ -18,6 +18,8 @@ namespace MakeMySkills.EDMX
         public User()
         {
             this.UserReports = new HashSet<UserReport>();
+            this.Tests = new HashSet<Test>();
+            this.QuestionBanks = new HashSet<QuestionBank>();
         }
     
         public int UserId { get; set; }
@@ -32,5 +34,9 @@ namespace MakeMySkills.EDMX
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<UserReport> UserReports { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Test> Tests { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<QuestionBank> QuestionBanks { get; set; }
     }
 }

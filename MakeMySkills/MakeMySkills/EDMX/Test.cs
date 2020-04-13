@@ -17,19 +17,31 @@ namespace MakeMySkills.EDMX
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public Test()
         {
-            this.QuestionBanks = new HashSet<QuestionBank>();
             this.UserReports = new HashSet<UserReport>();
+            this.QuestionBanks = new HashSet<QuestionBank>();
         }
     
         public int TestId { get; set; }
         public string TestName { get; set; }
         public int IsActive { get; set; }
         public int TopicId { get; set; }
+        public int TimeLimit { get; set; }
+        public int CorrectAnswerMarks { get; set; }
+        public int NegetiveMarking { get; set; }
+        public int PassingPercentage { get; set; }
+        public int SuffleQuestions { get; set; }
+        public int SuffleAnswers { get; set; }
+        public int AllowMultiple { get; set; }
+        public int RevealAnswers { get; set; }
+        public string TestGuid { get; set; }
+        public int UserId { get; set; }
+        public System.DateTime DateAdded { get; set; }
     
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<QuestionBank> QuestionBanks { get; set; }
         public virtual Topic Topic { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<UserReport> UserReports { get; set; }
+        public virtual User User { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<QuestionBank> QuestionBanks { get; set; }
     }
 }

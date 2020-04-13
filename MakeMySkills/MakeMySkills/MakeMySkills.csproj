@@ -133,9 +133,11 @@
     <Compile Include="Business\AccountBusiness.cs" />
     <Compile Include="Business\AdminBusiness.cs" />
     <Compile Include="Business\CommonBusiness.cs" />
+    <Compile Include="Business\TestBusiness.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\AdminController.cs" />
     <Compile Include="Controllers\CommonController.cs" />
+    <Compile Include="Controllers\TestController.cs" />
     <Compile Include="EDMX\AnswerBank.cs">
       <DependentUpon>MakeMySkills.tt</DependentUpon>
     </Compile>
@@ -180,6 +182,7 @@
     </Compile>
     <Compile Include="Models\AccountModels.cs" />
     <Compile Include="Models\CommonModels.cs" />
+    <Compile Include="Models\TestModels.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Utils\CommonFunctions.cs" />
     <Compile Include="Utils\Constants.cs" />
@@ -206,6 +209,7 @@
     <Folder Include="Views\Account\" />
     <Folder Include="Views\Admin\" />
     <Folder Include="Views\Common\" />
+    <Folder Include="Views\Test\" />
   </ItemGroup>
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />

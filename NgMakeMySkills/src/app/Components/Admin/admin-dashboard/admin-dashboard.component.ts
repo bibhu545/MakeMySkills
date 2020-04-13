@@ -40,14 +40,13 @@ export class AdminDashboardComponent implements OnInit {
           else {
             this.topicData = new TopicModel();
           }
-          // this.tempTopicData = Object.create(this.topicData);
         }
       }
       else {
         this.utils.showErrorMessage("Some error occured. Please reload the page.");
       }
     }, error => {
-      this.utils.showErrorMessage(error.message);
+      this.utils.showServerError(error);
     });
   }
 
@@ -85,7 +84,7 @@ export class AdminDashboardComponent implements OnInit {
         this.utils.showErrorMessage("Some internal error occured. " + response.errorMessage);
       }
     }, error => {
-      console.log(error);
+      this.utils.showServerError(error);
     });
   }
 
@@ -129,7 +128,7 @@ export class AdminDashboardComponent implements OnInit {
           this.utils.showErrorMessage("Some internal error occured. " + response.errorMessage);
         }
       }, error => {
-        console.log(error);
+        this.utils.showServerError(error);
       });
     }
   }
@@ -154,7 +153,7 @@ export class AdminDashboardComponent implements OnInit {
             this.utils.showErrorMessage("Some internal error occured. " + response.errorMessage);
           }
         }, error => {
-          console.log(error);
+          this.utils.showServerError(error);
         });
       }
     })

@@ -10,7 +10,10 @@ export const API_ENDPOINTS = {
     getCommondataForAdmin: BaseUrl + '/Admin/GetCommondataForAdmin',
     EditTopic: BaseUrl + '/Admin/EditTopic',
     DeleteTopic: BaseUrl + '/Admin/DeleteTopic',
-    GelHomePageCommonData: BaseUrl + '/Common/GetHomePageCommonData'
+    GelHomePageCommonData: BaseUrl + '/Common/GetHomePageCommonData',
+    GetCommonDataForTest: BaseUrl + '/Test/GetCommonDataForTest',
+    CreateTest: BaseUrl + '/Test/CreateTest',
+    GetTestBasicDetails: BaseUrl + '/Test/GetTestBasicDetails'
 }
 
 export const USER_TYPES = {
@@ -50,5 +53,8 @@ export class Utils {
             cancelButtonColor: '#d33',
             confirmButtonText: confirmBtnText
         });
+    }
+    showServerError(error: any) {
+        this.showErrorMessage("Some internal error occured. " + error.message);
     }
 }

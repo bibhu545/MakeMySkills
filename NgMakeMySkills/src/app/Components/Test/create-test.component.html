@@ -30,14 +30,25 @@
                     </h5>
                 </div>
                 <div class="custom-modal-body shadow">
-                    <form>
+                    <form #createTestForm="ngForm" novalidate>
                         <div class="row form-row">
                             <div class="col-md-4 col-12 right-content">
-                                <label for="email">Test Title*:</label>
+                                <label for="testTitle">Test Title*:</label>
                             </div>
                             <div class="col-md-8 col-12">
-                                <input type="text" id="email" class="form-control" placeholder="E.g. Weekly test"
-                                    autocomplete="false" />
+                                <input type="text" id="testTitle" class="form-control" placeholder="E.g. Weekly test"
+                                    autocomplete="false" name="testTitle" [(ngModel)]="newTest.testName" required />
+                            </div>
+                        </div>
+                        <div class="row form-row">
+                            <div class="col-md-4 col-12 right-content">
+                                <label for="testTopic">Test Topic*:</label>
+                            </div>
+                            <div class="col-md-8 col-12">
+                                <select id="testTopic" class="form-control" name="testTopic" [(ngModel)]="newTest.topicId" required >
+                                    <option value="0">Select Topic</option>
+                                    <option *ngFor="let item of topics" value="{{item.topicId}}">{{item.topicName}}</option>
+                                </select>
                             </div>
                         </div>
                         <div class="row form-row">
@@ -45,7 +56,7 @@
                                 <label for="timeLimit">Time Limit:</label>
                             </div>
                             <div class="col-md-2 col-12 right-content">
-                                <input type="number" min="0" value="0" id="timeLimit" class="form-control" />
+                                <input type="number" min="0" value="0" id="timeLimit" class="form-control" name="timeLimit" [(ngModel)]="newTest.timeLimit" />
                             </div>
                             <div class="col-md-6 col-12">
                                 <small> (in minutes) Leave Empty for no time limit</small>
@@ -53,10 +64,10 @@
                         </div>
                         <div class="row form-row">
                             <div class="col-md-4 col-12 right-content">
-                                <label for="correctMarks">Correct Answer Marks*:</label>
+                                <label for="correctAnswerMarks">Correct Answer Marks*:</label>
                             </div>
                             <div class="col-md-2 col-12 right-content">
-                                <input type="number" min="0" id="correctMarks" class="form-control" />
+                                <input type="number" min="0" id="correctAnswerMarks" class="form-control" name="correctAnswerMarks" [(ngModel)]="newTest.correctAnswerMarks" />
                             </div>
                             <div class="col-md-6 col-12">
                                 <small> marks</small>
@@ -64,10 +75,10 @@
                         </div>
                         <div class="row form-row">
                             <div class="col-md-4 col-12 right-content">
-                                <label for="timeLimit">Negetive Marking*:</label>
+                                <label for="negetiveMarking">Negetive Marking*:</label>
                             </div>
                             <div class="col-md-2 col-12 right-content">
-                                <input type="number" min="0" id="timeLimit" class="form-control" />
+                                <input type="number" min="0" id="negetiveMarking" class="form-control" name="negetiveMarking" [(ngModel)]="newTest.negetiveMarking" />
                             </div>
                             <div class="col-md-6 col-12">
                                 <small> 0 means No Negative Marking</small>
@@ -78,7 +89,7 @@
                                 <label for="passingPercentage">Passing Percentage*:</label>
                             </div>
                             <div class="col-md-2 col-12 right-content">
-                                <input type="number" min="0" id="passingPercentage" class="form-control" />
+                                <input type="number" min="0" id="passingPercentage" class="form-control" name="passingPercentage" [(ngModel)]="newTest.passingPercentage"  />
                             </div>
                             <div class="col-md-6 col-12">
                                 <small> %, 0 mean No Pass-Fail Concept</small>
@@ -89,32 +100,28 @@
                             <div class="col-md-3"></div>
                             <div class="col-md-9 col-12">
                                 <label class="checkbox">
-                                    <input type="checkbox" /> Shuffle Questions
+                                    <input type="checkbox" name="SuffleQuestions" [(ngModel)]="newTest.suffleQuestions" /> Shuffle Questions
                                 </label>
                                 <br />
                                 <label class="checkbox">
-                                    <input type="checkbox" /> Shuffle Options
+                                    <input type="checkbox" name="suffleAnswers" [(ngModel)]="newTest.suffleAnswers" /> Shuffle Options
                                 </label>
                                 <br />
                                 <label class="checkbox">
-                                    <input type="checkbox" /> Allow students to attempt test multiple times
+                                    <input type="checkbox" name="allowMultiple" [(ngModel)]="newTest.allowMultiple" /> Allow students to attempt test multiple times
                                 </label>
                                 <br />
                                 <label class="checkbox">
-                                    <input type="checkbox" /> Reveal Correct Answers on test completion
+                                    <input type="checkbox" name="revealAnswers" [(ngModel)]="newTest.revealAnswers" /> Reveal Correct Answers on test completion
                                 </label>
                             </div>
                         </div>
                         <hr />
                         <div class="right-content">
-                            <!-- <button type="submit" class="btn btn-primary">
+                            <button type="submit" class="btn btn-primary" [disabled]="createTestForm.form.invalid" (click)="createTest()" >
                                 Save and Proceed
                                 <i class="fa fa-arrow-right" aria-hidden="true"></i>
-                            </button> -->
-                            <a href="/update-test" class="btn btn-primary">
-                                Save and Proceed
-                                <i class="fa fa-arrow-right" aria-hidden="true"></i>
-                            </a>
+                            </button>
                         </div>
                     </form>
                 </div>

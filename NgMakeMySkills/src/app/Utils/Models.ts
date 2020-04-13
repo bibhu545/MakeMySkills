@@ -47,3 +47,20 @@ export class TopicModel {
     subTopics: TopicModel[] = [];
     editMode: boolean = false;
 }
+
+export class TestModel {
+    testId: number = 0;
+    userId: number = 0;
+    testName: string = "";
+    isActive: number = 0;
+    topicId: number = 0;
+    timeLimit: number = 0;
+    correctAnswerMarks: number = 0;
+    negetiveMarking: number = 0;
+    passingPercentage: number = 0;
+    suffleQuestions: boolean = false;
+    suffleAnswers: boolean = false;
+    allowMultiple: boolean = false;
+    revealAnswers: boolean = false;
+    testGuid: string = "";
+}

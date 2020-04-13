@@ -14,7 +14,7 @@ import { AdminDashboardComponent } from './Components/Admin/admin-dashboard/admi
 const routes: Routes = [
   { path: '', component: HomeComponent },
   { path: 'create-test', component: CreateTestComponent, canActivate: [RouteGuardService] },
-  { path: 'update-test', component: UpdateTestComponent },
+  { path: 'update-test/:testGuid', component: UpdateTestComponent },
   { path: 'publish-test', component: PublishTestComponent },
   { path: 'user-home', component: UserHomeComponent },
   { path: 'online-test', component: OnlineTestComponent },

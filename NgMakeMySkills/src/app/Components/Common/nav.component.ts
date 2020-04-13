@@ -32,8 +32,6 @@ export class NavComponent implements OnInit {
     });
 
     this.accountService.userType$.subscribe(data => {
-      console.log(data);
-      console.log(data == USER_TYPES.examiner);
       this.isExaminer = data == USER_TYPES.examiner;
     });
   }

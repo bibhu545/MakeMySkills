@@ -18,18 +18,17 @@ namespace MakeMySkills.EDMX
         public AnswerBank()
         {
             this.UserResponses = new HashSet<UserResponse>();
-            this.QuestionBanks = new HashSet<QuestionBank>();
         }
     
         public int AnswerId { get; set; }
-        public string Answer { get; set; }
+        public int QuestionId { get; set; }
+        public string AnswerText { get; set; }
         public string Explaination { get; set; }
         public int IsActive { get; set; }
         public Nullable<int> IsAnswer { get; set; }
     
+        public virtual QuestionBank QuestionBank { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<UserResponse> UserResponses { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<QuestionBank> QuestionBanks { get; set; }
     }
 }

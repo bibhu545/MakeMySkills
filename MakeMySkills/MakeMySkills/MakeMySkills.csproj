@@ -159,9 +159,6 @@
     <Compile Include="EDMX\QuestionBank.cs">
       <DependentUpon>MakeMySkills.tt</DependentUpon>
     </Compile>
-    <Compile Include="EDMX\sysdiagram.cs">
-      <DependentUpon>MakeMySkills.tt</DependentUpon>
-    </Compile>
     <Compile Include="EDMX\Test.cs">
       <DependentUpon>MakeMySkills.tt</DependentUpon>
     </Compile>

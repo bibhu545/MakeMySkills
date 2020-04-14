@@ -5,25 +5,25 @@
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
       <Diagram DiagramId="6215e267eec444e6844dd63650c5cfe1" Name="Diagram1" ZoomLevel="96">
-        <EntityTypeShape EntityType="MakeMySkillsModel.AnswerBank" Width="1.5" PointX="0.75" PointY="1.125" IsExpanded="true" />
-        <EntityTypeShape EntityType="MakeMySkillsModel.sysdiagram" Width="1.5" PointX="2.75" PointY="4.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="MakeMySkillsModel.Test" Width="1.5" PointX="0.75" PointY="5" IsExpanded="true" />
-        <EntityTypeShape EntityType="MakeMySkillsModel.Topic" Width="1.5" PointX="1.625" PointY="9.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="MakeMySkillsModel.UserReport" Width="1.5" PointX="3" PointY="13" IsExpanded="true" />
-        <EntityTypeShape EntityType="MakeMySkillsModel.UserResponse" Width="1.5" PointX="5.25" PointY="1" IsExpanded="true" />
-        <AssociationConnector Association="MakeMySkillsModel.FK_UserResponse_AnswerBank" ManuallyRouted="false" />
-        <AssociationConnector Association="MakeMySkillsModel.FK_Test_Topics" ManuallyRouted="false" />
-        <AssociationConnector Association="MakeMySkillsModel.FK_UserReports_Test" ManuallyRouted="false" />
-        <AssociationConnector Association="MakeMySkillsModel.FK_Topics_Topics" ManuallyRouted="false" />
-        <AssociationConnector Association="MakeMySkillsModel.FK_UserResponse_UserReports" ManuallyRouted="false" />
-        <EntityTypeShape EntityType="MakeMySkillsModel.User" Width="1.5" PointX="0.75" PointY="12.75" />
-        <AssociationConnector Association="MakeMySkillsModel.FK_UserReports_User" />
-        <AssociationConnector Association="MakeMySkillsModel.FK__Test__UserId__29221CFB" />
-        <EntityTypeShape EntityType="MakeMySkillsModel.QuestionBank" Width="1.5" PointX="4" PointY="8.125" />
-        <AssociationConnector Association="MakeMySkillsModel.FK_QuestionBank_AnswerBank" />
-        <AssociationConnector Association="MakeMySkillsModel.FK__QuestionB__UserI__2A164134" />
+        <EntityTypeShape EntityType="MakeMySkillsModel.AnswerBank" Width="1.5" PointX="5.25" PointY="9.75" />
+        <EntityTypeShape EntityType="MakeMySkillsModel.QuestionBank" Width="1.5" PointX="3" PointY="4.5" />
+        <EntityTypeShape EntityType="MakeMySkillsModel.Test" Width="1.5" PointX="6" PointY="3.75" />
+        <EntityTypeShape EntityType="MakeMySkillsModel.Topic" Width="1.5" PointX="3.75" PointY="0.75" />
+        <EntityTypeShape EntityType="MakeMySkillsModel.User" Width="1.5" PointX="0.75" PointY="4.375" />
+        <EntityTypeShape EntityType="MakeMySkillsModel.UserReport" Width="1.5" PointX="8.25" PointY="3.75" />
+        <EntityTypeShape EntityType="MakeMySkillsModel.UserResponse" Width="1.5" PointX="8.5" PointY="7.125" />
+        <AssociationConnector Association="MakeMySkillsModel.FK_AnswerBank_QuestionBank" />
+        <AssociationConnector Association="MakeMySkillsModel.FK_UserResponse_AnswerBank" />
+        <AssociationConnector Association="MakeMySkillsModel.FK__Question_User" />
         <AssociationConnector Association="MakeMySkillsModel.FK_QuestionBank_Test" />
+        <AssociationConnector Association="MakeMySkillsModel.FK_QuestionBank_Topics" />
         <AssociationConnector Association="MakeMySkillsModel.FK_UserResponse_QuestionBank" />
+        <AssociationConnector Association="MakeMySkillsModel.FK__Test__UserId__29221CFB" />
+        <AssociationConnector Association="MakeMySkillsModel.FK_Test_Topics" />
+        <AssociationConnector Association="MakeMySkillsModel.FK_UserReports_Test" />
+        <AssociationConnector Association="MakeMySkillsModel.FK_Topics_Topics" />
+        <AssociationConnector Association="MakeMySkillsModel.FK_UserReports_User" />
+        <AssociationConnector Association="MakeMySkillsModel.FK_UserResponse_UserReports" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

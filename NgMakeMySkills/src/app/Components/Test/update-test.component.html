@@ -16,17 +16,65 @@
         <div class="row">
             <div class="col-12 center-content">
                 <h4 class="text-primary">Add/Update Questions</h4>
-                <p class="text-muted">
+                <p class="text-muted" *ngIf="testQuestions.length == 0">
                     Please click on the <strong> "+ Add New Question"</strong> button above to start adding questions.
                 </p>
             </div>
         </div>
         <div class="row">
-            <div class="col-md-2"></div>
-            <div class="col-md-8 col-12">
-                <hr />
-                <div class="right-content">
-                    <button class="btn btn-light btn-add-qn" (click)="openQuestionModal(updateQuestion)">
+            <div class="col-md-1"></div>
+            <div class="col-md-10 col-12">
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label for="filterTopic">Filter By &nbsp;</label>
+                            <select class="form-control ddl-filter-topic" id="filterTopic" name="filterTopic"
+                                [(ngModel)]="filterTopic" (change)="filterByTopic()">
+                                <option value="0">Select Subtopic</option>
+                                <option *ngFor="let item of testTopic.subTopics" value="{{item.topicId}}">
+                                    {{item.topicName}}
+                                </option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="col-md-6 right-content">
+                        <button class="btn btn-light btn-add-qn btn-sm" (click)="openQuestionModal(updateQuestion)">
+                            <i class="fa fa-plus" aria-hidden="true"></i>
+                            Add New Question
+                        </button>
+                    </div>
+                </div>
+                <div class="question-container" *ngFor="let item of testQuestions;let i = index">
+                    <p>
+                        <span class="text-success">Question {{i + 1}} of {{testQuestions.length}}</span>
+                        <span class="float-right">
+                            <div class="btn-group">
+                                <button class="btn btn-light btn-sm"><i class="fas fa-edit"></i></button>
+                                <button class="btn btn-light btn-sm"><i class="fa fa-trash"></i></button>
+                            </div>
+                        </span>
+                    </p>
+                    <div class="bg-light">
+                        {{item.questionText}}
+                    </div>
+                    <ul>
+                        <li class="option-texts" *ngFor="let option of item.options">
+                            <span class="answer-mark" [ngClass]="{'text-success': option.isAnswer != 0}">
+                                {{option.answerText}}
+                                <!-- <i class="fas fa-check text-success"></i> -->
+                            </span>
+                        </li>
+                    </ul>
+                    <div>Explanation: </div>
+                    <div class="bg-light">
+                        No Explanation Added
+                    </div>
+                </div>
+                <div class="center-content">
+                    <small class="test-primary" *ngIf="testQuestions.length == 0">No questions available in this
+                        category</small>
+                    <button *ngIf="testQuestions.length > 0" class="btn btn-light btn-add-qn btn-sm"
+                        (click)="openQuestionModal(updateQuestion)">
                         <i class="fa fa-plus" aria-hidden="true"></i>
                         Add New Question
                     </button>
@@ -40,7 +88,7 @@
                 </div>
             </div>
         </div>
-        <div class="col-md-2"></div>
+        <div class="col-md-1"></div>
     </div>
 </div>
 
@@ -60,12 +108,15 @@
                     <h5>Topic Name:<span class="text-success">{{testTopic.topicName}}</span></h5>
                 </div>
                 <div class="col-6" *ngIf="this.testTopic.subTopics.length > 0">
-                    <select class="form-control" required name="subTopic" #subTopic="ngModel" [(ngModel)]="this.newQuestion.topicId" (change)="validateSubtopic()">
+                    <select class="form-control" required name="subTopic" #subTopic="ngModel"
+                        [(ngModel)]="this.newQuestion.topicId" (change)="validateSubtopic()">
                         <option value="0">Select SubTopic</option>
-                        <option *ngFor="let item of this.testTopic.subTopics" value="{{item.topicId}}">{{item.topicName}}
+                        <option *ngFor="let item of this.testTopic.subTopics" value="{{item.topicId}}">
+                            {{item.topicName}}
                         </option>
                     </select>
-                    <small class="text-danger" *ngIf="subTopic.touched && !isValidSubtopic">Please choose a subtopic.</small>
+                    <small class="text-danger" *ngIf="subTopic.touched && !isValidSubtopic">Please choose a
+                        subtopic.</small>
                 </div>
             </div>
             <div class="form-group">
@@ -104,8 +155,9 @@
                         (click)="closeQuestionModal()">Cancel</button>
                 </div>
                 <div class="col-md-6 col-12 right-content">
-                    <button type="submit" class="btn btn-primary" [disabled]="addQuestionForm.form.invalid || !isValidSubtopic"
-                        (click)="addQuestion()">Add Now</button>
+                    <button type="submit" class="btn btn-primary"
+                        [disabled]="addQuestionForm.form.invalid || !isValidSubtopic" (click)="addQuestion()">Add
+                        Now</button>
                 </div>
             </div>
         </form>

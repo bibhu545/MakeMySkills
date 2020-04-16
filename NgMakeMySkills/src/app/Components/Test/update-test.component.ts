@@ -21,6 +21,9 @@ export class UpdateTestComponent implements OnInit {
   topics: TopicModel[] = [];
   testTopic: TopicModel = new TopicModel();
   isValidSubtopic: boolean = false;
+  reservedQuestions: QuestionModel[] = [];
+  testQuestions: QuestionModel[] = [];
+  filterTopic: number = 0;
 
   constructor(
     private modalService: ModalService,
@@ -52,10 +55,30 @@ export class UpdateTestComponent implements OnInit {
 
   getQuestionsForTest() {
     this.http.getData(API_ENDPOINTS.GetQuestionsForTest + '?id=' + this.testDetails.testId).subscribe(response => {
-      console.log(response);
+      if (response.results != null) {
+        if (response.results[0] != null) {
+          this.testQuestions = response.results[0];
+          this.reservedQuestions = this.testQuestions;
+        }
+        else {
+          this.utils.showErrorMessage("Oops...Some error occured. Please refresh the page.");
+        }
+      }
+      else {
+        this.utils.showErrorMessage("Some internal error occured. " + response.errorMessage);
+      }
     }, error => {
-      console.log(error);
+      this.utils.showServerError(error);
     });
+  }
+
+  filterByTopic(){
+    if(this.filterTopic == 0){
+      this.testQuestions = this.reservedQuestions;
+    }
+    else{
+      this.testQuestions = this.reservedQuestions.filter(x => x.topicId == this.filterTopic);
+    }
   }
 
   getTestBasicDetails(testGuid: String) {

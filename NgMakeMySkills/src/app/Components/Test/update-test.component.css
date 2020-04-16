@@ -8,3 +8,16 @@
 .custom-modal-body{
     padding: 10px 30px;
 }
+.question-container{
+    border: 1px solid lightgray;
+    border-radius: 5px;
+    padding: 5px 10px;
+    margin: 5px 0px;
+}
+.bg-light{
+    text-align: justify;
+}
+.ddl-filter-topic{
+    width: 200px;
+    display: inline-block;
+}

@@ -54,20 +54,41 @@
         </h5>
     </div>
     <div class="custom-modal-body">
-        <form>
+        <form #addQuestionForm="ngForm">
+            <div class="row">
+                <div class="col-6">
+                    <h5>Topic Name:<span class="text-success">{{testTopic.topicName}}</span></h5>
+                </div>
+                <div class="col-6" *ngIf="this.testTopic.subTopics.length > 0">
+                    <select class="form-control" required name="subTopic" #subTopic="ngModel" [(ngModel)]="this.newQuestion.topicId" (change)="validateSubtopic()">
+                        <option value="0">Select SubTopic</option>
+                        <option *ngFor="let item of this.testTopic.subTopics" value="{{item.topicId}}">{{item.topicName}}
+                        </option>
+                    </select>
+                    <small class="text-danger" *ngIf="subTopic.touched && !isValidSubtopic">Please choose a subtopic.</small>
+                </div>
+            </div>
             <div class="form-group">
                 <label for="questionText">Question Text*:</label>
-                <textarea type="text" id="questionText" class="form-control"
-                    placeholder="Enter question here..."></textarea>
+                <textarea type="text" id="questionText" class="form-control" required #questionText="ngModel"
+                    [class.is-invalid]="questionText.touched && questionText.invalid"
+                    placeholder="Enter question here..." name="questionText"
+                    [(ngModel)]="newQuestion.questionText"></textarea>
+                <small class="text-danger" *ngIf="questionText.touched && questionText.invalid">Question can not leave
+                    blank.</small>
             </div>
-            <div class="form-group" *ngFor="let item of options; let i = index">
-                <span class="float-right delete-option" (click)="deleteOption(i)">Delete</span>
+            <div class="form-group" *ngFor="let item of newQuestion.options; let i = index">
+                <span class="float-right delete-option" *ngIf="newQuestion.options.length > 2"
+                    (click)="deleteOption(i)">Delete</span>
                 <label for="{{'option_' + i + 1}}">{{item.optionLabel}}</label>
-                <textarea type="text" id="{{'option_' + i + 1}}" class="form-control" ngModel="item.optionText"
-                    placeholder="Enter option here..."></textarea>
+                <textarea type="text" id="{{'option_' + i + 1}}" class="form-control" name="{{'option_' + i + 1}}"
+                    [(ngModel)]="item.answerText" placeholder="Enter option here..." #answerText="ngModel"
+                    [class.is-invalid]="answerText.touched && answerText.invalid" required></textarea>
                 <label class="checkbox text-muted">
-                    <input type="checkbox" /> Mark as correct Answer
+                    <input type="checkbox" name="isAnswer" [(ngModel)]="item.isAnswer" /> Mark as correct Answer
                 </label>
+                <span class="text-danger float-right" *ngIf="answerText.touched && answerText.invalid">Can not leave
+                    blank.</span>
             </div>
             <div class="row">
                 <div class="col-12 center-content">
@@ -83,7 +104,8 @@
                         (click)="closeQuestionModal()">Cancel</button>
                 </div>
                 <div class="col-md-6 col-12 right-content">
-                    <button type="submit" class="btn btn-primary">Add Now</button>
+                    <button type="submit" class="btn btn-primary" [disabled]="addQuestionForm.form.invalid || !isValidSubtopic"
+                        (click)="addQuestion()">Add Now</button>
                 </div>
             </div>
         </form>

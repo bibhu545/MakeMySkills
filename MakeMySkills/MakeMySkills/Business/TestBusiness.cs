@@ -14,7 +14,7 @@ namespace MakeMySkills.Business
         {
             using (var context = new MakeMySkillsEntities())
             {
-                Test test = context.Tests.FirstOrDefault(x => x.TestGuid == testGuid);
+                Test test = context.Tests.FirstOrDefault(x => x.TestGuid == testGuid && x.IsActive == ActiveStatus.IsActive);
                 if (test != null)
                 {
                     return new TestModel()
@@ -78,14 +78,67 @@ namespace MakeMySkills.Business
         {
             using (var context = new MakeMySkillsEntities())
             {
-                return context.QuestionBanks.Where(x => x.TestId == id).Select(x => new QuestionModel()
+                List<QuestionModel> questions = context.QuestionBanks.Where(x => x.TestId == id && x.IsActive == ActiveStatus.IsActive).Select(x => new QuestionModel()
                 {
+                    isActive = x.IsActive,
+                    questionText = x.QuestionText,
+                    questionId = x.QuestionId,
+                    testId = x.TestId,
+                    topicId = x.TopicId,
+                    userId = x.UserId
                 }).ToList();
+                foreach (var item in questions)
+                {
+                    item.options = context.AnswerBanks.Where(x => x.QuestionId == item.questionId && x.IsActive == ActiveStatus.IsActive).Select(x => new AnswerModel()
+                    {
+                        answerId = x.AnswerId,
+                        answerText = x.AnswerText,
+                        explaination = x.Explaination,
+                        isActive = x.IsActive,
+                        isAnswer = x.IsAnswer,
+                        questionId = x.QuestionId
+                    }).ToList();
+                }
+                return questions;
             }
         }
-        public static bool AddQuestion()
+        public static bool AddQuestions(QuestionModel model)
         {
-            return true;
+            using (var context = new MakeMySkillsEntities())
+            {
+                int added = 0;
+                QuestionBank question = new QuestionBank()
+                {
+                    QuestionText = model.questionText,
+                    TestId = model.testId,
+                    IsActive = ActiveStatus.IsActive,
+                    TopicId = model.topicId,
+                    UserId = model.userId
+                };
+                context.QuestionBanks.Add(question);
+                added += context.SaveChanges();
+                if (model.options != null)
+                {
+                    List<AnswerBank> options = new List<AnswerBank>();
+                    foreach (var item in model.options)
+                    {
+                        options.Add(new AnswerBank()
+                        {
+                            AnswerText = item.answerText,
+                            Explaination = item.explaination,
+                            IsActive = ActiveStatus.IsActive,
+                            QuestionId = question.QuestionId,
+                            IsAnswer = item.isAnswer
+                        });
+                    }
+                    if (options.Count > 0)
+                    {
+                        context.AnswerBanks.AddRange(options);
+                        added += context.SaveChanges();
+                    }
+                }
+                return added > 0;
+            }
         }
     }
 }

@@ -13,7 +13,9 @@ export const API_ENDPOINTS = {
     GelHomePageCommonData: BaseUrl + '/Common/GetHomePageCommonData',
     GetCommonDataForTest: BaseUrl + '/Test/GetCommonDataForTest',
     CreateTest: BaseUrl + '/Test/CreateTest',
-    GetTestBasicDetails: BaseUrl + '/Test/GetTestBasicDetails'
+    GetTestBasicDetails: BaseUrl + '/Test/GetTestBasicDetails',
+    AddQuestions: BaseUrl + '/Test/AddQuestions',
+    GetQuestionsForTest: BaseUrl + '/Test/GetQuestionsForTest'
 }
 
 export const USER_TYPES = {

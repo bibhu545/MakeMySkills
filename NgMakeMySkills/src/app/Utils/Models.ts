@@ -1,10 +1,3 @@
-export class OptionModel {
-    id: number;
-    optionLabel: String;
-    optionText: String;
-    isAnswer: boolean;
-}
-
 export class LoginRequestModel {
     email: string = "";
     password: string = "";
@@ -63,4 +56,25 @@ export class TestModel {
     allowMultiple: boolean = false;
     revealAnswers: boolean = false;
     testGuid: string = "";
+}
+
+export class AnswerModel {
+    optionId: number = 0;
+    answerId: number = 0;
+    optionLabel: String = "";
+    answerText: String = "";
+    isAnswer: boolean = false;
+    questionId: number = 0;
+    isActive: number = 0;
+    explanation: string = "";
+}
+
+export class QuestionModel {
+    questionId: number = 0;
+    questionText: String = "";
+    testId: number = 0;
+    isActive: number = 0;
+    topicId: number = 0;
+    userId: number = 0;
+    options: AnswerModel[] = [];
 }

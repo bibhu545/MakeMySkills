@@ -26,16 +26,18 @@ namespace MakeMySkills.Models
     public class QuestionModel
     {
         public int questionId { get; set; }
-        public string question { get; set; }
-        public int answerId { get; set; }
-        public int testId { get; set; }
-        public int isActive { get; set; }
+        public int topicId { get; set; }
         public int userId { get; set; }
+        public int testId { get; set; }
+        public string questionText { get; set; }
+        public int isActive { get; set; }
+        public List<AnswerModel> options { get; set; }
     }
     public class AnswerModel
     {
         public int answerId { get; set; }
-        public string answer { get; set; }
+        public int questionId { get; set; }
+        public string answerText { get; set; }
         public string explaination { get; set; }
         public int isActive { get; set; }
         public Nullable<int> isAnswer { get; set; }

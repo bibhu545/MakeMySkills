@@ -17,17 +17,19 @@ import { CreateTestComponent } from './Components/Test/create-test.component';
 import { UpdateTestComponent } from './Components/Test/update-test.component';
 import { PublishTestComponent } from './Components/Test/publish-test.component';
 import { CandidateHomeComponent } from './Components/Users/Candidate/candidate-home.component';
-import { TeacherHomeComponent } from './Components/Users/Teacher/teacher-home.component';
 import { UserHomeComponent } from './Components/Users/user-home.component';
 import { FooterComponent } from './Components/Common/footer.component';
 import { CustomDatePipe } from './Pipes/custom-date.pipe';
-import {NgsRevealModule} from 'ngx-scrollreveal';
+import { NgsRevealModule } from 'ngx-scrollreveal';
 import { OnlineTestComponent } from './Components/OnlineTest/online-test.component';
 import { ConfirmationDialogComponent } from './Components/Common/confirmation-dialog/confirmation-dialog.component';
 import { CookieService } from './Services/cookie.service';
 import { CookieService as BaseCookieService } from 'ngx-cookie-service';
-import { AdminDashboardComponent } from './Components/Admin/admin-dashboard/admin-dashboard.component';
 import { SubjectManagementComponent } from './Components/Partial/subject-management.component';
+import { ExaminerHomeComponent } from './Components/Users/Examiner/examiner-home.component';
+import { AdminDashboardComponent } from './Components/Admin/DashBoard/admin-dashboard.component';
+import {MatTabsModule} from '@angular/material';
+import { TestDetailsComponent } from './Components/Partial/test-details.component';
 
 
 @NgModule({
@@ -43,14 +45,15 @@ import { SubjectManagementComponent } from './Components/Partial/subject-managem
     UpdateTestComponent,
     PublishTestComponent,
     CandidateHomeComponent,
-    TeacherHomeComponent,
     UserHomeComponent,
     FooterComponent,
     CustomDatePipe,
     OnlineTestComponent,
     ConfirmationDialogComponent,
     AdminDashboardComponent,
-    SubjectManagementComponent
+    SubjectManagementComponent,
+    ExaminerHomeComponent,
+    TestDetailsComponent
   ],
   imports: [
     BrowserModule,
@@ -60,7 +63,8 @@ import { SubjectManagementComponent } from './Components/Partial/subject-managem
     FormsModule,
     ReactiveFormsModule,
     ModalModule.forRoot(),
-    NgsRevealModule
+    NgsRevealModule,
+    MatTabsModule
   ],
   providers: [CookieService, BaseCookieService],
   bootstrap: [AppComponent],

@@ -2,7 +2,11 @@ import { Component, OnInit, TemplateRef } from '@angular/core';
 import { HttpService } from 'src/app/Services/http.service';
 import { ModalService } from 'src/app/Services/modal.service';
 import { TopicModel } from 'src/app/Utils/Models';
-import { API_ENDPOINTS, Utils } from 'src/app/Utils/Utils';
+import { API_ENDPOINTS, Utils, USER_TYPES } from 'src/app/Utils/Utils';
+import { CookieService } from 'src/app/Services/cookie.service';
+import { Router } from '@angular/router';
+import { AccountService } from 'src/app/Services/account.service';
+import { AccountComponent } from '../../Account/account.component';
 
 @Component({
   selector: 'app-admin-dashboard',
@@ -21,10 +25,27 @@ export class AdminDashboardComponent implements OnInit {
   subjectEdit: boolean = false;
   editError: boolean = false;
 
-  constructor(private http: HttpService, private modalService: ModalService) { }
+  constructor(
+    private http: HttpService, 
+    private modalService: ModalService,
+    private cookieService: CookieService,
+    private router: Router,
+    private accountService: AccountService
+  ) { }
 
   ngOnInit() {
-    this.getCommonData();
+    // if(this.cookieService.isLoggedIn()){
+    //   if(this.cookieService.getUserType() == USER_TYPES.admin){
+        this.getCommonData();
+    //   }
+    //   else{
+    //     this.router.navigateByUrl("/error-page");
+    //   }
+    // }
+    // else{
+    //   this.router.navigateByUrl("/");
+    //   this.modalService.showModal(AccountComponent);
+    // }
   }
 
   getCommonData() {

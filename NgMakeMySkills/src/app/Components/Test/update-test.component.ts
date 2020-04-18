@@ -48,7 +48,6 @@ export class UpdateTestComponent implements OnInit {
     }
     else {
       this.router.navigateByUrl('/');
-      this.accountService.setLoginMode(true);
       this.modalService.showModal(AccountComponent);
     }
   }

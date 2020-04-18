@@ -1,0 +1,10 @@
+.test-details {
+    border: 1px solid lightgray;
+    border-radius: 5px;
+    height: 100%;
+    transition: all 0.3s ease;
+}
+.test-details:hover {
+    transform: scale(1.02);
+    box-shadow: 3px 3px 3px 3px rgba(0, 0, 0, 0.2);
+}

@@ -8,7 +8,7 @@ import { PublishTestComponent } from './Components/Test/publish-test.component';
 import { UserHomeComponent } from './Components/Users/user-home.component';
 import { OnlineTestComponent } from './Components/OnlineTest/online-test.component';
 import { RouteGuardService } from './Services/route-guard.service';
-import { AdminDashboardComponent } from './Components/Admin/admin-dashboard/admin-dashboard.component';
+import { AdminDashboardComponent } from './Components/Admin/DashBoard/admin-dashboard.component';
 
 
 const routes: Routes = [

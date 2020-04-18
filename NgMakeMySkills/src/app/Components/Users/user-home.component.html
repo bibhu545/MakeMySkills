@@ -1,1 +1,8 @@
-<p>user-home works!</p>
+<div class="custom-body">
+    <ng-container *ngIf="candidateMode">
+        <app-candidate-home></app-candidate-home>
+    </ng-container>
+    <ng-container *ngIf="!candidateMode">
+        <app-examiner-home></app-examiner-home>
+    </ng-container>
+</div>

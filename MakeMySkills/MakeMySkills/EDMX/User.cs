@@ -20,6 +20,9 @@ namespace MakeMySkills.EDMX
             this.QuestionBanks = new HashSet<QuestionBank>();
             this.Tests = new HashSet<Test>();
             this.UserReports = new HashSet<UserReport>();
+            this.Batches = new HashSet<Batch>();
+            this.BatchUsers = new HashSet<BatchUser>();
+            this.BatchUsers1 = new HashSet<BatchUser>();
         }
     
         public int UserId { get; set; }
@@ -38,5 +41,11 @@ namespace MakeMySkills.EDMX
         public virtual ICollection<Test> Tests { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<UserReport> UserReports { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Batch> Batches { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<BatchUser> BatchUsers { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<BatchUser> BatchUsers1 { get; set; }
     }
 }

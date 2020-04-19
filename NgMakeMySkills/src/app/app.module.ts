@@ -30,7 +30,8 @@ import { ExaminerHomeComponent } from './Components/Users/Examiner/examiner-home
 import { AdminDashboardComponent } from './Components/Admin/DashBoard/admin-dashboard.component';
 import {MatTabsModule} from '@angular/material';
 import { TestDetailsComponent } from './Components/Partial/test-details.component';
-import { BatchComponent } from './Components/Create-Batch/batch/batch.component';
+import { CreateBatchComponent } from './Components/Batch/create-batch.component';
+import { ChangePasswordComponent } from './Components/Account/change-password.component';
 
 
 @NgModule({
@@ -55,7 +56,8 @@ import { BatchComponent } from './Components/Create-Batch/batch/batch.component'
     SubjectManagementComponent,
     ExaminerHomeComponent,
     TestDetailsComponent,
-    BatchComponent
+    CreateBatchComponent,
+    ChangePasswordComponent
   ],
   imports: [
     BrowserModule,
@@ -70,6 +72,6 @@ import { BatchComponent } from './Components/Create-Batch/batch/batch.component'
   ],
   providers: [CookieService, BaseCookieService],
   bootstrap: [AppComponent],
-  entryComponents: [AccountComponent, SubjectManagementComponent, BatchComponent]
+  entryComponents: [AccountComponent, SubjectManagementComponent, CreateBatchComponent, ChangePasswordComponent]
 })
 export class AppModule { }

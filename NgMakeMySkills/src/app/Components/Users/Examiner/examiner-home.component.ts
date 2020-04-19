@@ -4,8 +4,8 @@ import { Router } from '@angular/router';
 import { CookieService } from 'src/app/Services/cookie.service';
 import { ModalService } from 'src/app/Services/modal.service';
 import { API_ENDPOINTS, Utils } from 'src/app/Utils/Utils';
-import { TestModel, UserModel } from 'src/app/Utils/Models';
-import { BatchComponent } from '../../Create-Batch/batch/batch.component';
+import { TestModel, UserModel, TopicModel } from 'src/app/Utils/Models';
+import { CreateBatchComponent } from '../../Batch/create-batch.component';
 
 
 @Component({
@@ -13,6 +13,7 @@ import { BatchComponent } from '../../Create-Batch/batch/batch.component';
   templateUrl: './examiner-home.component.html',
   styleUrls: ['./examiner-home.component.css']
 })
+
 export class ExaminerHomeComponent implements OnInit {
 
   utils: Utils = new Utils();
@@ -21,6 +22,7 @@ export class ExaminerHomeComponent implements OnInit {
   userDetails: UserModel = new UserModel();
   batchDetails: any[] = [];
   showBatchPopup = false;
+  topics: TopicModel[] = [];
 
   constructor(
     private http: HttpService,
@@ -30,11 +32,15 @@ export class ExaminerHomeComponent implements OnInit {
   ) { }
 
   openBatchModal(e) {
-    this.modalService.showModal(BatchComponent, { class: 'modal-lg' });
+    this.modalService.showModal(CreateBatchComponent, { class: 'modal-lg' });
   }
-  
+
   ngOnInit() {
     this.userId = this.cookieService.getUserdataFromCookies().userId;
+    this.GetUserHomeData();
+  }
+
+  GetUserHomeData() {
     this.http.getData(API_ENDPOINTS.GetUserHomeData + "?id=" + this.userId).subscribe(response => {
       if (response.results != null) {
         if (response.results.length > 0) {
@@ -46,6 +52,7 @@ export class ExaminerHomeComponent implements OnInit {
 
           this.batchDetails = response.results[1];
           this.userDetails = response.results[2];
+          this.topics = response.results[3];
         }
         else {
           this.utils.showErrorMessage("Some error occured. Please try again.");

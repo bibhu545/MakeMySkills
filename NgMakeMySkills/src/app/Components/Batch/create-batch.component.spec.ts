@@ -3,21 +3,21 @@ import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
 import { DebugElement } from '@angular/core';
 
-import { BatchComponent } from './batch.component';
+import { CreateBatchComponent } from './create-batch.component';
 
-describe('BatchComponent', () => {
-  let component: BatchComponent;
-  let fixture: ComponentFixture<BatchComponent>;
+describe('CreateBatchComponent', () => {
+  let component: CreateBatchComponent;
+  let fixture: ComponentFixture<CreateBatchComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ BatchComponent ]
+      declarations: [ CreateBatchComponent ]
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(BatchComponent);
+    fixture = TestBed.createComponent(CreateBatchComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

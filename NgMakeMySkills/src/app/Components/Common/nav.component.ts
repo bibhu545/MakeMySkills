@@ -7,6 +7,7 @@ import { Router } from '@angular/router';
 import { USER_TYPES, API_ENDPOINTS, Utils } from 'src/app/Utils/Utils';
 import { HttpService } from 'src/app/Services/http.service';
 import { TopicModel } from 'src/app/Utils/Models';
+import { ChangePasswordComponent } from '../Account/change-password.component';
 
 @Component({
   selector: 'app-nav',
@@ -66,6 +67,11 @@ export class NavComponent implements OnInit {
 
   openAccountModal(e) {
     this.modalService.showModal(AccountComponent);
+  }
+
+  openChangePasswordModal(e) {
+    e.preventDefault();
+    this.modalService.showModal(ChangePasswordComponent);
   }
 
 }

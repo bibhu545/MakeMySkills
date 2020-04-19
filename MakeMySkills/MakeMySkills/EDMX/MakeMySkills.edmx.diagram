@@ -24,6 +24,12 @@
         <AssociationConnector Association="MakeMySkillsModel.FK_Topics_Topics" />
         <AssociationConnector Association="MakeMySkillsModel.FK_UserReports_User" />
         <AssociationConnector Association="MakeMySkillsModel.FK_UserResponse_UserReports" />
+        <EntityTypeShape EntityType="MakeMySkillsModel.Batch" Width="1.5" PointX="3" PointY="8.625" />
+        <EntityTypeShape EntityType="MakeMySkillsModel.BatchUser" Width="1.5" PointX="8.25" PointY="10.75" />
+        <AssociationConnector Association="MakeMySkillsModel.FK_Batch_Batch" />
+        <AssociationConnector Association="MakeMySkillsModel.FK_BatchUsers_Batch" />
+        <AssociationConnector Association="MakeMySkillsModel.FK_BatchUsers_ApprovedByUser" />
+        <AssociationConnector Association="MakeMySkillsModel.FK_BatchUsers_User" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

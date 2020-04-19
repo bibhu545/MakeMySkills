@@ -132,13 +132,21 @@
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Business\AccountBusiness.cs" />
     <Compile Include="Business\AdminBusiness.cs" />
+    <Compile Include="Business\BatchBusiness.cs" />
     <Compile Include="Business\CommonBusiness.cs" />
     <Compile Include="Business\TestBusiness.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\AdminController.cs" />
+    <Compile Include="Controllers\BatchController.cs" />
     <Compile Include="Controllers\CommonController.cs" />
     <Compile Include="Controllers\TestController.cs" />
     <Compile Include="EDMX\AnswerBank.cs">
+      <DependentUpon>MakeMySkills.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EDMX\Batch.cs">
+      <DependentUpon>MakeMySkills.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EDMX\BatchUser.cs">
       <DependentUpon>MakeMySkills.tt</DependentUpon>
     </Compile>
     <Compile Include="EDMX\MakeMySkills.Context.cs">
@@ -178,6 +186,7 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\AccountModels.cs" />
+    <Compile Include="Models\BatchModels.cs" />
     <Compile Include="Models\CommonModels.cs" />
     <Compile Include="Models\TestModels.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -205,6 +214,7 @@
     <Folder Include="App_Data\" />
     <Folder Include="Views\Account\" />
     <Folder Include="Views\Admin\" />
+    <Folder Include="Views\Batch\" />
     <Folder Include="Views\Common\" />
     <Folder Include="Views\Test\" />
   </ItemGroup>

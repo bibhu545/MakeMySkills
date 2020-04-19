@@ -24,6 +24,13 @@ export class LoginResponseModel {
     message: string = "";
 }
 
+export class ChangePasswordModel {
+    userId: number;
+    currentPassword: string;
+    newPassword: string;
+    confirmNewPassword: string;
+}
+
 export class UserModel {
     userId: number;
     email: string = "";
@@ -79,4 +86,17 @@ export class QuestionModel {
     topicId: number = 0;
     userId: number = 0;
     options: AnswerModel[] = [];
+}
+
+export class BatchModel{
+    batchId: number = 0;
+    userId: number = 0;
+    batchCode: string;
+    batchDetails: string;
+    regnoRequired: number = 1;
+    approvalRequired: number = 1;
+    memberApproval: number = 0;
+    createdOn: Date;
+    lastupdatedOn: Date;
+    isActive: number;
 }

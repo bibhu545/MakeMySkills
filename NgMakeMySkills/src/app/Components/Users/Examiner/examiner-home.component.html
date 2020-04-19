@@ -10,7 +10,7 @@
                                     <label for="subjectFilter">Filter By: </label>
                                     <select class="form-control form-control-sm" id="subjectFilter"
                                         name="subjectFilter">
-                                        <option>Hello</option>
+                                        <option *ngFor="let item of topics" value={{item.topicId}}>{{item.topicName}}</option>
                                     </select>
                                     <span class="text-primary filter-span">Newest First</span>
                                     <span class="text-primary filter-span">Oldest First</span>

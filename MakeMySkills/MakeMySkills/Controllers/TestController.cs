@@ -109,7 +109,8 @@ namespace MakeMySkills.Controllers
             {
                 var tests = TestBusiness.GetTestsByUser(id);
                 var userDetails = AccountBusiness.GetUserDetails(id);
-                var response = new ApiRespnoseWrapper { status = ApiRespnoseStatus.Success, results = new ArrayList() { tests, null, userDetails } };
+                var topics = CommonBusiness.GetAllSubjects();
+                var response = new ApiRespnoseWrapper { status = ApiRespnoseStatus.Success, results = new ArrayList() { tests, null, userDetails, topics } };
                 return new JsonResult { Data = response, JsonRequestBehavior = JsonRequestBehavior.AllowGet };
             }
             catch (Exception ex)

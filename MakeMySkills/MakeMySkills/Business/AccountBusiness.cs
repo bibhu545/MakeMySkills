@@ -79,5 +79,28 @@ namespace MakeMySkills.Business
                 return response;
             }
         }
+        public static LoginResponseModel GetUserDetails(int id)
+        {
+            using (var context = new MakeMySkillsEntities())
+            {
+                var user = context.Users.FirstOrDefault(x => x.UserId  == id&& x.IsActive == ActiveStatus.IsActive);
+                if (user != null)
+                {
+                    return new LoginResponseModel()
+                    {
+                        email = user.Email,
+                        firstName = user.FirstName,
+                        lastName = user.LastName,
+                        userId = user.UserId,
+                        userType = user.UserType,
+                        joinedOn = user.JoinedOn
+                    };
+                }
+                else
+                {
+                    return null;
+                }
+            }
+        }
     }
 }

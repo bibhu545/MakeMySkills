@@ -26,7 +26,7 @@ export class AdminDashboardComponent implements OnInit {
   editError: boolean = false;
 
   constructor(
-    private http: HttpService, 
+    private http: HttpService,
     private modalService: ModalService,
     private cookieService: CookieService,
     private router: Router,
@@ -34,18 +34,12 @@ export class AdminDashboardComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    // if(this.cookieService.isLoggedIn()){
-    //   if(this.cookieService.getUserType() == USER_TYPES.admin){
-        this.getCommonData();
-    //   }
-    //   else{
-    //     this.router.navigateByUrl("/error-page");
-    //   }
-    // }
-    // else{
-    //   this.router.navigateByUrl("/");
-    //   this.modalService.showModal(AccountComponent);
-    // }
+    if (this.cookieService.getUserType() == USER_TYPES.admin) {
+      this.getCommonData();
+    }
+    else {
+      this.router.navigateByUrl("/error-page");
+    }
   }
 
   getCommonData() {

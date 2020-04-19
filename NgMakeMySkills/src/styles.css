@@ -9,6 +9,9 @@ body {
     font-size: 1.05em !important;
     overflow-x: hidden;
 }
+/* *{
+    font-family: 'Rokkitt', cursive !important;
+} */
 .custom-body{
     padding-top: 60px;
     min-height: calc(100% - 50px);
@@ -79,6 +82,7 @@ body {
     width: 50px;
     border-radius: 50%;
     padding: 15px;
+    cursor: pointer;
 }
 .complete{
     background-color: #53b9d8;
@@ -94,10 +98,6 @@ body {
 }
 .user-home-container{
     padding: 15px 0px;
-}
-.home-tab-content{
-    max-height: calc(100vh - 190px);
-    min-height: calc(100vh - 190px);
 }
 .home-tab-content{
     padding: 15px;

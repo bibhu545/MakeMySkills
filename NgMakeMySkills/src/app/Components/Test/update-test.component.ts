@@ -4,8 +4,6 @@ import { AnswerModel, TestModel, QuestionModel, TopicModel } from 'src/app/Utils
 import { ActivatedRoute, Router } from '@angular/router';
 import { CookieService } from 'src/app/Services/cookie.service';
 import { USER_TYPES, API_ENDPOINTS, Utils } from 'src/app/Utils/Utils';
-import { AccountService } from 'src/app/Services/account.service';
-import { AccountComponent } from '../Account/account.component';
 import { HttpService } from 'src/app/Services/http.service';
 
 @Component({
@@ -24,31 +22,25 @@ export class UpdateTestComponent implements OnInit {
   reservedQuestions: QuestionModel[] = [];
   testQuestions: QuestionModel[] = [];
   filterTopic: number = 0;
+  editMode: boolean = false;
 
   constructor(
     private modalService: ModalService,
     private route: ActivatedRoute,
     private router: Router,
     private cookieService: CookieService,
-    private accountService: AccountService,
     private http: HttpService
   ) { }
 
   ngOnInit() {
-    if (this.cookieService.isLoggedIn()) {
-      var userType = this.cookieService.getUserType();
-      var testGuid = this.route.snapshot.params.testGuid;
-      if (userType == USER_TYPES.admin || userType == USER_TYPES.examiner || testGuid == undefined || testGuid == null) {
-        this.getTestBasicDetails(testGuid);
-        this.populateInitialOptions();
-      }
-      else {
-        this.router.navigateByUrl('/error-page');
-      }
+    var userType = this.cookieService.getUserType();
+    var testGuid = this.route.snapshot.params.testGuid;
+    if (userType == USER_TYPES.admin || userType == USER_TYPES.examiner || testGuid == undefined || testGuid == null) {
+      this.getTestBasicDetails(testGuid);
+      this.populateInitialOptions();
     }
     else {
-      this.router.navigateByUrl('/');
-      this.modalService.showModal(AccountComponent);
+      this.router.navigateByUrl('/error-page');
     }
   }
 
@@ -71,11 +63,11 @@ export class UpdateTestComponent implements OnInit {
     });
   }
 
-  filterByTopic(){
-    if(this.filterTopic == 0){
+  filterByTopic() {
+    if (this.filterTopic == 0) {
       this.testQuestions = this.reservedQuestions;
     }
-    else{
+    else {
       this.testQuestions = this.reservedQuestions.filter(x => x.topicId == this.filterTopic);
     }
   }
@@ -168,7 +160,6 @@ export class UpdateTestComponent implements OnInit {
       this.http.postData(API_ENDPOINTS.AddQuestions, this.newQuestion).subscribe(response => {
         if (response.results != null) {
           if (response.results[0] != null) {
-            this.getQuestionsForTest();
             this.closeQuestionModal();
             this.utils.showSuccessMessage("New question added.");
           }
@@ -183,14 +174,68 @@ export class UpdateTestComponent implements OnInit {
         this.utils.showServerError(error);
       });
     }
+  }
 
+  setEditMode(template: TemplateRef<any>, item: QuestionModel) {
+    this.editMode = true;
+    this.newQuestion = item;
+    this.isValidSubtopic = true;
+    this.openQuestionModal(template);
+  }
+
+  editQuestion() {
+    this.http.postData(API_ENDPOINTS.EditQuestions, this.newQuestion).subscribe(response => {
+      if (response.results != null) {
+        if (response.results[0] != null) {
+          this.closeQuestionModal();
+          this.utils.showSuccessMessage("Question updated.");
+        }
+        else {
+          this.utils.showErrorMessage("Some error occured. Please try again.");
+        }
+      }
+      else {
+        this.utils.showErrorMessage("Some internal error occured. " + response.errorMessage);
+      }
+    }, error => {
+      this.utils.showServerError(error);
+    });
+  }
+
+  deleteQuestion(item: QuestionModel) {
+    this.utils.showConfirm("You won't be able to revert this!", "Yes, delete it!").then((result) => {
+      if (result.value) {
+        this.http.postData(API_ENDPOINTS.DeleteQuestions, item).subscribe(response => {
+          if (response.results != null) {
+            if (response.results[0] != null) {
+              this.getQuestionsForTest();
+              this.utils.showSuccessMessage("Question deleted.");
+            }
+            else {
+              this.utils.showErrorMessage("Some error occured. Please try again.");
+            }
+          }
+          else {
+            this.utils.showErrorMessage("Some internal error occured. " + response.errorMessage);
+          }
+        }, error => {
+          this.utils.showServerError(error);
+        });
+      }
+    });
   }
 
   openQuestionModal(template: TemplateRef<any>) {
+    if (!this.editMode) {
+      this.newQuestion = new QuestionModel();
+      this.populateInitialOptions();
+    }
     this.modalService.showModal(template, { class: 'modal-lg' });
   }
 
   closeQuestionModal() {
+    this.editMode = false;
+    this.getQuestionsForTest();
     this.modalService.closeModal();
   }
 

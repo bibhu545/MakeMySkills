@@ -56,6 +56,8 @@ export class TestModel {
     allowMultiple: boolean = false;
     revealAnswers: boolean = false;
     testGuid: string = "";
+    displayFromHome: boolean = false;
+    dateAdded: any;
 }
 
 export class AnswerModel {

@@ -5,6 +5,8 @@ import { CookieService } from 'src/app/Services/cookie.service';
 import { ModalService } from 'src/app/Services/modal.service';
 import { API_ENDPOINTS, Utils } from 'src/app/Utils/Utils';
 import { TestModel, UserModel } from 'src/app/Utils/Models';
+import { BatchComponent } from '../../Create-Batch/batch/batch.component';
+
 
 @Component({
   selector: 'app-examiner-home',
@@ -18,6 +20,7 @@ export class ExaminerHomeComponent implements OnInit {
   tests: TestModel[] = [];
   userDetails: UserModel = new UserModel();
   batchDetails: any[] = [];
+  showBatchPopup = false;
 
   constructor(
     private http: HttpService,
@@ -26,6 +29,10 @@ export class ExaminerHomeComponent implements OnInit {
     private modalService: ModalService
   ) { }
 
+  openBatchModal(e) {
+    this.modalService.showModal(BatchComponent, { class: 'modal-lg' });
+  }
+  
   ngOnInit() {
     this.userId = this.cookieService.getUserdataFromCookies().userId;
     this.http.getData(API_ENDPOINTS.GetUserHomeData + "?id=" + this.userId).subscribe(response => {

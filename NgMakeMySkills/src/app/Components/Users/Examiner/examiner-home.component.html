@@ -10,50 +10,22 @@
                                     <label for="subjectFilter">Filter By: </label>
                                     <select class="form-control form-control-sm" id="subjectFilter"
                                         name="subjectFilter">
-                                        <option>Hello</option>
+                                        <option *ngFor="let item of topics" value={{item.topicId}}>{{item.topicName}}</option>
                                     </select>
                                     <span class="text-primary filter-span">Newest First</span>
                                     <span class="text-primary filter-span">Oldest First</span>
                                 </div>
                                 <div class="col-md-3 center-content">
-                                    <button class="btn btn-light btn-sm">
+                                    <a href="/create-test" class="btn btn-light btn-sm">
                                         <i class="fa fa-plus" aria-hidden="true"></i>
                                         Create New Test
-                                    </button>
+                                    </a>
                                 </div>
                             </div>
                         </div>
                         <div class="row">
-                            <div class="col-md-1"></div>
-                            <div class="col-md-10">
-                                <div class="row">
-                                    <div class="col-md-4 test-container">
-                                        <app-test-details></app-test-details>
-                                    </div>
-                                    <div class="col-md-4 test-container">
-                                        <app-test-details></app-test-details>
-                                    </div>
-                                    <div class="col-md-4 test-container">
-                                        <app-test-details></app-test-details>
-                                    </div>
-                                    <div class="col-md-4 test-container">
-                                        <app-test-details></app-test-details>
-                                    </div>
-                                    <div class="col-md-4 test-container">
-                                        <app-test-details></app-test-details>
-                                    </div>
-                                    <div class="col-md-4 test-container">
-                                        <app-test-details></app-test-details>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-md-1"></div>
-                        </div>
-                        <div class="row">
-                            <div class="center-content">
-                                <button class="btn btn-light btn-sm">Previous</button>
-                                <span class="filter-span">Page 1</span>
-                                <button class="btn btn-light btn-sm">Next</button>
+                            <div class="col-md-3 col-sm-6 col-12" *ngFor="let item of tests">
+                                <app-test-details [test]="item"></app-test-details>
                             </div>
                         </div>
                     </div>

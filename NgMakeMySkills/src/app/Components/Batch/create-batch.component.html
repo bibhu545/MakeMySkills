@@ -1,0 +1,88 @@
+<div class="custom-modal-header">
+  <h5 class="center-content">
+    Create New Batch
+    <span class="btn-close float-right" (click)="closeModal()">
+      <i class="fa fa-times-circle" aria-hidden="true"></i>
+    </span>
+  </h5>
+</div>
+
+<div class="custom-modal-body">
+  <form [formGroup]="createBatchFormGroup">
+
+    <div class="form-group">
+      <div class="row">
+        <div class="col-sm-4 right-content">
+          <label for="batchName">Batch Name*:</label>
+        </div>
+        <div class="col-sm-8 ">
+          <input type="text" id="batchName" class="form-control" placeholder="For Ex CSE 2019 Batch-1" />
+        </div>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <div class="row">
+        <div class="col-sm-4 right-content">
+          <label for="batchDetails">Details*:</label>
+        </div>
+        <div class="col-sm-8">
+          <input type="text" id="batchDetails" class="form-control" placeholder="Enter some details about the batch" />
+        </div>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <div class="row">
+        <div class="col-sm-4 right-content">
+          <label for="regNo">Reg. No. Required ?</label>
+        </div>
+        <div class="col-sm-8">
+          <label class="checkbox">
+            <input type="checkbox" id="regNo" />
+            Students will need to enter their registration no. to join
+          </label>
+        </div>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <div class="row">
+        <div class="col-sm-4 right-content">
+          <label id="approval">Approval Required ?</label>
+        </div>
+        <div class="col-sm-8">
+          <label class="checkbox" id="approval">
+            <input type="checkbox" />
+            Students will need approval to join the Batch
+          </label>
+        </div>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <div class="row">
+        <div class="col-sm-4 right-content"></div>
+        <div class="col-sm-8">
+          <label class="checkbox">
+            <input type="checkbox" />
+            Members can also approve joining requests
+            <br />
+            <small>
+              (This will take away your burden to approve each request. If an existing member approves a request, you
+              can always see who approved the new member.)
+            </small>
+          </label>
+        </div>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-sm-4"></div>
+      <div class="col-sm-8">
+        <button class="btn btn-primary custom-btn">Create New Batch</button>
+      </div>
+    </div>
+
+  </form>
+</div>

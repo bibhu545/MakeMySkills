@@ -14,11 +14,12 @@ import { AdminDashboardComponent } from './Components/Admin/DashBoard/admin-dash
 const routes: Routes = [
   { path: '', component: HomeComponent },
   { path: 'create-test', component: CreateTestComponent, canActivate: [RouteGuardService] },
-  { path: 'update-test/:testGuid', component: UpdateTestComponent },
-  { path: 'publish-test', component: PublishTestComponent },
-  { path: 'user-home', component: UserHomeComponent },
-  { path: 'online-test', component: OnlineTestComponent },
-  { path: 'admin', component: AdminDashboardComponent },
+  { path: 'create-test/:testGuid', component: CreateTestComponent, canActivate: [RouteGuardService] },
+  { path: 'update-test/:testGuid', component: UpdateTestComponent, canActivate: [RouteGuardService] },
+  { path: 'publish-test', component: PublishTestComponent, canActivate: [RouteGuardService] },
+  { path: 'user-home', component: UserHomeComponent, canActivate: [RouteGuardService] },
+  { path: 'online-test', component: OnlineTestComponent, canActivate: [RouteGuardService] },
+  { path: 'admin', component: AdminDashboardComponent, canActivate: [RouteGuardService] },
   { path: 'not-found', component: NotFoundComponent },
   { path: '**', component: NotFoundComponent }
 ];

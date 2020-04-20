@@ -1,29 +1,19 @@
 import { Component, OnInit } from '@angular/core';
-import { AccountService } from 'src/app/Services/account.service';
 import { ModalService } from 'src/app/Services/modal.service';
-import { LoginRequestModel } from 'src/app/Utils/Models';
-import { HttpService } from 'src/app/Services/http.service';
-import { API_ENDPOINTS, USER_TYPES } from 'src/app/Utils/Utils';
-import { CookieService } from 'src/app/Services/cookie.service';
-import { Router } from '@angular/router';
-import Swal from 'sweetalert2';
 import { FormBuilder, Validators, FormControl } from '@angular/forms';
 
 @Component({
-  selector: 'app-batch',
-  templateUrl: './batch.component.html',
-  styleUrls: ['./batch.component.css']
+  selector: 'app-create-batch',
+  templateUrl: './create-batch.component.html',
+  styleUrls: ['./create-batch.component.css']
 })
-export class BatchComponent implements OnInit {
+
+export class CreateBatchComponent implements OnInit {
 
   createBatchFormGroup: any;
   constructor(
     private modalService: ModalService,
-    private accountService: AccountService,
-    private formBuilder: FormBuilder,
-    private http: HttpService,
-    private router: Router,
-    private cookieService: CookieService
+    private formBuilder: FormBuilder
   ) { }
 
   ngOnInit() {

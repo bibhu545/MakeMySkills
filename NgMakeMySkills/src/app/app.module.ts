@@ -32,6 +32,9 @@ import {MatTabsModule} from '@angular/material';
 import { TestDetailsComponent } from './Components/Partial/test-details.component';
 import { BatchComponent } from './Components/Create-Batch/batch/batch.component';
 
+import { CreateBatchComponent } from './Components/Batch/create-batch.component';
+import { ChangePasswordComponent } from './Components/Account/change-password.component';
+
 
 @NgModule({
   declarations: [
@@ -56,6 +59,9 @@ import { BatchComponent } from './Components/Create-Batch/batch/batch.component'
     ExaminerHomeComponent,
     TestDetailsComponent,
     BatchComponent,
+    CreateBatchComponent,
+    ChangePasswordComponent
+
   ],
   imports: [
     BrowserModule,
@@ -70,6 +76,8 @@ import { BatchComponent } from './Components/Create-Batch/batch/batch.component'
   ],
   providers: [CookieService, BaseCookieService],
   bootstrap: [AppComponent],
-  entryComponents: [AccountComponent, SubjectManagementComponent, BatchComponent]
+ 
+  entryComponents: [AccountComponent, SubjectManagementComponent, CreateBatchComponent, ChangePasswordComponent, BatchComponent]
+
 })
 export class AppModule { }

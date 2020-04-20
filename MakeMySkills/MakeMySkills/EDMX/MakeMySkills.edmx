@@ -16,6 +16,32 @@
           <Property Name="IsActive" Type="int" Nullable="false" />
           <Property Name="IsAnswer" Type="int" />
         </EntityType>
+        <EntityType Name="Batch">
+          <Key>
+            <PropertyRef Name="BatchId" />
+          </Key>
+          <Property Name="BatchId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="UserId" Type="int" Nullable="false" />
+          <Property Name="BatchCode" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="BatchDetails" Type="text" />
+          <Property Name="RegnoRequired" Type="int" Nullable="false" />
+          <Property Name="ApprovalRequired" Type="int" Nullable="false" />
+          <Property Name="MemberApproval" Type="int" Nullable="false" />
+          <Property Name="CreatedOn" Type="datetime" Nullable="false" />
+          <Property Name="LastupdatedOn" Type="datetime" Nullable="false" />
+          <Property Name="IsActive" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="BatchUsers">
+          <Key>
+            <PropertyRef Name="BatchUserId" />
+          </Key>
+          <Property Name="BatchUserId" Type="int" Nullable="false" />
+          <Property Name="BatchId" Type="int" Nullable="false" />
+          <Property Name="UserId" Type="int" Nullable="false" />
+          <Property Name="JoinedOn" Type="datetime" />
+          <Property Name="ApprovedBy" Type="int" />
+          <Property Name="IsActive" Type="int" />
+        </EntityType>
         <EntityType Name="QuestionBank">
           <Key>
             <PropertyRef Name="QuestionId" />
@@ -123,6 +149,54 @@
             </Principal>
             <Dependent Role="AnswerBank">
               <PropertyRef Name="QuestionId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Batch_Batch">
+          <End Role="User" Type="Self.User" Multiplicity="1" />
+          <End Role="Batch" Type="Self.Batch" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="UserId" />
+            </Principal>
+            <Dependent Role="Batch">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_BatchUsers_ApprovedByUser">
+          <End Role="User" Type="Self.User" Multiplicity="0..1" />
+          <End Role="BatchUsers" Type="Self.BatchUsers" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="UserId" />
+            </Principal>
+            <Dependent Role="BatchUsers">
+              <PropertyRef Name="ApprovedBy" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_BatchUsers_Batch">
+          <End Role="Batch" Type="Self.Batch" Multiplicity="1" />
+          <End Role="BatchUsers" Type="Self.BatchUsers" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Batch">
+              <PropertyRef Name="BatchId" />
+            </Principal>
+            <Dependent Role="BatchUsers">
+              <PropertyRef Name="BatchId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_BatchUsers_User">
+          <End Role="User" Type="Self.User" Multiplicity="1" />
+          <End Role="BatchUsers" Type="Self.BatchUsers" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="UserId" />
+            </Principal>
+            <Dependent Role="BatchUsers">
+              <PropertyRef Name="UserId" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -236,6 +310,8 @@
         </Association>
         <EntityContainer Name="MakeMySkillsModelStoreContainer">
           <EntitySet Name="AnswerBank" EntityType="Self.AnswerBank" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Batch" EntityType="Self.Batch" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="BatchUsers" EntityType="Self.BatchUsers" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="QuestionBank" EntityType="Self.QuestionBank" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Test" EntityType="Self.Test" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Topics" EntityType="Self.Topics" Schema="dbo" store:Type="Tables" />
@@ -253,6 +329,22 @@
           <AssociationSet Name="FK_AnswerBank_QuestionBank" Association="Self.FK_AnswerBank_QuestionBank">
             <End Role="QuestionBank" EntitySet="QuestionBank" />
             <End Role="AnswerBank" EntitySet="AnswerBank" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Batch_Batch" Association="Self.FK_Batch_Batch">
+            <End Role="User" EntitySet="User" />
+            <End Role="Batch" EntitySet="Batch" />
+          </AssociationSet>
+          <AssociationSet Name="FK_BatchUsers_ApprovedByUser" Association="Self.FK_BatchUsers_ApprovedByUser">
+            <End Role="User" EntitySet="User" />
+            <End Role="BatchUsers" EntitySet="BatchUsers" />
+          </AssociationSet>
+          <AssociationSet Name="FK_BatchUsers_Batch" Association="Self.FK_BatchUsers_Batch">
+            <End Role="Batch" EntitySet="Batch" />
+            <End Role="BatchUsers" EntitySet="BatchUsers" />
+          </AssociationSet>
+          <AssociationSet Name="FK_BatchUsers_User" Association="Self.FK_BatchUsers_User">
+            <End Role="User" EntitySet="User" />
+            <End Role="BatchUsers" EntitySet="BatchUsers" />
           </AssociationSet>
           <AssociationSet Name="FK_QuestionBank_Test" Association="Self.FK_QuestionBank_Test">
             <End Role="Test" EntitySet="Test" />
@@ -351,6 +443,24 @@
             <End Role="UserReport" EntitySet="UserReports" />
             <End Role="UserResponse" EntitySet="UserResponses" />
           </AssociationSet>
+          <EntitySet Name="Batches" EntityType="MakeMySkillsModel.Batch" />
+          <EntitySet Name="BatchUsers" EntityType="MakeMySkillsModel.BatchUser" />
+          <AssociationSet Name="FK_Batch_Batch" Association="MakeMySkillsModel.FK_Batch_Batch">
+            <End Role="User" EntitySet="Users" />
+            <End Role="Batch" EntitySet="Batches" />
+          </AssociationSet>
+          <AssociationSet Name="FK_BatchUsers_Batch" Association="MakeMySkillsModel.FK_BatchUsers_Batch">
+            <End Role="Batch" EntitySet="Batches" />
+            <End Role="BatchUser" EntitySet="BatchUsers" />
+          </AssociationSet>
+          <AssociationSet Name="FK_BatchUsers_ApprovedByUser" Association="MakeMySkillsModel.FK_BatchUsers_ApprovedByUser">
+            <End Role="User" EntitySet="Users" />
+            <End Role="BatchUser" EntitySet="BatchUsers" />
+          </AssociationSet>
+          <AssociationSet Name="FK_BatchUsers_User" Association="MakeMySkillsModel.FK_BatchUsers_User">
+            <End Role="User" EntitySet="Users" />
+            <End Role="BatchUser" EntitySet="BatchUsers" />
+          </AssociationSet>
         </EntityContainer>
         <EntityType Name="AnswerBank">
           <Key>
@@ -434,6 +544,9 @@
           <NavigationProperty Name="QuestionBanks" Relationship="MakeMySkillsModel.FK__Question_User" FromRole="User" ToRole="QuestionBank" />
           <NavigationProperty Name="Tests" Relationship="MakeMySkillsModel.FK__Test__UserId__29221CFB" FromRole="User" ToRole="Test" />
           <NavigationProperty Name="UserReports" Relationship="MakeMySkillsModel.FK_UserReports_User" FromRole="User" ToRole="UserReport" />
+          <NavigationProperty Name="Batches" Relationship="MakeMySkillsModel.FK_Batch_Batch" FromRole="User" ToRole="Batch" />
+          <NavigationProperty Name="BatchUsers" Relationship="MakeMySkillsModel.FK_BatchUsers_ApprovedByUser" FromRole="User" ToRole="BatchUser" />
+          <NavigationProperty Name="BatchUsers1" Relationship="MakeMySkillsModel.FK_BatchUsers_User" FromRole="User" ToRole="BatchUser" />
         </EntityType>
         <EntityType Name="UserReport">
           <Key>
@@ -605,6 +718,85 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <EntityType Name="Batch">
+          <Key>
+            <PropertyRef Name="BatchId" />
+          </Key>
+          <Property Name="BatchId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="UserId" Type="Int32" Nullable="false" />
+          <Property Name="BatchCode" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="BatchDetails" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="RegnoRequired" Type="Int32" Nullable="false" />
+          <Property Name="ApprovalRequired" Type="Int32" Nullable="false" />
+          <Property Name="MemberApproval" Type="Int32" Nullable="false" />
+          <Property Name="CreatedOn" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="LastupdatedOn" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="IsActive" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="User" Relationship="MakeMySkillsModel.FK_Batch_Batch" FromRole="Batch" ToRole="User" />
+          <NavigationProperty Name="BatchUsers" Relationship="MakeMySkillsModel.FK_BatchUsers_Batch" FromRole="Batch" ToRole="BatchUser" />
+        </EntityType>
+        <EntityType Name="BatchUser">
+          <Key>
+            <PropertyRef Name="BatchUserId" />
+          </Key>
+          <Property Name="BatchUserId" Type="Int32" Nullable="false" />
+          <Property Name="BatchId" Type="Int32" Nullable="false" />
+          <Property Name="UserId" Type="Int32" Nullable="false" />
+          <Property Name="JoinedOn" Type="DateTime" Precision="3" />
+          <Property Name="ApprovedBy" Type="Int32" />
+          <Property Name="IsActive" Type="Int32" />
+          <NavigationProperty Name="Batch" Relationship="MakeMySkillsModel.FK_BatchUsers_Batch" FromRole="BatchUser" ToRole="Batch" />
+          <NavigationProperty Name="User" Relationship="MakeMySkillsModel.FK_BatchUsers_ApprovedByUser" FromRole="BatchUser" ToRole="User" />
+          <NavigationProperty Name="User1" Relationship="MakeMySkillsModel.FK_BatchUsers_User" FromRole="BatchUser" ToRole="User" />
+        </EntityType>
+        <Association Name="FK_Batch_Batch">
+          <End Type="MakeMySkillsModel.User" Role="User" Multiplicity="1" />
+          <End Type="MakeMySkillsModel.Batch" Role="Batch" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="UserId" />
+            </Principal>
+            <Dependent Role="Batch">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_BatchUsers_Batch">
+          <End Type="MakeMySkillsModel.Batch" Role="Batch" Multiplicity="1" />
+          <End Type="MakeMySkillsModel.BatchUser" Role="BatchUser" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Batch">
+              <PropertyRef Name="BatchId" />
+            </Principal>
+            <Dependent Role="BatchUser">
+              <PropertyRef Name="BatchId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_BatchUsers_ApprovedByUser">
+          <End Type="MakeMySkillsModel.User" Role="User" Multiplicity="0..1" />
+          <End Type="MakeMySkillsModel.BatchUser" Role="BatchUser" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="UserId" />
+            </Principal>
+            <Dependent Role="BatchUser">
+              <PropertyRef Name="ApprovedBy" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_BatchUsers_User">
+          <End Type="MakeMySkillsModel.User" Role="User" Multiplicity="1" />
+          <End Type="MakeMySkillsModel.BatchUser" Role="BatchUser" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="UserId" />
+            </Principal>
+            <Dependent Role="BatchUser">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -700,6 +892,34 @@
                 <ScalarProperty Name="AnswerId" ColumnName="AnswerId" />
                 <ScalarProperty Name="UserReportId" ColumnName="UserReportId" />
                 <ScalarProperty Name="UserResponseId" ColumnName="UserResponseId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Batches">
+            <EntityTypeMapping TypeName="MakeMySkillsModel.Batch">
+              <MappingFragment StoreEntitySet="Batch">
+                <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+                <ScalarProperty Name="LastupdatedOn" ColumnName="LastupdatedOn" />
+                <ScalarProperty Name="CreatedOn" ColumnName="CreatedOn" />
+                <ScalarProperty Name="MemberApproval" ColumnName="MemberApproval" />
+                <ScalarProperty Name="ApprovalRequired" ColumnName="ApprovalRequired" />
+                <ScalarProperty Name="RegnoRequired" ColumnName="RegnoRequired" />
+                <ScalarProperty Name="BatchDetails" ColumnName="BatchDetails" />
+                <ScalarProperty Name="BatchCode" ColumnName="BatchCode" />
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+                <ScalarProperty Name="BatchId" ColumnName="BatchId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="BatchUsers">
+            <EntityTypeMapping TypeName="MakeMySkillsModel.BatchUser">
+              <MappingFragment StoreEntitySet="BatchUsers">
+                <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+                <ScalarProperty Name="ApprovedBy" ColumnName="ApprovedBy" />
+                <ScalarProperty Name="JoinedOn" ColumnName="JoinedOn" />
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+                <ScalarProperty Name="BatchId" ColumnName="BatchId" />
+                <ScalarProperty Name="BatchUserId" ColumnName="BatchUserId" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

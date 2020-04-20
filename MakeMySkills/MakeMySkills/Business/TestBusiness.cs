@@ -42,35 +42,59 @@ namespace MakeMySkills.Business
                 }
             }
         }
-        public static TestModel CreateTest(TestModel model)
+        public static TestModel UpdateTestDetails(TestModel model)
         {
             using (var context = new MakeMySkillsEntities())
             {
-                Test test = new Test()
+                if (model.testId != 0)
                 {
-                    TestName = model.testName,
-                    UserId = model.userId,
-                    AllowMultiple = model.allowMultiple,
-                    CorrectAnswerMarks = model.correctAnswerMarks,
-                    RevealAnswers = model.revealAnswers,
-                    IsActive = ActiveStatus.IsActive,
-                    NegetiveMarking = model.negetiveMarking,
-                    PassingPercentage = model.passingPercentage,
-                    SuffleAnswers = model.suffleAnswers,
-                    SuffleQuestions = model.suffleQuestions,
-                    TestGuid = Guid.NewGuid().ToString().Replace("-", ""),
-                    TimeLimit = model.timeLimit,
-                    TopicId = model.topicId,
-                    DateAdded = DateTime.UtcNow
-                };
-                context.Tests.Add(test);
-                if (context.SaveChanges() > 0)
-                {
-                    return GetTestBasicDetails(test.TestGuid);
+                    var test = context.Tests.FirstOrDefault(x => x.TestId == model.testId && x.IsActive == ActiveStatus.IsActive);
+                    if (test != null)
+                    {
+                        test.TestName = model.testName;
+                        test.NegetiveMarking = model.negetiveMarking;
+                        test.PassingPercentage = model.passingPercentage;
+                        test.RevealAnswers = model.revealAnswers;
+                        test.SuffleAnswers = model.suffleAnswers;
+                        test.AllowMultiple = model.allowMultiple;
+                        test.CorrectAnswerMarks = model.correctAnswerMarks;
+                        test.TimeLimit = model.timeLimit;
+                        if (context.SaveChanges() > 0)
+                        {
+                            return GetTestBasicDetails(test.TestGuid);
+                        }
+                    }
+                    return null;
                 }
                 else
                 {
-                    return null;
+                    Test test = new Test()
+                    {
+                        TestName = model.testName,
+                        UserId = model.userId,
+                        AllowMultiple = model.allowMultiple,
+                        CorrectAnswerMarks = model.correctAnswerMarks,
+                        RevealAnswers = model.revealAnswers,
+                        IsActive = ActiveStatus.IsActive,
+                        NegetiveMarking = model.negetiveMarking,
+                        PassingPercentage = model.passingPercentage,
+                        SuffleAnswers = model.suffleAnswers,
+                        SuffleQuestions = model.suffleQuestions,
+                        TestGuid = Guid.NewGuid().ToString().Replace("-", ""),
+                        TimeLimit = model.timeLimit,
+                        TopicId = model.topicId,
+                        DateAdded = DateTime.UtcNow
+                    };
+                    context.Tests.Add(test);
+
+                    if (context.SaveChanges() > 0)
+                    {
+                        return GetTestBasicDetails(test.TestGuid);
+                    }
+                    else
+                    {
+                        return null;
+                    }
                 }
             }
         }
@@ -119,25 +143,97 @@ namespace MakeMySkills.Business
                 added += context.SaveChanges();
                 if (model.options != null)
                 {
-                    List<AnswerBank> options = new List<AnswerBank>();
-                    foreach (var item in model.options)
-                    {
-                        options.Add(new AnswerBank()
-                        {
-                            AnswerText = item.answerText,
-                            Explaination = item.explaination,
-                            IsActive = ActiveStatus.IsActive,
-                            QuestionId = question.QuestionId,
-                            IsAnswer = item.isAnswer
-                        });
-                    }
-                    if (options.Count > 0)
-                    {
-                        context.AnswerBanks.AddRange(options);
-                        added += context.SaveChanges();
-                    }
+                    added = AddOptionsToQuestion(model, question.QuestionId);
                 }
                 return added > 0;
+            }
+        }
+        public static bool EditQuestions(QuestionModel model)
+        {
+            using (var context = new MakeMySkillsEntities())
+            {
+                int updated = 0;
+                var question = context.QuestionBanks.FirstOrDefault(x => x.QuestionId == model.questionId);
+                if (question != null)
+                {
+                    question.QuestionText = model.questionText;
+                    question.TopicId = model.topicId;
+
+                    context.AnswerBanks.RemoveRange(context.AnswerBanks.Where(x => x.QuestionId == model.questionId));
+                    context.SaveChanges();
+
+                    if (model.options.Count > 0)
+                    {
+                        updated = AddOptionsToQuestion(model, model.questionId);
+                    }
+                }
+                return updated > 0;
+            }
+        }
+        public static int AddOptionsToQuestion(QuestionModel model, int questionId)
+        {
+            using (var context = new MakeMySkillsEntities())
+            {
+                int updated = 0;
+                List<AnswerBank> options = new List<AnswerBank>();
+                foreach (var item in model.options)
+                {
+                    options.Add(new AnswerBank()
+                    {
+                        AnswerText = item.answerText,
+                        Explaination = item.explaination,
+                        IsActive = ActiveStatus.IsActive,
+                        QuestionId = questionId,
+                        IsAnswer = item.isAnswer
+                    });
+                }
+                if (options.Count > 0)
+                {
+                    context.AnswerBanks.AddRange(options);
+                    updated += context.SaveChanges();
+                }
+                return updated;
+            }
+        }
+        public static bool DeleteQuestions(QuestionModel model)
+        {
+            using (var context = new MakeMySkillsEntities())
+            {
+                var question = context.QuestionBanks.FirstOrDefault(x => x.QuestionId == model.questionId);
+                if (question != null)
+                {
+                    question.IsActive = ActiveStatus.Deleted;
+                    var answers = context.AnswerBanks.Where(x => x.QuestionId == model.questionId);
+                    foreach (var item in answers)
+                    {
+                        item.IsActive = ActiveStatus.Deleted;
+                    }
+                    return context.SaveChanges() > 0;
+                }
+                return false;
+            }
+        }
+        public static List<TestModel> GetTestsByUser(int id)
+        {
+            using (var context = new MakeMySkillsEntities())
+            {
+                return context.Tests.Where(x => x.UserId == id && x.IsActive == ActiveStatus.IsActive).Select(x => new TestModel()
+                {
+                    testName = x.TestName,
+                    dateAdded = x.DateAdded,
+                    correctAnswerMarks = x.CorrectAnswerMarks,
+                    isActive = x.IsActive,
+                    negetiveMarking = x.NegetiveMarking,
+                    passingPercentage = x.PassingPercentage,
+                    revealAnswers = x.RevealAnswers,
+                    suffleAnswers = x.SuffleAnswers,
+                    suffleQuestions = x.SuffleQuestions,
+                    testGuid = x.TestGuid,
+                    testId = x.TestId,
+                    timeLimit = x.TimeLimit,
+                    topicId = x.TopicId,
+                    allowMultiple = x.AllowMultiple
+                }).ToList();
             }
         }
     }

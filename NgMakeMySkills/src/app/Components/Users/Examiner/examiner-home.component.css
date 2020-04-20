@@ -21,3 +21,6 @@
 .test-container{
     padding: 5px;
 }
+mat-tab-group{
+    font-family: 'Rokkitt', cursive !important;
+}

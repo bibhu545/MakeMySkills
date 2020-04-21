@@ -1,5 +1,6 @@
-import { Component } from '@angular/core';
+import { Component, ChangeDetectorRef } from '@angular/core';
 import { CommonService } from './Services/common.service';
+import { HttpService } from './Services/http.service';
 
 @Component({
   selector: 'app-root',
@@ -7,14 +8,28 @@ import { CommonService } from './Services/common.service';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-  title = 'NgMakeMySkills';
 
+  title = 'NgMakeMySkills';
   currentRoute: String;
   onlineTestMode: boolean = false;
-  constructor(private commonService: CommonService) { }
+  isLoading: boolean = false;
+
+  constructor(
+    private commonService: CommonService,
+    private http: HttpService,
+    private cd: ChangeDetectorRef
+  ) {
+    this.commonService.loading$.subscribe(data => {
+      this.isLoading = data;
+    });
+  }
 
   ngOnInit() {
     this.getRoute();
+  }
+
+  ngAfterViewInit(): void {
+    this.cd.detectChanges();
   }
 
   getRoute() {

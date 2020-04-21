@@ -9,7 +9,7 @@ import { LoginComponent } from './Components/Account/login.component';
 import { SignupComponent } from './Components/Account/signup.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ModalModule } from 'ngx-bootstrap/modal';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { NavComponent } from './Components/Common/nav.component';
 import { AccountComponent } from './Components/Account/account.component';
 import { NotFoundComponent } from './Components/Common/not-found.component';
@@ -28,10 +28,11 @@ import { CookieService as BaseCookieService } from 'ngx-cookie-service';
 import { SubjectManagementComponent } from './Components/Partial/subject-management.component';
 import { ExaminerHomeComponent } from './Components/Users/Examiner/examiner-home.component';
 import { AdminDashboardComponent } from './Components/Admin/DashBoard/admin-dashboard.component';
-import {MatTabsModule} from '@angular/material';
+import { MatTabsModule, MatProgressSpinnerModule } from '@angular/material';
 import { TestDetailsComponent } from './Components/Partial/test-details.component';
 import { CreateBatchComponent } from './Components/Batch/create-batch.component';
 import { ChangePasswordComponent } from './Components/Account/change-password.component';
+import { HttpService } from './Services/http.service';
 
 
 @NgModule({
@@ -68,9 +69,14 @@ import { ChangePasswordComponent } from './Components/Account/change-password.co
     ReactiveFormsModule,
     ModalModule.forRoot(),
     NgsRevealModule,
-    MatTabsModule
+    MatTabsModule,
+    MatProgressSpinnerModule
   ],
-  providers: [CookieService, BaseCookieService],
+  providers: [
+    CookieService,
+    BaseCookieService,
+    { provide: HTTP_INTERCEPTORS, useClass: HttpService, multi: true }
+  ],
   bootstrap: [AppComponent],
   entryComponents: [AccountComponent, SubjectManagementComponent, CreateBatchComponent, ChangePasswordComponent]
 })

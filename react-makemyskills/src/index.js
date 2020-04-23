@@ -1,12 +1,19 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
-import App from './App';
 import * as serviceWorker from './serviceWorker';
+import RouterModule from './Utils/RouterModule';
+import Nav from './Components/Common/Nav';
+import Footer from './Components/Common/Footer';
+import { CookiesProvider } from 'react-cookie';
 
 ReactDOM.render(
   <React.StrictMode>
-    <App />
+    <CookiesProvider>
+      <Nav />
+      <RouterModule />
+      <Footer />
+    </CookiesProvider>
   </React.StrictMode>,
   document.getElementById('root')
 );

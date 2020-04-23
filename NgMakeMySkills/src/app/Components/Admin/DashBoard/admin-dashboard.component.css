@@ -38,3 +38,7 @@
 .error-txt{
     border: 1px solid red;
 }
+.delete-option{
+    cursor: pointer;
+    color: royalblue;
+}

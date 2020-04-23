@@ -84,6 +84,10 @@ export class AdminDashboardComponent implements OnInit {
     this.topicData.subTopics.push(subTopicData);
   }
 
+  deleteSubtopic(index: number) {
+    this.topicData.subTopics.splice(index, 1);
+  }
+
   addSubject() {
     this.http.postData(API_ENDPOINTS.addTopic, this.topicData).subscribe(response => {
       if (response.results != null) {

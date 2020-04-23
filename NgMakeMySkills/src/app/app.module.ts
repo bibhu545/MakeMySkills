@@ -30,7 +30,6 @@ import { ExaminerHomeComponent } from './Components/Users/Examiner/examiner-home
 import { AdminDashboardComponent } from './Components/Admin/DashBoard/admin-dashboard.component';
 import { MatTabsModule, MatProgressSpinnerModule } from '@angular/material';
 import { TestDetailsComponent } from './Components/Partial/test-details.component';
-import { BatchComponent } from './Components/Create-Batch/batch/batch.component';
 
 import { CreateBatchComponent } from './Components/Batch/create-batch.component';
 import { ChangePasswordComponent } from './Components/Account/change-password.component';
@@ -59,7 +58,6 @@ import { HttpService } from './Services/http.service';
     SubjectManagementComponent,
     ExaminerHomeComponent,
     TestDetailsComponent,
-    BatchComponent,
     CreateBatchComponent,
     ChangePasswordComponent
 
@@ -83,7 +81,7 @@ import { HttpService } from './Services/http.service';
   ],
   bootstrap: [AppComponent],
  
-  entryComponents: [AccountComponent, SubjectManagementComponent, CreateBatchComponent, ChangePasswordComponent, BatchComponent]
+  entryComponents: [AccountComponent, SubjectManagementComponent, CreateBatchComponent, ChangePasswordComponent, CreateBatchComponent]
 
 })
 export class AppModule { }

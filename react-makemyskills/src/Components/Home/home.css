@@ -1,0 +1,28 @@
+.hero-img{
+    height: 100vh;
+}
+.hero-text{
+    padding: 220px 20px;
+    text-align: center;
+}
+.hero-brand-text{
+    animation: changeColor 3s infinite;
+}
+@keyframes changeColor {
+    50% {color: lightseagreen;}
+}
+
+.scroll-down{
+    font-size: 1.5em;
+    cursor: pointer;
+    animation: MoveUpDown 2s linear infinite;
+}
+
+@keyframes MoveUpDown {
+    0%, 100% {
+      bottom: -10px;
+    }
+    50% {
+      bottom: 0px;
+    }
+}

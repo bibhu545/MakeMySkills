@@ -1,20 +1,29 @@
 .hero-img{
-    height: 100vh;
+    height: 80vh;
+    background: url(../../Assets/small.gif) center center;
+    background-size: contain;
+    background-repeat: no-repeat;
 }
 .hero-text{
-    padding: 220px 20px;
+    min-height: 80vh;
     text-align: center;
 }
+.hero-text{
+    padding-top: 185px;
+}
 .hero-brand-text{
+    color: royalblue;
     animation: changeColor 3s infinite;
 }
 @keyframes changeColor {
-    50% {color: lightseagreen;}
+    50% {color: seagreen}
 }
 
 .scroll-down{
     font-size: 1.5em;
     cursor: pointer;
+    color: royalblue;
+    position: relative;
     animation: MoveUpDown 2s linear infinite;
 }
 
@@ -25,4 +34,21 @@
     50% {
       bottom: 0px;
     }
+}
+.stats-row{
+    min-height: 20vh;
+    padding: 20px 0px;
+}
+
+@media only screen and (max-width: 768px) {
+    .hero-img{
+        height: 50vh;
+    }
+}
+.test-container{
+    height: 230px;
+    margin: 10px 0px;
+}
+.tests-row{
+    padding: 25px 0px;
 }

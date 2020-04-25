@@ -5,7 +5,7 @@ function Nav() {
 
     return (
         <React.Fragment>
-            <nav className="navbar navbar-expand-lg navbar-light fixed-top">
+            <nav className="navbar navbar-expand-lg navbar-light bg-light fixed-top">
                 <div className="container">
                     <a className="navbar-brand" href="/">#MakeMySkills</a>
 
@@ -33,7 +33,7 @@ function Nav() {
                                     My Profile
                                 </a>
                                 <div className="dropdown-menu">
-                                    <a className="dropdown-item" href="/user-home">Home</a>
+                                    <a className="dropdown-item" href="/user-home">Dashboard</a>
                                     <a className="dropdown-item" href="##">Change Password</a>
                                     <a className="dropdown-item" href="##">Logout</a>
                                 </div>

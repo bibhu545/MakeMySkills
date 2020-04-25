@@ -2,12 +2,12 @@ import React from 'react'
 
 function Footer() {
     return (
-        <div className="footer">
+        <div className="footer bg-light">
             <div className="container center-content">
                 <div className="row">
                     <div className="col-md-6 col-12">
                         Copyright &copy; MakeMySkills 2020
-            </div>
+                    </div>
                     <div className="col-md-6 col-12">
                         <a href="/">
                             <i className="fab fa-facebook-square fa-social"></i>

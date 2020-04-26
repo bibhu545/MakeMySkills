@@ -44,7 +44,7 @@ function Home() {
                     </div>
                     {
                         test.map((item, index) =>
-                            <div className="col-md-3 col=sm-6 col-12" key="index"><TestDetails test={test} /></div>
+                            <div className="col-md-3 col=sm-6 col-12" key={index}><TestDetails test={test} /></div>
                         )
                     }
                 </div>
@@ -56,7 +56,7 @@ function Home() {
                     </div>
                     {
                         test.map((item, index) =>
-                            <div className="col-md-3 col=sm-6 col-12" key="index"><TestDetails test={test} /></div>
+                            <div className="col-md-3 col=sm-6 col-12" key={index}><TestDetails test={test} /></div>
                         )
                     }
                 </div>

@@ -25,7 +25,6 @@ import { OnlineTestComponent } from './Components/OnlineTest/online-test.compone
 import { ConfirmationDialogComponent } from './Components/Common/confirmation-dialog/confirmation-dialog.component';
 import { CookieService } from './Services/cookie.service';
 import { CookieService as BaseCookieService } from 'ngx-cookie-service';
-import { SubjectManagementComponent } from './Components/Partial/subject-management.component';
 import { ExaminerHomeComponent } from './Components/Users/Examiner/examiner-home.component';
 import { AdminDashboardComponent } from './Components/Admin/DashBoard/admin-dashboard.component';
 import { MatTabsModule, MatProgressSpinnerModule } from '@angular/material';
@@ -34,6 +33,7 @@ import { TestDetailsComponent } from './Components/Partial/test-details.componen
 import { CreateBatchComponent } from './Components/Batch/create-batch.component';
 import { ChangePasswordComponent } from './Components/Account/change-password.component';
 import { HttpService } from './Services/http.service';
+import { UserDetailsComponent } from './Components/Users/user-details.component';
 
 
 @NgModule({
@@ -55,11 +55,11 @@ import { HttpService } from './Services/http.service';
     OnlineTestComponent,
     ConfirmationDialogComponent,
     AdminDashboardComponent,
-    SubjectManagementComponent,
     ExaminerHomeComponent,
     TestDetailsComponent,
     CreateBatchComponent,
-    ChangePasswordComponent
+    ChangePasswordComponent,
+    UserDetailsComponent
 
   ],
   imports: [
@@ -81,7 +81,7 @@ import { HttpService } from './Services/http.service';
   ],
   bootstrap: [AppComponent],
  
-  entryComponents: [AccountComponent, SubjectManagementComponent, CreateBatchComponent, ChangePasswordComponent, CreateBatchComponent]
+  entryComponents: [AccountComponent, CreateBatchComponent, ChangePasswordComponent, CreateBatchComponent]
 
 })
 export class AppModule { }

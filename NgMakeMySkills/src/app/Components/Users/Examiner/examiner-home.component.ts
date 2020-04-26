@@ -4,7 +4,7 @@ import { Router } from '@angular/router';
 import { CookieService } from 'src/app/Services/cookie.service';
 import { ModalService } from 'src/app/Services/modal.service';
 import { API_ENDPOINTS, Utils } from 'src/app/Utils/Utils';
-import { TestModel, UserModel, TopicModel } from 'src/app/Utils/Models';
+import { TestModel, UserModel, TopicModel, ProfileDetails } from 'src/app/Utils/Models';
 import { CreateBatchComponent } from '../../Batch/create-batch.component';
 
 
@@ -23,6 +23,7 @@ export class ExaminerHomeComponent implements OnInit {
   batchDetails: any[] = [];
   showBatchPopup = false;
   topics: TopicModel[] = [];
+  profileDetails: ProfileDetails = new ProfileDetails();
 
   constructor(
     private http: HttpService,
@@ -49,9 +50,8 @@ export class ExaminerHomeComponent implements OnInit {
           this.tests.forEach(element => {
             element.dateAdded = this.utils.getDateFromServer(element.dateAdded.toString()).toLocaleDateString();
           });
-
           this.batchDetails = response.results[1];
-          this.userDetails = response.results[2];
+          this.profileDetails = response.results[2];
           this.topics = response.results[3];
         }
         else {

@@ -70,7 +70,9 @@
                     </div>
                 </mat-tab>
                 <mat-tab label="My Profile">
-                    <div class="home-tab-content"></div>
+                    <div class="home-tab-content">
+                        <app-user-details [profileDetails]="profileDetails"></app-user-details>
+                    </div>
                 </mat-tab>
             </mat-tab-group>
         </div>

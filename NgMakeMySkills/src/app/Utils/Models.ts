@@ -100,3 +100,8 @@ export class BatchModel{
     lastupdatedOn: Date;
     isActive: number;
 }
+
+export class ProfileDetails{
+    userDetails: UserModel = new UserModel();
+    tests: TestModel[] = [];
+}

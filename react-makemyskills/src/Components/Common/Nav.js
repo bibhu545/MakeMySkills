@@ -1,7 +1,10 @@
-import React from 'react';
+import React, { useState } from 'react';
 import './Common.css';
+import Login from '../Account/Login';
 
 function Nav() {
+
+    const [show, setShow] = useState(false);
 
     return (
         <React.Fragment>
@@ -26,7 +29,7 @@ function Nav() {
                                 <a className="nav-link" href="##">Subjects </a>
                             </li>
                             <li className="nav-item">
-                                <a className="nav-link" href="##">Login/Register </a>
+                                <a className="nav-link" href="##" onClick={() => setShow(true)}>Login/Register </a>
                             </li>
                             <li className="nav-item dropdown">
                                 <a className="nav-link dropdown-toggle" href="##" id="navbardrop" data-toggle="dropdown">
@@ -42,6 +45,12 @@ function Nav() {
                     </div>
                 </div>
             </nav>
+
+            <Login
+                show={show}
+                onHide={() => {setShow(false);console.log('object')}}
+            />
+
         </React.Fragment>
     )
 }

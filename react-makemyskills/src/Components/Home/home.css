@@ -3,6 +3,9 @@
     background: url(../../Assets/small.gif) center center;
     background-size: contain;
     background-repeat: no-repeat;
+    /* background-color: aquamarine;
+    border-bottom-left-radius: 50%;
+    border-top-left-radius: 50%; */
 }
 .hero-text{
     min-height: 80vh;

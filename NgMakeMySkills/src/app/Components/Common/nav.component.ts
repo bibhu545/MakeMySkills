@@ -43,6 +43,7 @@ export class NavComponent implements OnInit {
       if (response.results != null) {
         if (response.results.length > 0) {
           this.topics = response.results[0];
+          this.topics = this.topics.splice(0, 8);
           if (this.cookieService.getUserType() != null) {
             this.isExaminer = this.cookieService.getUserType() == USER_TYPES.examiner;
           }

@@ -1,0 +1,23 @@
+.form-control{
+    width: 200px;
+    margin-bottom: 5px;
+    display: inline-block;
+}
+.btn-outline-primary{
+    margin: 20px 5px;
+}
+.details-container{
+    padding: 20px;
+    margin: 20px 200px;
+    border: 1px solid maroon;
+    border-radius: 8px;
+}
+
+@media only screen and (max-width: 768px){
+    .details-container{
+        margin: 20px;
+    }
+    .details-container, .right-content{
+        text-align: center;
+    }
+}

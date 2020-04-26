@@ -79,15 +79,14 @@ namespace MakeMySkills.Business
                 return response;
             }
         }
-        public static ProfileModel GetUserDetails(int id)
+        public static LoginResponseModel GetUserDetails(int id)
         {
             using (var context = new MakeMySkillsEntities())
             {
-                ProfileModel profile = new ProfileModel();
                 var user = context.Users.FirstOrDefault(x => x.UserId  == id&& x.IsActive == ActiveStatus.IsActive);
                 if (user != null)
                 {
-                    profile.userDetails =  new LoginResponseModel()
+                    return new LoginResponseModel()
                     {
                         email = user.Email,
                         firstName = user.FirstName,
@@ -96,8 +95,6 @@ namespace MakeMySkills.Business
                         userType = user.UserType,
                         joinedOn = user.JoinedOn
                     };
-                    profile.tests = TestBusiness.GetTestsByUser(profile.userDetails.userId);
-                    return profile;
                 }
                 else
                 {

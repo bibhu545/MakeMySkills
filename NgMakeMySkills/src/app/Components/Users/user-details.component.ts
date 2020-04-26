@@ -1,5 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { ProfileDetails } from 'src/app/Utils/Models';
+import { ProfileDetails, UserModel } from 'src/app/Utils/Models';
 
 @Component({
   selector: 'app-user-details',
@@ -8,12 +8,17 @@ import { ProfileDetails } from 'src/app/Utils/Models';
 })
 export class UserDetailsComponent implements OnInit {
 
-  @Input() profileDetails: ProfileDetails;
+  @Input() profileDetails: UserModel;
+  editMode: boolean = false;
 
   constructor() { }
 
   ngOnInit() {
-    
+
+  }
+
+  changeMode() {
+    this.editMode = !this.editMode;
   }
 
 }

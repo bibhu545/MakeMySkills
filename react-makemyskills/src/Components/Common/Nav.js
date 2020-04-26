@@ -1,11 +1,21 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import './Common.css';
 import Login from '../Account/Login';
+import HttpService from '../../Utils/HttpService';
+import { API_ENDPOINTS } from '../../Utils/Utils';
 
 function Nav() {
 
     const [show, setShow] = useState(false);
+    const [topics, setTopics] = useState([])
 
+    useEffect(() => {
+        new HttpService().getData(API_ENDPOINTS.GelHomePageCommonData).then(response => {
+            setTopics(response.data.results[0]);
+        }).catch(error => {
+            console.log(error);
+        });
+    }, [])
     return (
         <React.Fragment>
             <nav className="navbar navbar-expand-lg navbar-light bg-light fixed-top">
@@ -25,8 +35,17 @@ function Nav() {
                             <li className="nav-item">
                                 <a className="nav-link" href="/tests">Tests</a>
                             </li>
-                            <li className="nav-item">
-                                <a className="nav-link" href="##">Subjects </a>
+                            <li className="nav-item dropdown">
+                                <a className="nav-link dropdown-toggle" href="##" id="navbardrop" data-toggle="dropdown">
+                                    Subjects
+                                </a>
+                                <div className="dropdown-menu">
+                                    {
+                                        topics.map((item, index) =>
+                                            <a className="dropdown-item" href="##" key={index}>{item.topicName}</a>
+                                        )
+                                    }
+                                </div>
                             </li>
                             <li className="nav-item">
                                 <a className="nav-link" href="##" onClick={() => setShow(true)}>Login/Register </a>
@@ -48,7 +67,7 @@ function Nav() {
 
             <Login
                 show={show}
-                onHide={() => {setShow(false);console.log('object')}}
+                onHide={() => { setShow(false); console.log('object') }}
             />
 
         </React.Fragment>

@@ -4,6 +4,10 @@ import TestDetails from '../Partial/TestDetails';
 
 function Home() {
     const test = [1, 2, 3, 4, 5, 6, 7, 8];
+    const goToTests = () => {
+        var testsContainer = document.getElementById("testsContainer");
+        testsContainer.scrollIntoView({ behavior: 'smooth' });
+    }
     return (
         <React.Fragment>
             <div className="container">
@@ -14,7 +18,7 @@ function Home() {
                         <h3>Hundreds of Mock Tests online for free...</h3>
                         <br />
                         <br />
-                        <span className="scroll-down">
+                        <span className="scroll-down" onClick={goToTests}>
                             <i className="fa fa-arrow-circle-down" aria-hidden="true"></i>
                         </span>
                     </div>
@@ -38,7 +42,7 @@ function Home() {
                 </div>
             </div>
             <div className="container">
-                <div className="row tests-row">
+                <div className="row tests-row" id="testsContainer">
                     <div className="col-12 center-content">
                         <h3><i className="fa fa-bolt" aria-hidden="true"></i> Trending Tests</h3>
                     </div>

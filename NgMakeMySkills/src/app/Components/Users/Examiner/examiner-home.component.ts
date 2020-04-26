@@ -23,7 +23,7 @@ export class ExaminerHomeComponent implements OnInit {
   batchDetails: any[] = [];
   showBatchPopup = false;
   topics: TopicModel[] = [];
-  profileDetails: ProfileDetails = new ProfileDetails();
+  profileDetails: UserModel = new UserModel();
 
   constructor(
     private http: HttpService,
@@ -53,6 +53,7 @@ export class ExaminerHomeComponent implements OnInit {
           this.batchDetails = response.results[1];
           this.profileDetails = response.results[2];
           this.topics = response.results[3];
+          this.profileDetails.joinedOn = this.utils.getDateFromServer(this.profileDetails.joinedOn);
         }
         else {
           this.utils.showErrorMessage("Some error occured. Please try again.");

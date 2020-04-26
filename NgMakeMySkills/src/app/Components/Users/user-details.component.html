@@ -1,2 +1,41 @@
-<p>user-details works!</p>
-{{profileDetails | json}}
+<div class="details-container">
+    <div class="row">
+        <div class="col-md-6 col-12 right-content">
+            <label for="email">Email:</label>
+        </div>
+        <div class="col-md-6 col-12">
+            <span>{{profileDetails.email}}</span>
+        </div>
+
+        <div class="col-md-6 col-12 right-content">
+            <label for="email">Joined On:</label>
+        </div>
+        <div class="col-md-6 col-12">
+            <span>{{profileDetails.joinedOn | date: mediumDate}}</span>
+        </div>
+
+        <div class="col-md-6 col-12 right-content">
+            <label for="firstName">First Name:</label>
+        </div>
+        <div class="col-md-6 col-12">
+            <span *ngIf="!editMode">{{profileDetails.firstName}}</span>
+            <input class="form-control" id="firstName" *ngIf="editMode" name="firstName"
+                [(ngModel)]="profileDetails.firstName" />
+        </div>
+
+        <div class="col-md-6 col-12 right-content">
+            <label for="lastName">Last Name:</label>
+        </div>
+        <div class="col-md-6 col-12">
+            <span *ngIf="!editMode">{{profileDetails.lastName}}</span>
+            <input class="form-control" id="lastName" *ngIf="editMode" name="lastName"
+                [(ngModel)]="profileDetails.lastName" />
+        </div>
+        <div class="center-content">
+            <button class="btn btn-outline-primary btn-sm" *ngIf="!editMode" (click)="changeMode()">Edit
+                details</button>
+            <button class="btn btn-outline-primary btn-sm" *ngIf="editMode">Update</button>
+            <button class="btn btn-outline-warning btn-sm" *ngIf="editMode" (click)="changeMode()">Cancel</button>
+        </div>
+    </div>
+</div>

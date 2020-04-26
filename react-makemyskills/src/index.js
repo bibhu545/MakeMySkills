@@ -11,10 +11,12 @@ import RouterModule from './Utils/RouterModule';
 import Nav from './Components/Common/Nav';
 import Footer from './Components/Common/Footer';
 import { CookiesProvider } from 'react-cookie';
+import Preloader from './Utils/Preloader';
 
 ReactDOM.render(
   <React.StrictMode>
     <CookiesProvider>
+      <Preloader></Preloader>
       <Nav />
       <RouterModule />
       <Footer />

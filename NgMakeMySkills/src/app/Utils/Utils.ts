@@ -12,8 +12,13 @@ export const API_ENDPOINTS = {
     DeleteTopic: BaseUrl + '/Admin/DeleteTopic',
     GelHomePageCommonData: BaseUrl + '/Common/GetHomePageCommonData',
     GetCommonDataForTest: BaseUrl + '/Test/GetCommonDataForTest',
-    CreateTest: BaseUrl + '/Test/CreateTest',
-    GetTestBasicDetails: BaseUrl + '/Test/GetTestBasicDetails'
+    UpdateTestDetails: BaseUrl + '/Test/UpdateTestDetails',
+    GetTestBasicDetails: BaseUrl + '/Test/GetTestBasicDetails',
+    AddQuestions: BaseUrl + '/Test/AddQuestions',
+    GetQuestionsForTest: BaseUrl + '/Test/GetQuestionsForTest',
+    GetUserHomeData: BaseUrl + '/Test/GetUserHomeData',
+    DeleteQuestions: BaseUrl + '/Test/DeleteQuestions',
+    EditQuestions: BaseUrl + '/Test/EditQuestions'
 }
 
 export const USER_TYPES = {
@@ -26,6 +31,15 @@ export class Utils {
 
     constructor() {
 
+    }
+
+    getDateFromServer(date: string): Date {
+        if(date == null){
+            return null;
+        }
+        else{
+            return new Date(parseInt(date.substring(6, date.length - 2)));
+        }
     }
 
     showErrorMessage(message: string, footerMessage?: string) {

@@ -1,0 +1,13 @@
+#test{
+    background-color: red;
+}
+.footer{
+    min-height: 50px;
+    line-height: 50px;
+    color: darkslategray;
+}
+.fa-social{
+    margin: 0px 10px;
+    font-size: 1.2em;
+    color: darkslategray;
+}

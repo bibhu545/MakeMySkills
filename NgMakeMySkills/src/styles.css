@@ -7,9 +7,11 @@ body {
     margin: 0; 
     font-family: 'Rokkitt', cursive !important; 
     font-size: 1.05em !important;
-    /* background-color: aliceblue; */
-    /* background: linear-gradient(-45deg, lightblue, white, white, lightblue); */
+    overflow-x: hidden;
 }
+/* *{
+    font-family: 'Rokkitt', cursive !important;
+} */
 .custom-body{
     padding-top: 60px;
     min-height: calc(100% - 50px);
@@ -80,6 +82,7 @@ body {
     width: 50px;
     border-radius: 50%;
     padding: 15px;
+    cursor: pointer;
 }
 .complete{
     background-color: #53b9d8;
@@ -92,4 +95,30 @@ body {
     position: relative;
     top: -25px;
     margin: 0 10px;
+}
+.user-home-container{
+    padding: 15px 0px;
+}
+.home-tab-content{
+    padding: 15px;
+}
+
+
+
+/* Scroll bar styles */
+/* width */
+::-webkit-scrollbar {
+    width: 8px;
+}
+  
+  /* Track */
+::-webkit-scrollbar-track {
+    box-shadow: inset 0 0 5px grey;
+    border-radius: 10px;
+}
+  
+  /* Handle */
+::-webkit-scrollbar-thumb {
+    background: gray;
+    border-radius: 10px;
 }

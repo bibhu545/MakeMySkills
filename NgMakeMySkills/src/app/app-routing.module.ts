@@ -8,17 +8,18 @@ import { PublishTestComponent } from './Components/Test/publish-test.component';
 import { UserHomeComponent } from './Components/Users/user-home.component';
 import { OnlineTestComponent } from './Components/OnlineTest/online-test.component';
 import { RouteGuardService } from './Services/route-guard.service';
-import { AdminDashboardComponent } from './Components/Admin/admin-dashboard/admin-dashboard.component';
+import { AdminDashboardComponent } from './Components/Admin/DashBoard/admin-dashboard.component';
 
 
 const routes: Routes = [
   { path: '', component: HomeComponent },
   { path: 'create-test', component: CreateTestComponent, canActivate: [RouteGuardService] },
-  { path: 'update-test/:testGuid', component: UpdateTestComponent },
-  { path: 'publish-test', component: PublishTestComponent },
-  { path: 'user-home', component: UserHomeComponent },
-  { path: 'online-test', component: OnlineTestComponent },
-  { path: 'admin', component: AdminDashboardComponent },
+  { path: 'create-test/:testGuid', component: CreateTestComponent, canActivate: [RouteGuardService] },
+  { path: 'update-test/:testGuid', component: UpdateTestComponent, canActivate: [RouteGuardService] },
+  { path: 'publish-test', component: PublishTestComponent, canActivate: [RouteGuardService] },
+  { path: 'user-home', component: UserHomeComponent, canActivate: [RouteGuardService] },
+  { path: 'online-test', component: OnlineTestComponent, canActivate: [RouteGuardService] },
+  { path: 'admin', component: AdminDashboardComponent, canActivate: [RouteGuardService] },
   { path: 'not-found', component: NotFoundComponent },
   { path: '**', component: NotFoundComponent }
 ];

@@ -1,0 +1,202 @@
+<div class="container custom-body">
+    <div class="admin-dashboard">
+        <div class="row">
+            <div class="col-md-6 col-12">
+                <div class="card">
+                    <div class="card-header">
+                        Subjects
+                        <button class="btn btn-light" (click)="openSubjectModal(subjectModal)">
+                            <i class="fa fa-plus" aria-hidden="true"></i>
+                        </button>
+                        <input type="text" class="form-control float-right search-control" placeholder="search..."
+                            (keyup)="filterSubjects()" [(ngModel)]="subjectKeyword" />
+                    </div>
+                    <div class="card-body subject-section">
+                        <div class="row">
+                            <div *ngIf="topics.length == 0" class="center-content">
+                                <span class="text-primary">Please add subjects to site.</span>
+                            </div>
+                            <div class="col-md-6 col-12" *ngFor="let item of topics">
+                                <i class="fa fa-arrow-right"></i>
+                                <span class="btn-link" (click)="editTopic(subjectModal, item)">{{item.topicName}}</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6 col-12">
+                <div class="card">
+                    <div class="card-header">
+                        <span>Users Stats</span>
+                        <span class="float-right">
+                            As per <span class="text-primary">{{todaysDate | date: mediumDate}}</span>
+                        </span>
+                    </div>
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-md-6 col-12">
+                                <h3 class="text-success">150</h3>
+                                <h4>Examiners</h4>
+                            </div>
+                            <div class="col-md-6 col-12">
+                                <h3 class="text-success">3500</h3>
+                                <h4>Candidates</h4>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6 col-12">
+                                <h3 class="text-success">1200</h3>
+                                <h4>Tests</h4>
+                            </div>
+                            <div class="col-md-6 col-12">
+                                <h3 class="text-success">15200</h3>
+                                <h4>Questions</h4>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-12 test-section">
+                <div class="row filter-section">
+                    <div class="col-sm-4">
+                        <div class="form-group">
+                            <label for="subjects">Filter By Subjects:</label>
+                            <select class="form-control" id="subjects">
+                                <option>Subject One</option>
+                                <option>Subject Two</option>
+                                <option>Subject Three</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="col-sm-4">
+                        <div class="form-group">
+                            <label for="createdAfter">Created after:</label>
+                            <input type="date" class="form-control" id="createdAfter" />
+                        </div>
+                    </div>
+                    <div class="col-sm-4"></div>
+                </div>
+                <div class="row">
+                    material datatable for tests with sorting and paging
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<ng-template #subjectModal>
+    <div class="custom-modal-header">
+        <h5 class="center-content">
+            Add/Update Subjects
+            <span class="btn-close float-right" (click)="closeModal()">
+                <i class="fa fa-times-circle" aria-hidden="true"></i>
+            </span>
+        </h5>
+    </div>
+    <div class="custom-modal-body">
+        <form #subjectForm="ngForm" novalidate>
+
+            <div class="form-group">
+                <label for="topic">Topic Name*:</label>
+                <input type="text" id="topic" class="form-control" placeholder="E.g. Verbal ability" name="topicName"
+                    required #topic="ngModel" [class.is-invalid]="topic.invalid && topic.touched"
+                    [(ngModel)]="topicData.topicName" />
+                <small class="text-danger" *ngIf="topic.invalid && topic.touched">Topic Name is required.</small>
+            </div>
+
+            <div *ngIf="!subjectEdit">
+                <div class="form-group" *ngFor="let item of topicData.subTopics;let i = index">
+                    <span class="float-right delete-option" (click)="deleteSubtopic(i)">Delete</span>
+                    <label for="{{'subTopic_' + i}}">Sub Topic Name*:</label>
+                    <input type="text" id="{{'subTopic_' + i}}" class="form-control" name="{{'subTopic_' + i}}" required
+                        #subTopic="ngModel" [class.is-invalid]="subTopic.invalid && subTopic.touched"
+                        placeholder="Enter Subtopic Name" [(ngModel)]="item.topicName" />
+                    <small class="text-danger" *ngIf="subTopic.invalid && subTopic.touched">subTopic is
+                        required.</small>
+                </div>
+            </div>
+
+            <div *ngIf="subjectEdit">
+                <div class="row">
+                    <div *ngIf="topicData.subTopics.length == 0" class="center-content">
+                        <span class="text-primary">This topic has no sub-topics.</span>
+                    </div>
+                    <ng-container *ngFor="let item of topicData.subTopics;let i = index" class="subTopics-row">
+                        <ng-container *ngIf="item.topicId != null">
+
+                            <div class="col-8">
+                                <span class="btn-link" *ngIf="!item.editMode">
+                                    <i class="fa fa-arrow-right"></i>
+                                    {{item.topicName}}
+                                </span>
+                                <div class="input-group mb-3" *ngIf="item.editMode">
+                                    <input type="text" class="form-control" name="subTopicName"
+                                        [(ngModel)]="item.topicName" required #subTopicEdit="ngModel"
+                                        [class.is-invalid]="subTopicEdit.invalid && subTopicEdit.touched">
+                                    <div class="input-group-append">
+                                        <button class="btn btn-light btn-sm btn-cancel"
+                                            (click)="cancelEditSubTopic(item)">
+                                            <i class="fa fa-times"></i>
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-4 right-content">
+                                <div class="btn-group" [ngClass]="{'mr-top-bottom': item.editMode}">
+                                    <button type="button" class="btn btn-light" (click)="editSubTopic(item)"
+                                        *ngIf="!item.editMode">
+                                        <i class="fas fa-edit"></i>
+                                    </button>
+                                    <button type="button" class="btn btn-light" (click)="updateTopic(item)"
+                                        *ngIf="item.editMode">
+                                        <i class="fa fa-check"></i>
+                                    </button>
+                                    <button type="button" class="btn btn-light" (click)="deleteTopic(item)">
+                                        <i class="fa fa-trash" aria-hidden="true"></i>
+                                    </button>
+                                </div>
+                            </div>
+                        </ng-container>
+                        <br />
+                        <div class="col-12" *ngIf="item.topicId == null">
+                            <div class="form-group">
+                                <span class="float-right delete-option" (click)="deleteSubtopic(i)">Delete</span>
+                                <label for="{{'subTopic_' + i}}">Sub Topic Name*:</label>
+                                <input type="text" id="{{'subTopic_' + i}}" class="form-control"
+                                    name="{{'subTopic_' + i}}" required #subTopic="ngModel"
+                                    [class.is-invalid]="subTopic.invalid && subTopic.touched"
+                                    placeholder="Enter Subtopic Name" [(ngModel)]="item.topicName" />
+                                <small class="text-danger" *ngIf="subTopic.invalid && subTopic.touched">
+                                    subTopic isrequired.
+                                </small>
+                            </div>
+                        </div>
+                    </ng-container>
+                </div>
+            </div>
+
+            <br />
+
+            <div class="row">
+                <div class="col-md-6 col-12">
+                    <span class="btn-link" (click)="addSubtopic()">Add SubTopic</span>
+                </div>
+                <div class="col-md-6 col-12 right-content">
+                    <div class="btn-group">
+                        <button type="submit" [disabled]="subjectForm.form.invalid" (click)="addSubject()"
+                            class="btn btn-outline-primary" *ngIf="!subjectEdit">
+                            Add Now
+                        </button>
+                        <button type="submit" [disabled]="subjectForm.form.invalid" (click)="updateTopic(topicData)"
+                            class="btn btn-outline-primary" *ngIf="subjectEdit">
+                            Update Now
+                        </button>
+                        <button class="btn btn-outline-danger" *ngIf="subjectEdit" (click)="deleteTopic(topicData)">Delete</button>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+</ng-template>

@@ -1,10 +1,3 @@
-export class OptionModel {
-    id: number;
-    optionLabel: String;
-    optionText: String;
-    isAnswer: boolean;
-}
-
 export class LoginRequestModel {
     email: string = "";
     password: string = "";
@@ -29,6 +22,13 @@ export class LoginResponseModel {
     userType: number;
     joinedOn: any;
     message: string = "";
+}
+
+export class ChangePasswordModel {
+    userId: number;
+    currentPassword: string;
+    newPassword: string;
+    confirmNewPassword: string;
 }
 
 export class UserModel {
@@ -63,6 +63,8 @@ export class TestModel {
     allowMultiple: boolean = false;
     revealAnswers: boolean = false;
     testGuid: string = "";
+    displayFromHome: boolean = false;
+    dateAdded: any;
 }
 
 export class TopicWiseQuestionModel {
@@ -96,4 +98,43 @@ export class TopicWiseAnswerCountModel {
     NotAnswered: number = 0;
     Marked: number = 0;
     NotVisited: number = 0;
+}
+
+export class AnswerModel {
+    optionId: number = 0;
+    answerId: number = 0;
+    optionLabel: String = "";
+    answerText: String = "";
+    isAnswer: boolean = false;
+    questionId: number = 0;
+    isActive: number = 0;
+    explanation: string = "";
+}
+
+export class QuestionModel {
+    questionId: number = 0;
+    questionText: String = "";
+    testId: number = 0;
+    isActive: number = 0;
+    topicId: number = 0;
+    userId: number = 0;
+    options: AnswerModel[] = [];
+}
+
+export class BatchModel{
+    batchId: number = 0;
+    userId: number = 0;
+    batchCode: string;
+    batchDetails: string;
+    regnoRequired: number = 1;
+    approvalRequired: number = 1;
+    memberApproval: number = 0;
+    createdOn: Date;
+    lastupdatedOn: Date;
+    isActive: number;
+}
+
+export class ProfileDetails{
+    userDetails: UserModel = new UserModel();
+    tests: TestModel[] = [];
 }

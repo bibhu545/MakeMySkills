@@ -30,4 +30,9 @@ namespace MakeMySkills.Models
         public String lastName { get; set; }
         public int userType { get; set; }
     }
+    public class ProfileModel
+    {
+        public LoginResponseModel userDetails { get; set; }
+        public List<TestModel> tests { get; set; }
+    }
 }

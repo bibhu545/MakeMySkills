@@ -32,5 +32,7 @@ namespace MakeMySkills.EDMX
         public virtual DbSet<User> Users { get; set; }
         public virtual DbSet<UserReport> UserReports { get; set; }
         public virtual DbSet<UserResponse> UserResponses { get; set; }
+        public virtual DbSet<Batch> Batches { get; set; }
+        public virtual DbSet<BatchUser> BatchUsers { get; set; }
     }
 }

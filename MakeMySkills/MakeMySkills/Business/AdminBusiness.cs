@@ -24,15 +24,17 @@ namespace MakeMySkills.Business
                 updateStatus += context.SaveChanges();
                 if (model.subTopics != null)
                 {
+                    List<Topic> allSubtopics = new List<Topic>();
                     foreach (var item in model.subTopics)
                     {
                         Topic subTopic = new Topic();
                         subTopic.TopicName = item.topicName;
                         subTopic.IsActive = ActiveStatus.IsActive;
                         subTopic.SubjectId = topic.TopicId;
-                        context.Topics.Add(subTopic);
-                        updateStatus += context.SaveChanges();
+                        allSubtopics.Add(subTopic);
                     }
+                    context.Topics.AddRange(allSubtopics);
+                    updateStatus += context.SaveChanges();
                 }
                 return updateStatus > 0;
             }

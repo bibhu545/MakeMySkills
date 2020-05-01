@@ -2,11 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { TestModel, TopicModel } from 'src/app/Utils/Models';
 import { Utils, API_ENDPOINTS, USER_TYPES } from 'src/app/Utils/Utils';
 import { HttpService } from 'src/app/Services/http.service';
-import { Router } from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
 import { CookieService } from 'src/app/Services/cookie.service';
-import { AccountService } from 'src/app/Services/account.service';
-import { ModalService } from 'src/app/Services/modal.service';
-import { AccountComponent } from '../Account/account.component';
 
 @Component({
   selector: 'app-create-test',
@@ -24,27 +21,43 @@ export class CreateTestComponent implements OnInit {
   constructor(
     private http: HttpService,
     private router: Router,
+    private route: ActivatedRoute,
     private cookieService: CookieService,
-    private modalService: ModalService,
-    private accountService: AccountService,
   ) { }
 
   ngOnInit() {
-    if (this.cookieService.isLoggedIn()) {
-      var userType = this.cookieService.getUserType();
-      if (userType == USER_TYPES.admin || userType == USER_TYPES.examiner) {
-        this.userId = this.cookieService.getUserdataFromCookies().userId;
-        this.getCommonDataForTest();
-      }
-      else{
-        this.router.navigateByUrl('/error-page');
+    var userType = this.cookieService.getUserType();
+    if (userType == USER_TYPES.admin || userType == USER_TYPES.examiner) {
+      this.userId = this.cookieService.getUserdataFromCookies().userId;
+      this.getCommonDataForTest();
+      var testGuid = this.route.snapshot.params.testGuid;
+      if (testGuid != undefined) {
+        this.getTestBasicDetails(testGuid);
       }
     }
-    else{
-      this.router.navigateByUrl('/');
-      this.accountService.setLoginMode(true);
-      this.modalService.showModal(AccountComponent);
+    else {
+      this.router.navigateByUrl('/error-page');
     }
+  }
+
+  getTestBasicDetails(testGuid: String) {
+    this.http.getData(API_ENDPOINTS.GetTestBasicDetails + "?id=" + testGuid).subscribe(response => {
+      if (response.results != null) {
+        if (response.results[0] != null) {
+          this.newTest = response.results[0];
+          this.getCommonDataForTest();
+        }
+        else {
+          this.router.navigateByUrl('/error-page');
+          this.utils.showErrorMessage("You are trying to edit a test which does not exists.");
+        }
+      }
+      else {
+        this.utils.showErrorMessage("Some internal error occured. " + response.errorMessage);
+      }
+    }, error => {
+      this.utils.showServerError(error);
+    });
   }
 
   getCommonDataForTest() {
@@ -67,7 +80,7 @@ export class CreateTestComponent implements OnInit {
 
   createTest() {
     this.newTest.userId = this.userId;
-    this.http.postData(API_ENDPOINTS.CreateTest, this.newTest).subscribe(response => {
+    this.http.postData(API_ENDPOINTS.UpdateTestDetails, this.newTest).subscribe(response => {
       if (response.results != null) {
         if (response.results[0] != null) {
           this.addedTest = response.results[0];

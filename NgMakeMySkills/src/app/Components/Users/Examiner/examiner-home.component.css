@@ -1,0 +1,26 @@
+.form-control-sm {
+    display: inline-block;
+    width: 200px;
+    margin: 0px 5px;
+}
+.filter-span {
+    font-size: small;
+    margin: 5px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+.filter-span:hover {
+    font-size: initial;
+}
+.test-container{
+    height: 150px;
+}
+.tab-content-header{
+    margin-bottom: 10px;
+}
+.test-container{
+    padding: 5px;
+}
+mat-tab-group{
+    font-family: 'Rokkitt', cursive !important;
+}

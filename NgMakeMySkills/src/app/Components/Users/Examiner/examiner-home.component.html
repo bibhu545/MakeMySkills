@@ -1,0 +1,86 @@
+<div class="container user-home-container">
+    <div class="row">
+        <div class="col-12">
+            <mat-tab-group mat-stretch-tabs>
+                <mat-tab label="My Tests">
+                    <div class="home-tab-content">
+                        <div class="tab-content-header">
+                            <div class="row">
+                                <div class="col-md-9">
+                                    <label for="subjectFilter">Filter By: </label>
+                                    <select class="form-control form-control-sm" id="subjectFilter"
+                                        name="subjectFilter">
+                                        <option *ngFor="let item of topics" value={{item.topicId}}>{{item.topicName}}</option>
+                                    </select>
+                                    <span class="text-primary filter-span">Newest First</span>
+                                    <span class="text-primary filter-span">Oldest First</span>
+                                </div>
+                                <div class="col-md-3 center-content">
+                                    <a href="/create-test" class="btn btn-light btn-sm">
+                                        <i class="fa fa-plus" aria-hidden="true"></i>
+                                        Create New Test
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-3 col-sm-6 col-12" *ngFor="let item of tests">
+                                <app-test-details [test]="item"></app-test-details>
+                            </div>
+                        </div>
+                    </div>
+                </mat-tab>
+                <mat-tab label="My Batches">
+                    <div class="home-tab-content">
+                        <div class="tab-content-header">
+                            <div class="row">
+                                <div class="col-md-9">
+                                    <span class="text-primary filter-span">Newest First</span>
+                                    <span class="text-primary filter-span">Oldest First</span>
+                                </div>
+                                <div class="col-md-3 center-content">
+                                    <button class="btn btn-light btn-sm"
+                                    (click)="openBatchModal(e)">
+                                        <i class="fa fa-plus" aria-hidden="true"></i>
+                                        Create New Batch
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-3 test-container">
+
+                            </div>
+                            <div class="col-md-3 test-container">
+
+                            </div>
+                            <div class="col-md-3 test-container">
+
+                            </div>
+                            <div class="col-md-3 test-container">
+
+                            </div>
+                            <div class="col-md-3 test-container">
+
+                            </div>
+                            <div class="col-md-3 test-container">
+
+                            </div>
+                        </div>
+                    </div>
+                </mat-tab>
+                <mat-tab label="My Profile">
+                    <div class="home-tab-content">
+                        <app-user-details [profileDetails]="profileDetails"></app-user-details>
+                    </div>
+                </mat-tab>
+            </mat-tab-group>
+        </div>
+    </div>
+
+
+
+
+
+    
+</div>

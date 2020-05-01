@@ -7,6 +7,7 @@ import { Router } from '@angular/router';
 import { USER_TYPES, API_ENDPOINTS, Utils } from 'src/app/Utils/Utils';
 import { HttpService } from 'src/app/Services/http.service';
 import { TopicModel } from 'src/app/Utils/Models';
+import { ChangePasswordComponent } from '../Account/change-password.component';
 
 @Component({
   selector: 'app-nav',
@@ -42,6 +43,10 @@ export class NavComponent implements OnInit {
       if (response.results != null) {
         if (response.results.length > 0) {
           this.topics = response.results[0];
+          this.topics = this.topics.splice(0, 8);
+          if (this.cookieService.getUserType() != null) {
+            this.isExaminer = this.cookieService.getUserType() == USER_TYPES.examiner;
+          }
         }
         else {
           this.utils.showErrorMessage("Some error occured. Please try again.");
@@ -63,6 +68,11 @@ export class NavComponent implements OnInit {
 
   openAccountModal(e) {
     this.modalService.showModal(AccountComponent);
+  }
+
+  openChangePasswordModal(e) {
+    e.preventDefault();
+    this.modalService.showModal(ChangePasswordComponent);
   }
 
 }

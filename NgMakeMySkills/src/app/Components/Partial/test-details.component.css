@@ -1,0 +1,33 @@
+.card{
+    margin: 10px 0px;
+    padding: 20px 20px 10px 20px;
+}
+.card-body{
+    padding-bottom: 10px;
+}
+.test-logo{
+    font-size: 1.5em;
+}
+.btn-start-test{
+    padding: 5px 10px;
+    text-decoration: none;
+    padding: 5px 10px;
+    border: 1px solid lightgray;
+    transition: all 0.3s ease;
+}
+.btn-start-test:hover{
+    background-color: lightgray;
+}
+.shadow {
+    transition: all 0.5s ease;
+}
+.shadow:hover{
+    border: 1px solid gray;
+    border-radius: 10px;
+}
+.trending-container{
+    margin-bottom: 20px;
+}
+.trending-header{
+    padding: 20px 0px 10px 0px;
+}

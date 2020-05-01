@@ -56,3 +56,30 @@ testem.log
 bin
 obj
 .vs
+
+
+
+# See https://help.github.com/articles/ignoring-files/ for more about ignoring files.
+
+# dependencies
+react-makemyskills/node_modules
+react-makemyskills/.pnp
+react-makemyskills/.pnp.js
+
+# testing
+react-makemyskills/coverage
+
+# production
+react-makemyskills/build
+
+# misc
+react-makemyskills/.DS_Store
+react-makemyskills/.env.local
+react-makemyskills/.env.development.local
+react-makemyskills/.env.test.local
+react-makemyskills/.env.production.local
+
+react-makemyskills/npm-debug.log*
+react-makemyskills/yarn-debug.log*
+react-makemyskills/yarn-error.log*
+

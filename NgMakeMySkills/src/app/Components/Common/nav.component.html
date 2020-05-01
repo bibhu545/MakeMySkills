@@ -17,13 +17,24 @@
                         Subjects
                     </a>
                     <div class="dropdown-menu">
-                        <a class="dropdown-item" href="/not-found">Error Page</a>
                         <a class="dropdown-item" href="#" *ngFor="let item of topics">{{item.topicName}}</a>
                     </div>
                 </li>
                 <li class="nav-item">
+                    <a class="nav-link" href="/all-tests">More Tests</a>
+                </li>
+                <li class="nav-item dropdown" *ngIf="isLoggedIn">
+                    <a class="nav-link dropdown-toggle" href="#" id="navbardrop" data-toggle="dropdown">
+                        My Profile
+                    </a>
+                    <div class="dropdown-menu">
+                        <a class="dropdown-item" href="/user-home">Home</a>
+                        <a class="dropdown-item" href="#" (click)="openChangePasswordModal($event)">Change Password</a>
+                        <a class="dropdown-item" href="#" (click)="logout()">Logout</a>
+                    </div>
+                </li>
+                <li class="nav-item">
                     <a class="nav-link" *ngIf="!isLoggedIn" (click)="openAccountModal(e)">Login/Resister</a>
-                    <a class="nav-link" *ngIf="isLoggedIn" (click)="logout()">Logout</a>
                 </li>
             </ul>
         </div>

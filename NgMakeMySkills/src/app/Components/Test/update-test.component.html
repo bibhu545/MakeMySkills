@@ -1,8 +1,10 @@
 <div class="custom-container custom-body">
     <div class="progress-row">
-        <span class="inline-block progress complete">
-            <i class="fa fa-check" aria-hidden="true"></i>
-        </span>
+        <a href="/create-test/{{testDetails.testGuid}}">
+            <span class="inline-block progress complete">
+                <i class="fa fa-check" aria-hidden="true"></i>
+            </span>
+        </a>
         <div class="inline-block progress-interval complete"></div>
         <span class="inline-block progress complete">
             <i class="fa fa-check" aria-hidden="true"></i>
@@ -16,22 +18,75 @@
         <div class="row">
             <div class="col-12 center-content">
                 <h4 class="text-primary">Add/Update Questions</h4>
-                <p class="text-muted">
+                <p class="text-muted" *ngIf="testQuestions.length == 0">
                     Please click on the <strong> "+ Add New Question"</strong> button above to start adding questions.
                 </p>
             </div>
         </div>
         <div class="row">
-            <div class="col-md-2"></div>
-            <div class="col-md-8 col-12">
-                <hr />
-                <div class="right-content">
-                    <button class="btn btn-light btn-add-qn" (click)="openQuestionModal(updateQuestion)">
+            <div class="col-md-1"></div>
+            <div class="col-md-10 col-12">
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label for="filterTopic">Filter By &nbsp;</label>
+                            <select class="form-control ddl-filter-topic" id="filterTopic" name="filterTopic"
+                                [(ngModel)]="filterTopic" (change)="filterByTopic()">
+                                <option value="0">Select Subtopic</option>
+                                <option *ngFor="let item of testTopic.subTopics" value="{{item.topicId}}">
+                                    {{item.topicName}}
+                                </option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="col-md-6 right-content">
+                        <button class="btn btn-light btn-add-qn btn-sm" (click)="openQuestionModal(updateQuestion)">
+                            <i class="fa fa-plus" aria-hidden="true"></i>
+                            Add New Question
+                        </button>
+                    </div>
+                </div>
+                <div class="question-container" *ngFor="let item of testQuestions;let i = index">
+                    <p>
+                        <span class="text-success">Question {{i + 1}} of {{testQuestions.length}}</span>
+                        <span class="float-right">
+                            <div class="btn-group">
+                                <button class="btn btn-light btn-sm" (click)="setEditMode(updateQuestion, item)"><i
+                                        class="fas fa-edit"></i></button>
+                                <button class="btn btn-light btn-sm" (click)="deleteQuestion(item)"><i
+                                        class="fa fa-trash"></i></button>
+                            </div>
+                        </span>
+                    </p>
+                    <div class="bg-light">
+                        {{item.questionText}}
+                    </div>
+                    <ul>
+                        <li class="option-texts" *ngFor="let option of item.options">
+                            <span class="answer-mark" [ngClass]="{'text-success': option.isAnswer != 0}">
+                                {{option.answerText}}
+                            </span>
+                        </li>
+                    </ul>
+                    <div>Explanation: </div>
+                    <div class="bg-light">
+                        No Explanation Added
+                    </div>
+                </div>
+                <div class="center-content">
+                    <small class="test-primary" *ngIf="testQuestions.length == 0">No questions available in this
+                        category</small>
+                    <button *ngIf="testQuestions.length > 0" class="btn btn-light btn-add-qn btn-sm"
+                        (click)="openQuestionModal(updateQuestion)">
                         <i class="fa fa-plus" aria-hidden="true"></i>
                         Add New Question
                     </button>
                 </div>
                 <hr />
+                <a href="/create-test/{{testDetails.testGuid}}" class="btn btn-primary">
+                    <i class="fa fa-arrow-left" aria-hidden="true"></i>
+                    Edit test settings
+                </a>
                 <div class="float-right">
                     <a href="/publish-test" class="btn btn-primary">
                         Save and Proceed
@@ -40,7 +95,7 @@
                 </div>
             </div>
         </div>
-        <div class="col-md-2"></div>
+        <div class="col-md-1"></div>
     </div>
 </div>
 
@@ -54,20 +109,44 @@
         </h5>
     </div>
     <div class="custom-modal-body">
-        <form>
+        <form #addQuestionForm="ngForm">
+            <div class="row">
+                <div class="col-6">
+                    <h5>Topic Name:<span class="text-success">{{testTopic.topicName}}</span></h5>
+                </div>
+                <div class="col-6" *ngIf="this.testTopic.subTopics.length > 0">
+                    <select class="form-control" required name="subTopic" #subTopic="ngModel"
+                        [(ngModel)]="this.newQuestion.topicId" (change)="validateSubtopic()">
+                        <option value="0">Select SubTopic</option>
+                        <option *ngFor="let item of this.testTopic.subTopics" value="{{item.topicId}}">
+                            {{item.topicName}}
+                        </option>
+                    </select>
+                    <small class="text-danger" *ngIf="subTopic.touched && !isValidSubtopic">Please choose a
+                        subtopic.</small>
+                </div>
+            </div>
             <div class="form-group">
                 <label for="questionText">Question Text*:</label>
-                <textarea type="text" id="questionText" class="form-control"
-                    placeholder="Enter question here..."></textarea>
+                <textarea type="text" id="questionText" class="form-control" required #questionText="ngModel"
+                    [class.is-invalid]="questionText.touched && questionText.invalid"
+                    placeholder="Enter question here..." name="questionText"
+                    [(ngModel)]="newQuestion.questionText" rows="5"></textarea>
+                <small class="text-danger" *ngIf="questionText.touched && questionText.invalid">Question can not leave
+                    blank.</small>
             </div>
-            <div class="form-group" *ngFor="let item of options; let i = index">
-                <span class="float-right delete-option" (click)="deleteOption(i)">Delete</span>
+            <div class="form-group bg-option" *ngFor="let item of newQuestion.options; let i = index" [ngClass]="{'bg-answer': item.isAnswer == 1}">
+                <span class="float-right delete-option" *ngIf="newQuestion.options.length > 2"
+                    (click)="deleteOption(i)">Delete</span>
                 <label for="{{'option_' + i + 1}}">{{item.optionLabel}}</label>
-                <textarea type="text" id="{{'option_' + i + 1}}" class="form-control" ngModel="item.optionText"
-                    placeholder="Enter option here..."></textarea>
+                <textarea type="text" id="{{'option_' + i + 1}}" class="form-control" name="{{'option_' + i + 1}}"
+                    [(ngModel)]="item.answerText" placeholder="Enter option here..." #answerText="ngModel"
+                    [class.is-invalid]="answerText.touched && answerText.invalid" required></textarea>
                 <label class="checkbox text-muted">
-                    <input type="checkbox" /> Mark as correct Answer
+                    <input type="checkbox" name="isAnswer" [(ngModel)]="item.isAnswer" /> Mark as correct Answer
                 </label>
+                <span class="text-danger float-right" *ngIf="answerText.touched && answerText.invalid">Can not leave
+                    blank.</span>
             </div>
             <div class="row">
                 <div class="col-12 center-content">
@@ -83,7 +162,14 @@
                         (click)="closeQuestionModal()">Cancel</button>
                 </div>
                 <div class="col-md-6 col-12 right-content">
-                    <button type="submit" class="btn btn-primary">Add Now</button>
+                    <button *ngIf="!editMode" type="submit" class="btn btn-primary"
+                        [disabled]="addQuestionForm.form.invalid || !isValidSubtopic" (click)="addQuestion()">
+                        Add Now
+                    </button>
+                    <button *ngIf="editMode" type="submit" class="btn btn-primary"
+                        [disabled]="addQuestionForm.form.invalid || !isValidSubtopic" (click)="editQuestion()">
+                        Update Now
+                    </button>
                 </div>
             </div>
         </form>

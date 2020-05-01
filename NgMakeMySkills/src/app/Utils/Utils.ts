@@ -1,7 +1,7 @@
 import Swal from 'sweetalert2';
 
-// export const BaseUrl = "http://www.makemyskills.me";
-export const BaseUrl = "http://makemyskills.me";
+ export const BaseUrl = "http://www.makemyskills.me";
+//export const BaseUrl = "http://makemyskills.me";
 
 export const API_ENDPOINTS = {
     login: BaseUrl + '/Account/login',

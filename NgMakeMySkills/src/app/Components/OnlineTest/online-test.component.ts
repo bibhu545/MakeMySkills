@@ -1,10 +1,9 @@
 import { Component, OnInit, TemplateRef } from '@angular/core';
 import { CommonService } from 'src/app/Services/common.service';
 import { Router } from '@angular/router';
-import { interval, timer } from 'rxjs';
-import { takeUntil, takeWhile } from 'rxjs/operators';
+import { timer } from 'rxjs';
+import { takeWhile } from 'rxjs/operators';
 import { ModalService } from 'src/app/Services/modal.service';
-import { ConfirmationDialogComponent } from '../Common/confirmation-dialog/confirmation-dialog.component';
 
 const MARKER = {
   'answered': 1,
@@ -42,7 +41,7 @@ export class OnlineTestComponent implements OnInit {
   hours = 0;
   title: string = "Confirm Submit Test";
   ownMessage: boolean = false;
-  message: any = "Are You Sure You want to Submit Test.";
+  message: any = this.topicWiseAnswerCount;
   btnOkText: string = "Confirm Submission.";
   btnCancelText: string = "Go back to test";
 
@@ -147,7 +146,7 @@ export class OnlineTestComponent implements OnInit {
     if (this.prevVisitedTopicNo !== 0 && this.prevVisitedQuestionNo !== 0 && (this.prevVisitedTopicNo + this.prevVisitedQuestionNo !== topicNo + qNo)) {
       let marker = this.getMarkerForQNo(this.prevVisitedTopicNo,this.prevVisitedQuestionNo);
       if(marker === 1){
-        this.enableOnlyMarker(MARKER.answered);
+        this.enableOnlyMarker(MARKER.answered); 
       }
       else if(marker === 2){
         this.enableOnlyMarker(MARKER["not-answered"]);
@@ -190,12 +189,35 @@ export class OnlineTestComponent implements OnInit {
   }
 
   confirmSubmittingTest(template: TemplateRef<any>) {
-    //const arr = [{'TopicNo':1, 'TopicName':}]
-    this.modalService.showModal(template);
+    let totalQn = 0;
+    for (let index = 0; index < this.topicWiseQuestionsList.length; index++) {
+      let countType = this.topicWiseAnswerCount[index];
+      countType.Answered = 0;
+      countType.Marked = 0;
+      countType.NotAnswered = 0;
+      countType.NotVisited = 0;
+      this.topicWiseQuestionsList[index].Questions.forEach(question => {
+        if(question.Answered || question.MarkedAndAnswered) {
+          countType.Answered = countType.Answered + 1;
+        }
+        else if(question.Marked) {
+          countType.Marked = countType.Marked + 1;
+        }
+        else if(question.NotAnswered) {
+          countType.NotAnswered = countType.NotAnswered + 1;
+        }
+      });
+      countType.NotVisited = this.topicWiseQuestionsList[index].TotalQn - (countType.Answered + countType.Marked + countType.NotAnswered);
+    }
+    this.message = this.topicWiseAnswerCount;
+    this.modalService.showModal(template, {class: 'modal-lg'});
   }
 
   alertReturnValue($event) {
-    alert($event);
+    if($event == 2){
+      //submit test
+      alert("Test Submitted successfully!!");
+    }
   }
 
   enableOnlyMarker(marker) {

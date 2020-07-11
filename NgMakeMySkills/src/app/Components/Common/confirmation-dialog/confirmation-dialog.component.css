@@ -1,0 +1,24 @@
+.marker-icon {
+    border-radius: 50%;
+    width: 20px;
+    height: 20px;
+    text-align: center;
+    font-size: 8px;
+    display: inline-block;
+}
+
+.answered {
+    background:rgb(14, 179, 14) !important;
+}
+
+.not-answered {
+    background:#dc3545 !important; 
+}
+
+.marked {
+    background:rgb(150, 7, 150) !important;
+}
+
+.not-visited {
+    background: #ddd;
+}

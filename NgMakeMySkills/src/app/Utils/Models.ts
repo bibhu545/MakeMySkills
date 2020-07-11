@@ -67,6 +67,39 @@ export class TestModel {
     dateAdded: any;
 }
 
+export class TopicWiseQuestionModel {
+    TopicNumber: number = 0;
+    Name: string = '';
+    TotalQn: number = 0;
+    Questions: QuestionWithOptionsModel[] = [];
+}
+
+export class QuestionWithOptionsModel {
+    Qnumber: number = 0;
+    Text: string = '';
+    Summary: string = '';
+    NotAnswered: boolean = false;
+    Answered: boolean = false;
+    Marked: boolean = false;
+    MarkedAndAnswered: boolean = false;
+    SelectedOptionId: number = 0;
+    Options: OptionsModel[] = [];
+}
+
+export class OptionsModel {
+    OptionNo: number = 0;
+    Text: string = '';
+}
+
+export class TopicWiseAnswerCountModel {
+    TopicNumber: number = 0;
+    Name: string = '';
+    Answered: number = 0;
+    NotAnswered: number = 0;
+    Marked: number = 0;
+    NotVisited: number = 0;
+}
+
 export class AnswerModel {
     optionId: number = 0;
     answerId: number = 0;

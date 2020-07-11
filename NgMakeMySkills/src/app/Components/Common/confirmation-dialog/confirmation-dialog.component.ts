@@ -28,10 +28,6 @@ export class ConfirmationDialogComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    console.log("object")
-    console.log(this.title)
-    console.log(this.ownMessage)
-    console.log(this.message)
   }
 
   // closeModal() {

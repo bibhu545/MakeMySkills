@@ -8,15 +8,15 @@
 </div>
 
 <div class="custom-modal-body">
-  <form [formGroup]="createBatchFormGroup">
+  <form [formGroup]="createBatchFormGroup" (ngSubmit)="createNewBatch(createBatchFormGroup.value)">
 
     <div class="form-group">
       <div class="row">
         <div class="col-sm-4 right-content">
-          <label for="batchName">Batch Name*:</label>
+          <label for="batchCode">Batch Name*:</label>
         </div>
         <div class="col-sm-8 ">
-          <input type="text" id="batchName" class="form-control" placeholder="For Ex CSE 2019 Batch-1" />
+          <input type="text" id="batchCode" name="batchCode" formControlName="batchCode" class="form-control" placeholder="For Ex CSE 2019 Batch-1" />
         </div>
       </div>
     </div>
@@ -27,7 +27,7 @@
           <label for="batchDetails">Details*:</label>
         </div>
         <div class="col-sm-8">
-          <input type="text" id="batchDetails" class="form-control" placeholder="Enter some details about the batch" />
+          <input type="text" id="batchDetails" class="form-control" name="batchDetails" formControlName="batchDetails" placeholder="Enter some details about the batch" />
         </div>
       </div>
     </div>
@@ -39,7 +39,7 @@
         </div>
         <div class="col-sm-8">
           <label class="checkbox">
-            <input type="checkbox" id="regNo" />
+            <input type="checkbox" id="regNo" name="regnoRequired" formControlName="regnoRequired"  />
             Students will need to enter their registration no. to join
           </label>
         </div>
@@ -53,7 +53,7 @@
         </div>
         <div class="col-sm-8">
           <label class="checkbox" id="approval">
-            <input type="checkbox" />
+            <input type="checkbox" name="approvalRequired" formControlName="approvalRequired" />
             Students will need approval to join the Batch
           </label>
         </div>
@@ -65,7 +65,7 @@
         <div class="col-sm-4 right-content"></div>
         <div class="col-sm-8">
           <label class="checkbox">
-            <input type="checkbox" />
+            <input type="checkbox" name="memberApproval" formControlName="memberApproval"  />
             Members can also approve joining requests
             <br />
             <small>
@@ -80,7 +80,7 @@
     <div class="row">
       <div class="col-sm-4"></div>
       <div class="col-sm-8">
-        <button class="btn btn-primary custom-btn">Create New Batch</button>
+        <button type="submit" class="btn btn-primary custom-btn" [disabled]='!createBatchFormGroup.valid'>Create New Batch</button>
       </div>
     </div>
 

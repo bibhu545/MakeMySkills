@@ -9,7 +9,7 @@
     /* box-shadow: 4px 4px 2px lightgray; */
 }
 .filter-section{
-    margin-bottom: 15px;
+    margin: 0px 10px 15px 10px;
 }
 .subject-section{
     min-height: 100px;
@@ -42,3 +42,15 @@
     cursor: pointer;
     color: royalblue;
 }
+.card{
+    min-height: 300px;
+}
+
+.example-container {
+    height: 400px;
+    overflow: auto;
+  }
+  
+  table {
+    width: 100%;
+  }

@@ -18,7 +18,8 @@ export const API_ENDPOINTS = {
     GetQuestionsForTest: BaseUrl + '/Test/GetQuestionsForTest',
     GetUserHomeData: BaseUrl + '/Test/GetUserHomeData',
     DeleteQuestions: BaseUrl + '/Test/DeleteQuestions',
-    EditQuestions: BaseUrl + '/Test/EditQuestions'
+    EditQuestions: BaseUrl + '/Test/EditQuestions',
+    AddBatch: BaseUrl + '/Batch/AddBatch'
 }
 
 export const USER_TYPES = {

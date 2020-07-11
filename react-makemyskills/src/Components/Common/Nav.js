@@ -3,6 +3,8 @@ import './Common.css';
 import Login from '../Account/Login';
 import HttpService from '../../Utils/HttpService';
 import { API_ENDPOINTS } from '../../Utils/Utils';
+import { showModal } from '../../Redux/CommonActions';
+import { connect } from 'react-redux';
 
 function Nav() {
 
@@ -74,4 +76,18 @@ function Nav() {
     )
 }
 
-export default Nav
+const mapStateToProps = (state) => {
+    return {
+        ...state
+    }
+}
+
+const mapActionToProps = (dispatch) => {
+    return {
+        showModal: () => {
+            dispatch(showModal())
+        }
+    }
+}
+
+export default connect(mapStateToProps, mapActionToProps)(Nav)

@@ -27,7 +27,7 @@ import { CookieService } from './Services/cookie.service';
 import { CookieService as BaseCookieService } from 'ngx-cookie-service';
 import { ExaminerHomeComponent } from './Components/Users/Examiner/examiner-home.component';
 import { AdminDashboardComponent } from './Components/Admin/DashBoard/admin-dashboard.component';
-import { MatTabsModule, MatProgressSpinnerModule } from '@angular/material';
+import { MatTabsModule, MatProgressSpinnerModule, MatTableModule } from '@angular/material';
 import { TestDetailsComponent } from './Components/Partial/test-details.component';
 
 import { CreateBatchComponent } from './Components/Batch/create-batch.component';
@@ -72,7 +72,8 @@ import { UserDetailsComponent } from './Components/Users/user-details.component'
     ModalModule.forRoot(),
     NgsRevealModule,
     MatTabsModule,
-    MatProgressSpinnerModule
+    MatProgressSpinnerModule,
+    MatTableModule
   ],
   providers: [
     CookieService,

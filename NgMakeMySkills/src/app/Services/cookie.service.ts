@@ -57,7 +57,7 @@ export class CookieService {
   }
 
   getUserType() {
-    return this.getUserdataFromCookies().userType;
+    return this.getUserdataFromCookies() == null ? null : this.getUserdataFromCookies().userType;
   }
 
 }
